@@ -242,8 +242,8 @@ public class MainServices {
     public String vistaPrevia(Url url) throws IOException {
 
         String miMD5 = getMD5SecretKey(url.getUrlLarga());
-        String source = "http://api.screenshotlayer.com/api/capture?access_key="+Main.API_KEY+"&url="+url.getUrlLarga()+"&secret_key="+miMD5;
-
+//        String source = "http://api.screenshotlayer.com/api/capture?access_key="+Main.API_KEY+"&url="+url.getUrlLarga()+"&secret_key="+miMD5;
+        String source = "https://api.apilayer.com/screenshot?url="+url.getUrlLarga()+"&apikey="+Main.API_KEY;
         return source;
     }
 

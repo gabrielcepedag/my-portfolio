@@ -29,11 +29,9 @@ import java.util.Enumeration;
 import java.util.List;
 
 public class Main {
-
-    public static String API_KEY = "c23511e70a5477691ee1e8691a304255";
+    public static String API_KEY = "xHxiJmeD69NVtr8HT9C7MnO9yaYq6onZ";
 //    public static String API_KEY = "68bd44cbe9cc43b26ef602afc00a6de4";
-
-    public static String SECRET_KEY = "gabrieleduardo";
+    public static String SECRET_KEY = "gabrielgdcg";
 
     public static String HOST;
     public enum Constantes{
@@ -55,7 +53,7 @@ public class Main {
 
         new ApiControlador(app).aplicarRutas();
         new SoapControlador(app).aplicarRutas();
-        app.start(8888);
+        app.start(5000);
 
         /*  Denotando rutas especificas  */
 //        app.get("/", ctx -> ctx.redirect("/home"));
@@ -88,19 +86,19 @@ public class Main {
 
         /*  Inicializando usuario de administrador  */
         Usuario admin = new Usuario("admin", "admin", "admin", "admin@admin.com", true, true);
-        Usuario eduardo = new Usuario("eemr0001", "123", "Eduardo", "eduardo@mail.com", true, false);
-        Usuario gabriel = new Usuario("gdcg", "456", "Gabriel", "gabriel@mail.com", false, false);
+        Usuario nicolas = new Usuario("nicolas", "nicolas", "Nicolas", "nicolas@mail.com", true, false);
+        Usuario gabriel = new Usuario("gdcg", "gabriel", "Gabriel", "gabriel@mail.com", false, false);
         mainServices.addUsuario(admin);
-        mainServices.addUsuario(eduardo);
+        mainServices.addUsuario(nicolas);
         mainServices.addUsuario(gabriel);
 
 //        mainServices.setLoggedUser(eduardo);
 
         Url url = new Url("https://github.com/gabrielcepedag");
-        Url url2 = new Url("https://github.com/gabrielcepedag/MassyCake");
-        Url url3 = new Url("https://github.com/gabrielcepedag/NOSEQUE");
-        url.setUsuario(eduardo);
-        url2.setUsuario(eduardo);
+        Url url2 = new Url("https://github.com/gabrielcepedag/my-portfolio");
+        Url url3 = new Url("https://gabrielcepeda.cloudfoliohub.com");
+        url.setUsuario(nicolas);
+        url2.setUsuario(nicolas);
         url3.setUsuario(gabriel);
         mainServices.addUrl(url);
         mainServices.addUrl(url2);
@@ -131,7 +129,7 @@ public class Main {
 //        String getUrlsUser = client.getUrlsByUsuario(idUser, "userTest");
 //
 //        String clientUrlLarga = "https://www.example.com";
-//        String newUrl = client.addUrl(eduardo.getId(), clientUrlLarga);
+//        String newUrl = client.addUrl(nicolas.getId(), clientUrlLarga);
 //
 //        System.out.println("URL 2 desde Cliente: "+getUrl2);
 //        System.out.println("URLs de eemr0001 desde Cliente: "+getUrlsUser);
@@ -145,14 +143,16 @@ public class Main {
     private static String getHostForUrl(Javalin app) {
         try {
             Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+
             while (((Enumeration<?>) networkInterfaces).hasMoreElements()) {
                 NetworkInterface networkInterface = networkInterfaces.nextElement();
                 if (!networkInterface.isLoopback() && networkInterface.isUp()) {
                     Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
                     while (inetAddresses.hasMoreElements()) {
                         InetAddress inetAddress = inetAddresses.nextElement();
+                        System.out.println("IP: "+inetAddress.getHostAddress());
                         if (!inetAddress.isLoopbackAddress() && inetAddress.isSiteLocalAddress()) {
-                            return "http://" + inetAddress.getHostAddress()+ ":" +"8888/";
+                            return "http://" + inetAddress.getHostAddress()+ ":" +"5000/";
                         }
                     }
                 }
