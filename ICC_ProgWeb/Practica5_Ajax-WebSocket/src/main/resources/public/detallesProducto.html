@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICC Market | Practica 2</title>
+    <link rel="shortcut icon" type="image" href="/images/LogoPUCMM.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styleDetalleProd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+<!-- navbar -->
+<nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 navbar-static-top">
+    <div class = "container">
+        <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "/">
+            <img src="/images/LogoPUCMM-long.png" width="256" height="67" alt="Logo PUCMM">
+            <span class = "text-uppercase fw-lighter ms-2">ICC Market</span>
+        </a>
+
+        <div class = "order-lg-2 nav-btns">
+            <button type = "button" class = "btn position-relative" onclick="window.location.href='/cart'">
+                <i class = "fa fa-shopping-cart fa-lg" title="Carrito de Compras"></i>
+                <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary" th:text="${cantCarrito}">0</span>
+            </button>
+
+            <span class="dropdown">
+                <button type = "button" class = "btn position-relative dropdown-toggle" id="dropDownUser" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class = "fa fa-user fa-lg"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" readonly th:text="'Bienvenido, '+${logguedUser}">[user]</a></li>
+                    <li><a class="dropdown-item" href="/cart">Mi Carrito de Compras</a></li>
+                    <span th:if="${logguedUser == 'guest'}">
+                        <li><a class="dropdown-item" href="/login">Iniciar Sesion</a></li>
+                    </span>
+                    <span th:if="${logguedUser != 'guest'}">
+                        <li><a class="dropdown-item" href="/logout">Salir</a></li>
+                    </span>
+                    <div hidden="logguedUser" id="logguedUser" th:text="${logguedUser}"></div>
+                </ul>
+            </span>
+        </div>
+        <div class="order-lg-3 nav-btns" th:if="${logguedUser != 'guest'}" style="padding-left: 20px">
+            <button type="button" class="btn position-relative" id="userCount" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Usuarios Conectados">
+                <small style="color: #0f5acb"><strong id="conectados" type="number"></strong></small>
+                <i class="fa-solid fa-users-rectangle fa-xl"></i>
+            </button>
+        </div>
+
+        <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
+            <ul class = "navbar-nav mx-auto text-center">
+                <li class = "nav-item px-2 py-2">
+                    <a class = "nav-link text-uppercase text-dark" href = "/">home</a>
+                </li>
+                <li class = "nav-item px-2 py-2">
+                    <a class = "nav-link text-uppercase text-dark" href = "/home?offset=0#product">productos</a>
+                </li>
+                <li class = "nav-item px-2 py-2">
+                    <a class = "nav-link text-uppercase text-dark" href = "/usuarios">usuarios</a>
+                </li>
+                <li class = "nav-item px-2 py-2">
+                    <span th:if="${logguedUser == 'admin'}">
+                        <a class = "nav-link text-uppercase text-dark" href = "/gestion?offset=0" >gestionar</a>
+                    </span>
+                    <span th:if="${logguedUser != 'admin'}">
+                        <a class = "nav-link text-uppercase text-dark" href = "/gestion?offset=0" style="display: none" >gestionar</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end of navbar -->
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-5">
+            <div th:if="${producto.getFotos().size() == 0}">
+                <div class="main-img">
+                    <img class="img-fluid" src="/images/no-image.png" alt="Producto">
+                </div>
+            </div>
+            <div th:if="${producto.getFotos().size() == 1}">
+                <div class="main-img">
+                    <img th:src="@{'data:'+${producto.fotos[0].getMimeType()}+';base64,'+${producto.fotos[0].getFotoBase64()}}" class="d-block w-100" alt="Slide 1">
+                </div>
+            </div>
+            <div th:if="${producto.getFotos().size() > 1}">
+                <div id="myCarousel" name="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img th:src="@{'data:'+${producto.fotos[0].getMimeType()}+';base64,'+${producto.fotos[0].getFotoBase64()}}" class="d-block w-100" alt="Slide 1">
+                        </div>
+                        <div class="carousel-item" th:each="foto: ${producto.fotos}">
+                            <img th:src="@{'data:'+${foto.getMimeType()}+';base64,'+${foto.getFotoBase64()}}" class="d-block w-100" alt="Producto">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="main-description px-2">
+                <div class="category text-bold" style="color: #1a1e1e">
+                    Home > Productos
+                </div>
+                <div class="product-title text-bold my-3" th:text="${producto.nombre}">[Nombre de Producto]</div>
+
+                <div class="price-area my-4">
+                    <p class="new-price text-bold mb-1" style="display:inline">$</p>
+                    <p class="new-price text-bold mb-1" style="display:inline" th:text="${producto.precio}">0000.00</p>
+                </div>
+
+                <div class="buttons d-flex my-5">
+                    <div class="block">
+                        <a th:href="@{'/home/regProducto/' + ${producto.codigo}}" class="btn custom-btn">Agregar al carrito</a>
+                        <button class="btn custom-btn-danger" onclick="window.history.back()">Volver</button>
+                    </div>
+                </div>
+
+                <div class="product-details my-4">
+                    <p class="details-title text-color mb-1">Detalles del Producto</p>
+                    <p class="description" th:text="${producto.descripcion}">[Descripcion del producto. Aqui se colocara una breve descricion del producto seleccionado]</p>
+                </div>
+
+                <div class="delivery my-4">
+                    <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-truck"></i></span> <b>Con envios de hasta 3 dias</b> </p>
+                    <p class="text-secondary">Ordena ahora!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    seccion Comentarios     -->
+<section id="comments">
+    <div class="container similar-products my-4">
+        <hr>
+        <p class="display-5">Comentarios</p>
+        <div class="container mt-5">
+            <div class="row  d-flex justify-content-center">
+
+                <div th:if="${logguedUser != 'guest'}">
+                    <div class="card-footer py-3 border-0" style="background-color: #ffffff;">
+                        <form id="frmComentario" method="post" th:action="@{'/home/masDetalles/' + ${producto.codigo}}">
+                            <div class="d-flex flex-start w-100">
+                                <div class="form-floating mb-3 w-100">
+                                    <textarea name="comentario" id="areaComentario" type="text" class="form-control"rows="3" placeholder="Agrega un comentario..."></textarea>
+                                    <label for="AreaComentario">Agrega un comentario...</label>
+                                </div>
+                            </div>
+                            <div class="float-end mt-2 pt-1">
+                                <!--                        <a class = "btn btn-primary btn-sm" href = "/home" >Publicar Comentario</a>-->
+                                <button type="submit" class="btn btn-primary btn-sm">Publicar Comentario</button>
+                                <button type="reset" class="btn btn-outline-danger btn-sm">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div th:if="${logguedUser == 'guest'}">
+                    <div class="card-footer py-3 border-0" style="background-color: #ffffff;">
+                        <form id="frmComentarioGuest" method="post" action="">
+                            <div class="d-flex flex-start w-100">
+                                <div class="form-floating mb-3 w-100">
+                                    <textarea name="comentario" id="areaComentarioGuest" type="text" class="form-control"rows="3" placeholder="Agrega un comentario..." readonly></textarea>
+                                    <label for="AreaComentario">Inicia sesion para agregar un comentario...</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div>
+                    <br>
+                    <hr class="solid">
+                </div>
+                <div th:if="${comentarios.size() != 0}">
+                    <div class="headings d-flex justify-content-between align-items-center mb-3">
+                        <h5>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Comentarios Destacados</h5>
+                    </div>
+                </div>
+<!--                <div th:if="${comentarios.size() != 0}">-->
+                <div id="div-principal">
+<!--                    <div class="card p-3 mt-2" th:each="comentario: ${comentarios}">-->
+<!--                    <div class="card p-3 mt-2">-->
+<!--                        <div class="d-flex justify-content-between align-items-center">-->
+<!--                            <div class="user d-flex flex-row align-items-center">-->
+<!--                                <span>-->
+<!--                                    <small id="usuario" class="font-weight-bold text-primary"></small>-->
+<!--                                    <small></small>-->
+<!--                                    <small id="comment" class="font-weight-bold"></small>-->
+<!--                                </span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply px-4">-->
+<!--                            <small th:if="${logguedUser == 'admin'}">-->
+<!--                                <br>-->
+<!--&lt;!&ndash;                                <a th:href="@{${producto.codigo}+'/rmvComment/'+ ${comentario.id}}">&nbsp&nbspEliminar</a>&ndash;&gt;-->
+<!--                            </small>-->
+<!--                            <small th:if="${logguedUser != 'admin'}">-->
+<!--                                <a href="/home?offset=0" style="display: none">Eliminar</a>-->
+<!--                            </small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+                <div th:if="${comentarios.size() == 0}">
+                    <div class="card p-3 mt-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user d-flex flex-row align-items-center">
+                                <div class="headings d-flex justify-content-between align-items-center mb-3">
+                                    <h7>Aun no hay comentarios.</h7>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!--    Footer  -->
+<footer class="bg-dark text-center text-white">
+    <div class="container p-4 pb-0" >
+        <!-- Social media -->
+        <section class="mb-4">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button" target="_blank">
+                <i class="fab fa-facebook-f"></i
+                ></a>
+            <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/?lang=en" role="button" target="_blank">
+                <i class="fab fa-twitter"></i
+                ></a>
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/" role="button" target="_blank">
+                <i class="fab fa-google"></i
+                ></a>
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/" role="button" target="_blank">
+                <i class="fab fa-instagram"></i
+                ></a>
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/" role="button" target="_blank">
+                <i class="fab fa-linkedin-in"></i
+                ></a>
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/" role="button" target="_blank">
+                <i class="fab fa-github"></i
+                ></a>
+        </section>
+        <!-- end of Social media -->
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        ICC Market&nbsp;&nbsp;|&nbsp;&nbsp;&#169 2023 Copyright&nbsp;&nbsp;|&nbsp;&nbsp;Eduardo Martinez & Gabriel Cepeda
+    </div>
+</footer>
+<!--    end of Footer   -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="./js/jquery-3.6.3.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+
+<script>
+    //Inicializando Tooltip usuarios
+    $(function () {
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    })
+
+
+    //abriendo el objeto para el websocket
+    var webSocket;
+    var tiempoReconectar = 5000;
+
+    $(document).ready(function(){
+        console.info("Iniciando Jquery -  Ejemplo WebServices (DetallesProducto)");
+        conectarUser();
+        conectarComentario();
+    });
+
+    function borrarContenido() {
+        var padre = document.getElementById("div-principal");
+        while (padre.firstChild) {
+            padre.removeChild(padre.firstChild);
+        }
+    }
+
+    /**
+     *
+     * @param mensaje
+     */
+    function recibirInformacionServidor(mensaje){
+        var message = JSON.parse(mensaje.data);
+        var principal = document.getElementById('div-principal');
+        borrarContenido();
+
+        for (let i = 0; i < message.length; i++) {
+            var div = document.createElement('div');
+            div.classList.add("card");
+            div.classList.add("p-3");
+            div.classList.add("mt-2");
+            var div1 = document.createElement('div');
+            var div2 = document.createElement('div');
+            var span1 = document.createElement('span');
+            var small1 = document.createElement('small');
+            small1.innerText = message[i].usuario;
+            small1.setAttribute('style','color:#005dea');
+            var small2 = document.createElement('small');
+            small2.innerText = "   -   ";
+            var small3 = document.createElement('small');
+            small3.innerText = message[i].comentario;
+
+            span1.appendChild(small1);
+            span1.appendChild(small2);
+            span1.appendChild(small3);
+            div2.appendChild(span1);
+            div1.appendChild(div2);
+            div.appendChild(div1);
+            principal.appendChild(div);
+
+            if ($("#logguedUser").text() == 'admin') {
+                var divEliminar = document.createElement('div');
+                divEliminar.classList.add('reply');
+                var smallLink = document.createElement('small');
+                var link = document.createElement('a');
+                link.innerText = 'Eliminar';
+                link.setAttribute('id', 'btnEliminar');
+                link.setAttribute('style','color:#ec0505');
+                var br = document.createElement('br');
+
+                smallLink.appendChild(br);
+                smallLink.appendChild(link);
+                divEliminar.appendChild(smallLink);
+                div.appendChild(divEliminar);
+
+                link.addEventListener("click", function(event){
+                    const mensaje = 'remove:' + message[i].id;
+                    webSocket.send(mensaje);
+                });
+            }
+        }
+    }
+
+    function conectarComentario() {
+        console.info("Iniciando la comunicación...");
+        webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + location.pathname);
+        webSocket.onmessage = function(data){recibirInformacionServidor(data);};
+        webSocket.onopen  = function(e){console.log("(COMENTARIOS) Conectado - status "+this.readyState);};
+        webSocket.onclose = function(e){console.log("(COMENTARIOS) Desconectado - status "+this.readyState);};
+    }
+    function conectarUser() {
+        if ($("#logguedUser").text() != 'guest') {
+            console.info("Iniciando la comunicación...");
+            webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/usuariosConectados");
+
+            webSocket.onmessage = function(event) {
+                var message = JSON.parse(event.data);
+                if (message.users){
+                    const numUsers = message.users;
+                    document.getElementById("conectados").innerHTML = numUsers;
+                }
+            };
+            webSocket.onopen  = function(e){console.log("(ONOPEN) Conectado - status "+this.readyState);};
+            webSocket.onclose = function(e){console.log("(ONCLOSE) Desconectado - status "+this.readyState);};
+        }
+        // else{
+        //     document.getElementById("conectados").innerHTML = "";
+        // }
+    }
+
+    function verificarConexion(){
+        if(!webSocket || webSocket.readyState == 3){
+            conectar();
+        }
+    }
+
+    setInterval(verificarConexion, tiempoReconectar); //para reconectar.
+
+</script>
+</body>
+</html>
+

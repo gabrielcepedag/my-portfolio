@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Menu | Shrinkr</title>
+  <link rel="shortcut icon" type="image" href="/images/logo1-icon.png">
+
+  <link rel="stylesheet" href="/css/styleMainMenu.css">
+  <link rel="stylesheet" href="../contrast-bootstrap-pro/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../contrast-bootstrap-pro/css/cdb.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+<div hidden="logguedUser" id="logguedUser" th:text="${logguedUser}"></div>
+<!--  Side Panel  -->
+<div class="container">
+  <div class="navigation">
+    <ul>
+      <li class="hovered">
+        <a href="/menu">
+          <img class="menu-icon" src="/images/logo1-icon2.png" alt="logo">
+          <img class="menu-logo" src="/images/logo1.png" alt="logo" style="width: 250px; height: 72px">
+        </a>
+      </li>
+      <li>
+        <a href="/menu">
+          <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+          <span class="title">Main Menu</span>
+        </a>
+      </li>
+      <li>
+        <a href="/menu/links">
+          <span class="icon"><ion-icon name="link-outline"></ion-icon></ion-icon></span>
+          <span class="title">My Links</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <span class="icon"><ion-icon name="stats-chart"></ion-icon></span>
+          <span class="title">Dashboard</span>
+        </a>
+      </li>
+      <li th:if="${loguedUser.admin}">
+        <a href="/gestion/links">
+          <span class="icon"><ion-icon name="cog-outline"></ion-icon></span>
+          <span class="title">Manage Links</span>
+        </a>
+      </li>
+      <li th:if="${loguedUser.admin && loguedUser.superAdmin}">
+        <a href="/gestion/users">
+          <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></ion-icon></span>
+          <span class="title">Manage Users</span>
+        </a>
+      </li>
+      <li>
+      <li class="profile">
+        <div class="user-profile">
+          <img src="/images/user-icon3.jpg" alt="User Profile Picture">
+          <div class="user-details">
+            <div class="user-name" th:text="${loguedUser.username}">Logued Username</div>
+            <div class="user-role" th:if="${loguedUser.admin}">
+              <span th:if="${loguedUser.admin and not loguedUser.superAdmin}">Administrator</span>
+              <span th:if="${loguedUser.admin and loguedUser.superAdmin}">Main Administrator</span>
+            </div>
+          </div>
+        </div>
+        <div class="logout-icon" title="Logout" >
+          <ion-icon id="logButton" name="log-out-outline"></ion-icon>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--  end of Side Panel  -->
+
+  <!--  Main Panel  -->
+  <div class="main">
+    <!-- TopBar -->
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu"></ion-icon>
+      </div>
+      <h1 class="title1">Dashboard</h1><br>
+      <!--            <div class="search">-->
+      <!--                <label>-->
+      <!--                    <input type="text" placeholder="Escriba aqui...">-->
+      <!--                    <ion-icon name="search-outline"></ion-icon>-->
+      <!--                </label>-->
+      <!--            </div>-->
+      <!--            <div class="user">-->
+      <!--                <img src="./images/user-icon3.jpg" title="Bienvenido, admin">-->
+      <!--            </div>-->
+    </div>
+    <!-- end of Topbar -->
+
+    <!-- Upper Cards -->
+    <div class="cardBox dashboard">
+      <div class="card">
+        <div>
+          <div class="numbers" id="cantVistas" th:text="${totalVisits}">[00]</div>
+          <div class="cardName">Your Total Visits</div>
+        </div>
+        <div class="iconBx">
+          <ion-icon name="analytics-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <div class="numbers" id="cantLinks" th:text="${linksCreated}">[00]</div>
+          <div class="cardName">Links You've Created</div>
+        </div>
+        <div class="iconBx">
+          <ion-icon name="globe-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+        <div th:unless="${linksCreated == 0}">
+          <div class="numbers" id="promVisitas" th:text="${#numbers.formatDecimal(visitorsAverage, 1, 'DEFAULT', 2, 'DEFAULT')}">[00.00]</div>
+          <div class="cardName">Your Average Visitors</div>
+        </div>
+        <div th:if="${linksCreated == 0}">
+          <div class="numbers">00</div>
+          <div class="cardName">Your Average Visitors</div>
+        </div>
+        <div class="iconBx">
+          <ion-icon name="shuffle-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <!-- end of Upper Cards -->
+
+    <!-- Top Links -->
+
+    <!-- end of Top Links -->
+
+
+    <br><br>
+    <!-- Charts -->
+    <h1 id="productos" style="padding-left: 30px">Welcome to your Statistics Dashboard</h1><br>
+    <div class="cardHeader">
+      <h2 style="margin-bottom: 10px; padding-top: 20px; padding-left: 65px">Total Visits by Link</h2>
+    </div>
+    <div class="details" style="margin-top: 25px">
+      <div class="recentOrders">
+        <canvas id="chartAccesosLinksBar"></canvas>
+      </div>
+
+      <div class="recentCustomers">
+        <canvas id="chartAccesosLinks"></canvas>
+      </div>
+
+    </div>
+
+    <div class="graphBox">
+      <div class="box">
+        <div class="cardHeader">
+          <h2 style="margin-bottom: 50px">Total Visits by Date</h2>
+        </div>
+        <div style="display: block; margin:0 auto; position: relative; width: 95%;">
+          <canvas id="chartAccesosFechas"></canvas>
+        </div>
+      </div>
+
+      <div class="graphBox dashboard">
+        <div class="box">
+          <div class="cardHeader">
+            <h2 style="margin-bottom: 50px">Visits by Web Browser</h2>
+          </div>
+          <div style="display: block; margin:0 auto; position: relative; width: 95%;">
+            <canvas id="chartAccesosBrowser"></canvas>
+          </div>
+        </div>
+        <div class="box">
+          <div class="cardHeader">
+            <h2 style="margin-bottom: 50px">Visits by OS</h2>
+          </div>
+          <div style="display: block; margin:0 auto; position: relative; width: 95%;">
+            <canvas id="chartAccesosOS"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+<script src="/js/mainMenu.js"></script>
+<script src="/js/jquery-3.6.3.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/usuariosConectados.js"></script>
+
+<script id="userID" th:inline="javascript">
+  const profileLi = document.querySelector(".profile");
+  var superAdmin = /*[[${loguedUser.superAdmin}]]*/ false;
+  var admin = /*[[${loguedUser.admin}]]*/ false;
+  window.onload = loadCharts;
+
+  if (admin === true && superAdmin === false) {
+    profileLi.classList.add("admin");
+  }else if(admin === false && superAdmin === false){
+    profileLi.classList.add("user");
+  }
+
+  function loadCharts() {
+    var chartDataLinks = /*[[${listaUrlJson}]]*/ [];
+    var chartDataAccesos = /*[[${listaAccesosJson}]]*/ [];
+    createChart(chartDataLinks);
+    createChart2(chartDataLinks);
+    createChart3(chartDataAccesos);
+    createChart4(chartDataAccesos);
+    createChart5(chartDataAccesos);
+  }
+
+  function createChart(listUrlJson) {
+    const ctxChart = document.getElementById("chartAccesosLinksBar").getContext('2d');
+    const listUrl = JSON.parse(listUrlJson);
+    const labels = [];
+    const data = [];
+    const backgroundColors = [];
+    const usedColors = [];
+    const validBackgroundColors = [];
+
+    for (let i = 0; i < listUrl.length; i++) {
+      if (listUrl[i].cantAccesos > 0) {
+        labels.push(listUrl[i].urlAcortada);
+        data.push(listUrl[i].cantAccesos);
+        let randomColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        while (usedColors.includes(randomColor)) {
+          randomColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        }
+        backgroundColors.push(randomColor);
+        usedColors.push(randomColor);
+        validBackgroundColors.push(randomColor);
+      }
+    }
+    new Chart(ctxChart, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Total Visits",
+            data: data,
+            backgroundColor: validBackgroundColors,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        legend: {
+          display: false ,
+        },
+        title: {
+          display: false,
+        }
+      }
+    });
+  }
+
+    function createChart2(listUrlJson){
+    const ctxChart2 = document.getElementById("chartAccesosLinks").getContext('2d');
+    const listUrl2 = JSON.parse(listUrlJson);
+    const labels2 = [];
+    const data2 = [];
+    const backgroundColors2 = [];
+    const usedColors2 = [];
+    const validBackgroundColors2 = [];
+
+    for (let i = 0; i < listUrl2.length; i++) {
+      if (listUrl2[i].cantAccesos > 0) {
+        labels2.push(listUrl2[i].urlAcortada);
+        data2.push(listUrl2[i].cantAccesos);
+        let randomColor2 = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        while (usedColors2.includes(randomColor2)) {
+          randomColor2 = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        }
+        backgroundColors2.push(randomColor2);
+        usedColors2.push(randomColor2);
+        validBackgroundColors2.push(randomColor2);
+      }
+    }
+    if (labels2.length === 0) {
+      // display placeholder chart
+      window.myChartLinks = new Chart(ctxChart2, {
+        type: 'doughnut',
+        data: {
+          labels: ['No Data'],
+          datasets: [{
+            label: 'Number of Visits By Link',
+            borderColor: 'rgb(0,0,0)',
+            borderWidth: 1,
+            data: [1],
+            backgroundColor: ['#f6f6f6']
+          }]
+        },
+        options:{
+          responsive: true,
+          legend: {
+            display: false
+          },
+          tooltips: {
+            enabled: false
+          }
+        }
+      });
+    } else {
+      // display chart with url data
+      window.myChartLinks = new Chart(ctxChart2, {
+        type: 'doughnut',
+        data: {
+          labels: labels2,
+          datasets: [{
+            label: 'Number of Visits By Link',
+            borderColor: 'rgb(255,255,255)',
+            borderWidth: 2,
+            data: data2,
+            backgroundColor: validBackgroundColors2
+          }]
+        },
+        options:{
+          responsive: true,
+        }
+      });
+    }
+  }
+
+  function createChart3(listAccesosJson) {
+    const ctxChart3 = document.getElementById("chartAccesosFechas").getContext('2d');
+    const listAccesos = JSON.parse(listAccesosJson);
+    const dateCounts = {}; // object to store the count for each date
+
+    for (let i = 0; i < listAccesos.length; i++) {
+      const fecha = listAccesos[i].fecha;
+      const dateKey = fecha.split(' ')[0]; // get the date part only, e.g. "09/04/2023"
+      dateCounts[dateKey] = (dateCounts[dateKey] || 0) + 1; // increment the count for the date
+    }
+
+    const labels3 = Object.keys(dateCounts);
+    const data3 = Object.values(dateCounts);
+    const borderColor = [];
+    const backgroundColor = [];
+
+    for (let i = 0; i < labels3.length; i++) {
+      borderColor.push('black');
+      backgroundColor.push('blue');
+    }
+
+    new Chart(ctxChart3, {
+      type: 'line',
+      data: {
+        labels: labels3,
+        datasets: [{
+          label: "Total Visits",
+          data: data3,
+          backgroundColor: backgroundColor,
+          borderColor: borderColor,
+          borderWidth: 1,
+          pointRadius: 4,
+        }],
+      },
+      options: {
+        responsive: true,
+      },
+    });
+  }
+
+  function createChart4(listAccesosJson) {
+    const ctxChart4 = document.getElementById("chartAccesosBrowser").getContext('2d');
+    const listAccesos2 = JSON.parse(listAccesosJson);
+    const browserVisits = {};
+
+    for (let i = 0; i < listAccesos2.length; i++) {
+      const browser = listAccesos2[i].navegador;
+      if (browser in browserVisits) {
+        browserVisits[browser]++;
+      } else {
+        browserVisits[browser] = 1;
+      }
+    }
+
+    const labels4 = Object.keys(browserVisits);
+    const data4 = Object.values(browserVisits);
+    const backgroundColors4 = labels4.map(() => '#' + Math.floor(Math.random() * 0xffffff).toString(16));
+
+    if (labels4.length === 0) {
+      // display placeholder chart
+      window.myChartLinks = new Chart(ctxChart4, {
+        type: 'doughnut',
+        data: {
+          labels: ['No Data'],
+          datasets: [{
+            label: 'Number of Visits By Link',
+            borderColor: 'rgb(0,0,0)',
+            borderWidth: 1,
+            data: [1],
+            backgroundColor: ['#f6f6f6']
+          }]
+        },
+        options:{
+          responsive: true,
+          legend: {
+            display: false
+          },
+          tooltips: {
+            enabled: false
+          }
+        }
+      });
+    } else {
+      new Chart(ctxChart4, {
+        type: 'doughnut',
+        data: {
+          labels: labels4,
+          datasets: [
+            {
+              label: "Total Number of Visits",
+              data: data4,
+              backgroundColor: backgroundColors4,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: false ,
+          }
+        }
+      });
+    }
+  }
+
+  function createChart5(listAccesosJson) {
+    const ctxChart5 = document.getElementById("chartAccesosOS").getContext('2d');
+    const listAccesos3 = JSON.parse(listAccesosJson);
+    const visitsByOs = {};
+
+    for (let i = 0; i < listAccesos3.length; i++) {
+      const os = listAccesos3[i].plataforma;
+      if (os in visitsByOs) {
+        visitsByOs[os]++;
+      } else {
+        visitsByOs[os] = 1;
+      }
+    }
+
+    const labels5 = Object.keys(visitsByOs);
+    const data5 = Object.values(visitsByOs);
+    const backgroundColors5 = labels5.map(() => '#' + Math.floor(Math.random() * 0xffffff).toString(16));
+
+    if (labels5.length === 0) {
+      // display placeholder chart
+      window.myChartLinks = new Chart(ctxChart5, {
+        type: 'doughnut',
+        data: {
+          labels: ['No Data'],
+          datasets: [{
+            label: 'Number of Visits By Link',
+            borderColor: 'rgb(0,0,0)',
+            borderWidth: 1,
+            data: [1],
+            backgroundColor: ['#f6f6f6']
+          }]
+        },
+        options:{
+          responsive: true,
+          legend: {
+            display: false
+          },
+          tooltips: {
+            enabled: false
+          }
+        }
+      });
+    } else {
+      new Chart(ctxChart5, {
+        type: 'doughnut',
+        data: {
+          labels: labels5,
+          datasets: [
+            {
+              label: "Total Number of Visits",
+              data: data5,
+              backgroundColor: backgroundColors5,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: false ,
+          }
+        }
+      });
+    }
+  }
+</script>
+
+  <script id="chart4">
+  <!--  var chartAccesosByLink = document.getElementById("chartAccesosBrowser").getContext('2d');-->
+  <!--  var labels = ["ay7Ec4", "7ec64", "x7h21d", "k4lopa"];-->
+  <!--  var data = [17,2,114,54];-->
+
+  <!--  new Chart(chartAccesosByLink, {-->
+  <!--    type: 'doughnut',-->
+  <!--    data: {-->
+  <!--      labels: labels,-->
+  <!--      datasets: [-->
+  <!--        {-->
+  <!--          label: "Total Number of Visits",-->
+  <!--          data: data,-->
+  <!--          backgroundColor: ["#27abff", "#c180dc","#25ceaa","#f85325"]-->
+  <!--        }-->
+  <!--      ]-->
+  <!--    },-->
+  <!--    options: {-->
+  <!--      responsive: true,-->
+  <!--      title: {-->
+  <!--        display: true,-->
+  <!--        text: 'Number of Visits for Links Created'-->
+  <!--      }-->
+  <!--    }-->
+  <!--  });-->
+  <!--</script>-->
+
+  <!--<script id="chart5">-->
+  <!--  var chartAccesosByOS = document.getElementById("chartAccesosOS").getContext('2d');-->
+  <!--  var labels = ["Windows", "Chrome OS", "Mac", "Linux"];-->
+  <!--  var data = [106,19,84,48];-->
+
+  <!--  new Chart(chartAccesosByOS, {-->
+  <!--    type: 'doughnut',-->
+  <!--    data: {-->
+  <!--      labels: labels,-->
+  <!--      datasets: [-->
+  <!--        {-->
+  <!--          label: "Total Number of Visits",-->
+  <!--          data: data,-->
+  <!--          backgroundColor: ["#27abff", "#c180dc","#25ceaa","#f85325"]-->
+  <!--        }-->
+  <!--      ]-->
+  <!--    },-->
+  <!--    options: {-->
+  <!--      responsive: true,-->
+  <!--      title: {-->
+  <!--        display: false,-->
+  <!--        text: 'Number of Visits for Links Created'-->
+  <!--      }-->
+  <!--    }-->
+  <!--  });-->
+  </script>
+
+</body>
+</html>

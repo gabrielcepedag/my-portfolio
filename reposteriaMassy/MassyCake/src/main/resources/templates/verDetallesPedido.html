@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ver Pedido | Massy's Cake</title>
+    <link rel="shortcut icon" type="image" href="/img/massyCake-Logo.jpg">
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+
+    <!-- Enlaza la biblioteca de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous"/>
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="/css/sb-admin-2.css" >
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/css/notification.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+                <div class="sidebar-brand-icon sidebar-logo">
+                    <img src="/img/massyCake-Logo.jpg" alt="Logo">
+                </div>
+                <div class="sidebar-brand-text mx-sm-3">Gesti&oacute;n General</div>
+            </a>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/home">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Home</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Cocina
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCocina" aria-expanded="true" aria-controls="collapseCocina">
+                    <i class="fas fa-fw fa-utensils"></i>
+                    <span>Cocina</span>
+                </a>
+                <div id="collapseCocina" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/cocina">Cocina</a>
+                                     <a class="collapse-item" href="/pedidos?paginacion=true">Pedidos</a>
+                        <a class="collapse-item" href="/cocina/recetas">Recetas</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestion" aria-expanded="true" aria-controls="collapseGestion">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>Gesti&oacute;n</span>
+                </a>
+                <div id="collapseGestion" class="collapse" aria-labelledby="Gestion" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/inventario">Inventario</a>
+                        <a class="collapse-item" href="/productos">Productos</a>
+                        <a class="collapse-item" href="/ordenesCompra">Ordenes de Compra</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pedidos/crear">
+                    <i class="fas fa-file-upload"></i>
+                    <span>Crear Pedido</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Ventas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pos">
+                    <i class="fas fa-fw fa-cash-register"></i>
+                    <span>Punto de Venta</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegistros"
+                   aria-expanded="true" aria-controls="collapseRegistros">
+                    <i class="fas fa-fw fa-receipt"></i>
+                    <span>Registros</span>
+                </a>
+                <div id="collapseRegistros" class="collapse" aria-labelledby="Registros" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/facturas">Facturas</a>
+                        <a class="collapse-item" href="/ventas">Ventas</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Personas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/empleados">
+                    <i class="fas fa-users"></i>
+                    <span>Empleados</span></a>
+            </li>
+
+
+
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reportes
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+                   aria-expanded="true" aria-controls="collapseReportes">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseReportes" class="collapse" aria-labelledby="Reportes" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/reportes/ventas">Reporte de Ventas</a>
+                        <a class="collapse-item" href="/reportes/inventario">Reporte de Inventario</a>
+                        <a class="collapse-item" href="/reportes/clientes">Reporte de Clientes</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Page Heading -->
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <h1 class="h3 mt-2 text-gray-800">Informaci&oacute;n de Pedido</h1>
+                    </div>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${empleado.nombre} + ' ' + ${empleado.apellido}">Nombre Apellido</span>
+                                <img class="img-profile rounded-circle" th:src="${empleado.rol == 'ADMIN' ? '/img/profile_icon.jpg':
+                                (empleado.rol == 'REPOSTERO' ? '/img/chef-avatar-vector-illustration.jpg' : '/img/profile_icon.png')}" alt="Imagen de perfil usuario">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/perfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Mi Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar Sesi&oacute;n
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div>
+                        <!--------------- FORM PARA VER PEDIDO PERSONALIZADO --------------------->
+                        <div id="personalizado">
+                            <form style="padding: 10px">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="nombrePedido">Nombre del pedido</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="nombrePedido" th:value="${pedido.nombre}" disabled style="background-color: transparent">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-clipboard"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="fechaOrdenEncargo" class="col-sm-2 col-form-label">Fecha de Orden</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" id="fechaOrdenEncargo" class="form-control" style="background-color: transparent">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label for="fechaEntregaEncargo" class="col-sm-2 col-form-label">Fecha de Entrega</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" id="fechaEntregaEncargo" class="form-control" style="background-color: transparent">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-calendar-check"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="cliente">Cliente</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-transparent" id="cliente" th:value="${pedido.cliente.nombre}" disabled>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label" for="metodoEntrega">Método de entrega</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="metodoEntrega" th:value="${pedido.metodoEntrega != null ? pedido.metodoEntrega : 'N/E'}" disabled style="background-color: transparent">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-truck"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <textarea id="descripcion" class="form-control" maxlength="100" th:text="${pedido.descripcion}" disabled style="background-color: transparent"></textarea>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row" th:if="${pedido.tipoPedido.toLowerCase() != 'cabina'}">
+                                    <label class="col-sm-2 col-form-label" for="inicialPedido">Inicial</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="inicialPedido" th:value="${pedido.inicial != null ? pedido.inicial : 'N/E'}" disabled style="background-color: transparent">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label">Descuento</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="descuentoPedido" th:value="${pedido.descuento != null ? pedido.descuento : 'N/E'}" disabled style="background-color: transparent">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="detallesPedidosInput" name="detallesPedidos"/>
+                                <hr>
+
+                                <div id="detallesContainer">
+
+                                </div>
+
+                                <input type="hidden" id="recetasPedidoInputCrear" name="recetasJSON" th:value="${recetasPedidoJSON}" />
+
+                                <button type="button" class="btn btn-primary mt-3" onclick="window.history.back()">Volver</button>
+                            </form>
+                        </div>
+                        <!--------------- FORM PARA VER DETALLES PEDIDO --------------------->
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Massy's Cake 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Est&aacute; seguro que desea salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Asegurese de guardar correctamente todo su progreso.</div> <br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="/logout">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Notification Area Div -->
+    <div id="notification-area"></div>
+
+    <!-- DatePicker Scripts and Initializers -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/datatables-main.js"></script>
+    <script src="/js/notification.js">  </script>
+
+    <!-- DateTimePicker Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
+
+    <script th:inline="javascript">
+        $(function() {
+            var defaultDate = new Date();
+            var fechaEntrega = /*[[${#temporals.format(pedido.fechaEntrega, 'yyyy-MM-dd HH:mm')}]]*/ '';
+            var fechaOrdenEncargo = /*[[${#temporals.format(pedido.fechaOrden, 'yyyy-MM-dd HH:mm')}]]*/ '';
+
+            $("#fechaOrdenCabina").val(convertToCustomFormat(defaultDate)).prop("readonly", true);
+
+            $("#fechaEntregaEncargo").datetimepicker({
+                dateFormat: "yy-mm-dd",
+                timeFormat: "HH:mm",
+                minDate: 0,
+                step: 5,
+                onSelect: function(dateText, inst) {
+                    var selectedDate = new Date(dateText);
+                    var formattedDate = convertToCustomFormat(selectedDate);
+                    $("#fechaEntregaEncargo").val(formattedDate);
+                }
+            }).val(fechaEntrega).prop("disabled", true);
+
+            $("#fechaOrdenEncargo").datetimepicker({
+                dateFormat: "yy-mm-dd",
+                timeFormat: "HH:mm",
+                minDate: 0,
+                step: 5,
+                onSelect: function(dateText, inst) {
+                    var selectedDate = new Date(dateText);
+                    var formattedDate = convertToCustomFormat(selectedDate);
+                    $("#fechaOrdenEncargo").val(formattedDate);
+                }
+            }).val(fechaOrdenEncargo).prop("disabled", true);
+        })
+
+        function convertToCustomFormat(date) {
+            var formattedDate =
+                date.getFullYear() +
+                "-" +
+                ("0" + (date.getMonth() + 1)).slice(-2) +
+                "-" +
+                ("0" + date.getDate()).slice(-2) +
+                "T" +
+                ("0" + date.getHours()).slice(-2) +
+                ":" +
+                ("0" + date.getMinutes()).slice(-2);
+            return formattedDate;
+        }
+    </script>
+
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            var detallesPedido = /*[[${detallesPedido}]]*/ [];
+            var recetasPedido = [];
+
+
+            if (detallesPedido != null && detallesPedido.length > 0) {
+                var detallePedidoId = 1;
+
+                detallesPedido.forEach(function(detalle) {
+                    var detalleId = detalle.detalle_pedidoId;
+                    var tipoMasa = detalle.masa;
+                    var forma = detalle.forma;
+                    var relleno = detalle.relleno;
+                    var peso = detalle.peso;
+                    var unidad = detalle.unidad;
+                    var notas = detalle.nota ? detalle.nota : " ";
+                    var numDetalle = 1;
+
+                    var detalleContainerId = 'detalle-' + detallePedidoId;
+                    var detallePedidoItem = '<div id="' + detalleContainerId + '" data-detalleId="' + detalleId + '" style="background-color: #fff; padding: 10px; border-radius: 20px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">';
+                    detallePedidoItem += '<h3 class="text-primary m-0" style="padding: 10px">Detalle ' + detallePedidoId + '</h3>';
+                    detallePedidoItem += '<p><strong>Tipo de masa:</strong> ' + tipoMasa + '</p>';
+                    detallePedidoItem += '<p><strong>Forma:</strong> ' + forma + '</p>';
+                    detallePedidoItem += '<p><strong>Relleno:</strong> ' + relleno + '</p>';
+                    detallePedidoItem += '<p><strong>Peso:</strong> ' + peso + ' ' + unidad + '</p>';
+                    detallePedidoItem += '<p><strong>Notas:</strong> ' + notas + '</p>';
+
+                    if (detalle.recetas.length > 0) {
+                        detallePedidoItem += '<h4 class="text-primary m-0" style="padding: 10px">Recetas</h4>';
+                        detallePedidoItem += '<div class="table-responsive d-flex justify-content-center">';
+                        detallePedidoItem += '<table class="table table-bordered" id="tableRecetasUsadasVer' + detallePedidoId + '" style="width: 95%;" cellspacing="0">';
+                        detallePedidoItem += '<thead>';
+                        detallePedidoItem += '<tr>';
+                        detallePedidoItem += '<th>Nombre</th>';
+                        detallePedidoItem += '<th>Porci&oacute;n Resultante</th>';
+                        detallePedidoItem += '<th>Tiempo Preparaci&oacute;n</th>';
+                        detallePedidoItem += '<th>Cant. Ingredientes</th>';
+                        detallePedidoItem += '<th class="text-center pl-0 pr-0">Ver Receta</th>';
+                        detallePedidoItem += '</tr>';
+                        detallePedidoItem += '</thead>';
+                        detallePedidoItem += '<tbody>';
+                        detalle.recetas.forEach(function(receta) {
+                            var idReceta = receta.id;
+                            recetasPedido.push({
+                                idReceta: idReceta,
+                                idDetalle: detalleId,
+                            });
+                            var recetaPedidoJSON = JSON.stringify(recetasPedido);
+                            var recetasPedidoInput = 'recetasPedidoInputCrear';
+                            document.getElementById(recetasPedidoInput).value = recetaPedidoJSON;
+                            console.log(recetaPedidoJSON);
+
+                            var nombre = receta.nombre;
+                            var porcion = receta.porcionResultante + ' ' + receta.uniPorcionResultante;
+                            var tiempo = receta.minutosPreparacion + ' Mins.';
+                            var ingredientes = receta.ingredientes.length;
+
+                            // Agregar fila con receta a tabla RecetasUsadasCrear
+                            detallePedidoItem += '<tr data-id="' + idReceta + '">';
+                            detallePedidoItem +=    '<td>' + nombre + '</td>';
+                            detallePedidoItem +=    '<td>' + porcion + '</td>';
+                            detallePedidoItem +=    '<td>' + tiempo +'</td>';
+                            detallePedidoItem +=    '<td>' + ingredientes + '</td>';
+                            detallePedidoItem +=    '<td class="text-center pr-0 pl-0">';
+                            detallePedidoItem +=        '<a href="/cocina/recetas/ver/' + idReceta +'?idDetalle='+detalleId+'" class="btn btn-info btn-circle">';
+                            detallePedidoItem +=            '<i class="fas fa-info-circle"></i>';
+                            detallePedidoItem +=        '</a>';
+                            detallePedidoItem +=    '</td>';
+                            detallePedidoItem += '</tr>';
+                        });
+                        detallePedidoItem += '</tbody>';
+                        detallePedidoItem += '</table>';
+                        detallePedidoItem += '</div>';
+
+                        detallePedidoItem += '</div>';
+
+                        $('#detallesContainer').append(detallePedidoItem);
+                        detallePedidoId++;
+
+                    //Caso donde no hayan receas
+                    }else{
+                        detallePedidoItem += '<h4 class="text-primary m-0" style="padding: 10px">Recetas</h4>';
+                        detallePedidoItem += '<div class="table-responsive d-flex justify-content-center">';
+                        detallePedidoItem += '<table class="table table-bordered" id="tableRecetasUsadasVer' + detallePedidoId + '" style="width: 95%;" cellspacing="0">';
+                        detallePedidoItem += '<thead>';
+                        detallePedidoItem += '<tr>';
+                        detallePedidoItem += '<th>Nombre</th>';
+                        detallePedidoItem += '<th>Porci&oacute;n Resultante</th>';
+                        detallePedidoItem += '<th>Tiempo Preparaci&oacute;n</th>';
+                        detallePedidoItem += '<th>Cant. Ingredientes</th>';
+                        detallePedidoItem += '<th class="text-center pl-0 pr-0">Ver Receta</th>';
+                        detallePedidoItem += '</tr>';
+                        detallePedidoItem += '</thead>';
+                        detallePedidoItem += '<tbody>';
+                        detallePedidoItem += '</tbody>';
+                        detallePedidoItem += '</table>';
+                        detallePedidoItem += '</div>';
+
+                        detallePedidoItem += '</div>';
+
+                        $('#detallesContainer').append(detallePedidoItem);
+                        addEmptyRow(detallePedidoId);
+                        detallePedidoId++;
+                    }
+                });
+            }else{
+                var noDetalles = '<div style="background-color: #fff; padding: 10px; border-radius: 20px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center;">';
+                noDetalles +=    '<p class="mt-2"><strong>No hay detalles para este pedido</strong></p>';
+                noDetalles +=    '</div>';
+                $('#detallesContainer').append(noDetalles);
+            }
+
+            // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
+
+            if ($('#tableRecetasUsadasVer tbody tr').length === 0) {
+                addEmptyRow();
+            }
+
+        });
+
+        function addEmptyRow(numPedido) {
+            // Determinar la table basados en vistaEditar
+            var tableRecetasUsadas = '#tableRecetasUsadasVer'+numPedido;
+            var emptyRow = '<tr class="empty-row">' +
+                '<td colspan="6" style="text-align: center;">No se han agregado recetas a este pedido.</td>' +
+                '</tr>';
+            $(tableRecetasUsadas + ' tbody').append(emptyRow);
+        }
+    </script>
+</body>
+
+</html>

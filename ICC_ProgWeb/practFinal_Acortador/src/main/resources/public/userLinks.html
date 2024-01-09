@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Menu | Shrinkr</title>
+  <link rel="shortcut icon" type="image" href="/images/logo1-icon.png">
+
+  <link rel="stylesheet" href="/css/styleMainMenu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+
+</head>
+
+<body>
+<div hidden="logguedUser" id="logguedUser" th:text="${logguedUser}"></div>
+<!--  Side Panel  -->
+<div class="container">
+  <div class="navigation">
+    <ul>
+      <li class="hovered">
+        <a href="/menu">
+          <img class="menu-icon" src="/images/logo1-icon2.png" alt="logo">
+          <img class="menu-logo" src="/images/logo1.png" alt="logo" style="width: 250px; height: 72px">
+        </a>
+      </li>
+      <li>
+        <a href="/menu">
+          <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+          <span class="title">Main Menu</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <span class="icon"><ion-icon name="link-outline"></ion-icon></ion-icon></span>
+          <span class="title">My Links</span>
+        </a>
+      </li>
+      <li>
+        <a href="/menu/dashboard">
+          <span class="icon"><ion-icon name="stats-chart"></ion-icon></span>
+          <span class="title">Dashboard</span>
+        </a>
+      </li>
+      <li th:if="${loguedUser.admin}">
+        <a href="/gestion/links">
+          <span class="icon"><ion-icon name="cog-outline"></ion-icon></span>
+          <span class="title">Manage Links</span>
+        </a>
+      </li>
+      <li th:if="${loguedUser.admin && loguedUser.superAdmin}">
+        <a href="/gestion/users">
+          <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></ion-icon></span>
+          <span class="title">Manage Users</span>
+        </a>
+      </li>
+      <li>
+      <li class="profile">
+        <div class="user-profile">
+          <img src="/images/user-icon3.jpg" alt="User Profile Picture">
+          <div class="user-details">
+            <div class="user-name" th:text="${loguedUser.username}">Logued Username</div>
+            <div class="user-role" th:if="${loguedUser.admin}">
+              <span th:if="${loguedUser.admin and not loguedUser.superAdmin}">Administrator</span>
+              <span th:if="${loguedUser.admin and loguedUser.superAdmin}">Main Administrator</span>
+            </div>
+          </div>
+        </div>
+        <div class="logout-icon" title="Logout" >
+          <ion-icon id="logButton" name="log-out-outline"></ion-icon>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--  end of Side Panel  -->
+
+  <!--  Main Panel  -->
+  <div class="main">
+    <!-- TopBar -->
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu"></ion-icon>
+      </div>
+      <h1 class="title1">Links Manager</h1><br>
+    </div>
+    <!-- end of Topbar -->
+
+    <div class="graphBox">
+      <div class="box">
+        <div class="table-header">
+          <h1 class="caption">Your Links</h1>
+          <a href="/menu" class="add-user-button">Create new Shortened URL</a>
+        </div>
+        <div th:if="${not #lists.isEmpty(listaUrl)}">
+          <table class="table-users">
+            <thead>
+            <tr>
+              <th>Original URL</th>
+              <th>Shortened URL</th>
+              <th># of Visits</th>
+              <th>Creation Date</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr class="urlRow" th:each="url, iterStat : ${listaUrl}">
+                <td th:text="${url.urlLarga}"></td>
+                <td th:text="${url.urlAcortada}"></td>
+                <td th:text="${url.cantAccesos}"></td>
+                <td th:text="${url.fechaCreacion}"></td>
+                <td>
+                <span>
+                  <a th:href="@{'/menu/links/getQr/'+ ${url.id}}" class="edit-user">
+                    <ion-icon name="qr-code-outline"></ion-icon>
+                  </a>
+                  <a th:href="@{'/menu/stats/'+ ${url.id}}" style="text-decoration: none; font-size: 1.5em; color: #fdb15f; padding-left: 3px; padding-right: 6px">
+                    <ion-icon name="stats-chart-outline" ></ion-icon>
+                  </a>
+                  <a th:id="'eliminarUrl-'+${iterStat.index}" th:data-id="${url.id}" class="delete-user" th:href="'javascript:showModalLinksMenu('+${iterStat.index}+')'">
+                      <ion-icon name="trash-outline"></ion-icon>
+                  </a>
+                </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class="modal" id="myModal" th:if="${modal}">
+      <div class="modal-content" style="width: 40%">
+        <div class="modal-header-wrapper">
+          <h2 class="modal-header-qr">Your Custom QR Code</h2>
+          <h2 class="modal-header-qr subheader" th:text="'For URL: '+${selectedUrl.urlAcortada}"></h2>
+          <button class="close-button"><ion-icon name="close-circle-outline"></ion-icon></button>
+        </div>
+        <div style="text-align: center">
+<!--          <img src="/images/QR-code-sample.png" alt="URL QR Code" style="max-width: 100%; height: auto">-->
+          <img th:src="@{'data:'+${qrCode.getMimeType()}+';base64,'+${qrCode.getFotoBase64()}}" style="max-width: 100%; width: 50%; height: auto; margin-top: -50px; margin-bottom: -20px" alt="Codigo QR">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+<script src="/js/mainMenu.js"></script>
+<script src="/js/jquery-3.6.3.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="./js/usuariosConectados.js"></script>
+
+<script th:inline="javascript">
+  const profileLi = document.querySelector(".profile");
+  var superAdmin = /*[[${loguedUser.superAdmin}]]*/ false;
+  var admin = /*[[${loguedUser.admin}]]*/ false;
+  var modal = /*[[${modal}]]*/ false;
+  if(modal){
+    window.onload = showModalQR;
+  }
+
+  if (admin === true && superAdmin === false) {
+    profileLi.classList.add("admin");
+  }else if(admin === false && superAdmin === false){
+    profileLi.classList.add("user");
+  }
+  function showModalQR(){
+    var modal = document.getElementById("myModal");
+    var link = document.querySelector(".edit-user");
+    var btn = document.querySelector(".close-button");
+
+    modal.style.display = "block";
+    window.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        window.location.href = '/menu/links';
+      }
+    });
+    btn.addEventListener("click", function() {
+      window.location.href = '/menu/links';
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900');
+@import url('https://fonts.googleapis.com/css?family=Cabin:400, 700');
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-image: url('/img/white-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#wrapper {
+    position: relative;
+    height: 100vh
+}
+
+#wrapper .container {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%,-50%);
+    max-width: 520px;
+    width: 100%;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.container .error-alert {
+    position: relative;
+    height: 240px;
+    margin-top: -2rem;
+}
+
+.container .error-alert h1 {
+    font-family: montserrat,sans-serif;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    font-size: 252px;
+    font-weight: 900;
+    margin: 0;
+    margin-left: -20px;
+    color: #262626;
+    text-transform: uppercase;
+    letter-spacing: -40px;
+}
+
+.container .error-alert h1>span {
+    text-shadow: -8px 0 0 #fff;
+    color: #605c9b;
+}
+
+.container .error-alert h3 {
+    font-family: cabin,sans-serif;
+    position: relative;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #262626;
+    margin: 0;
+    letter-spacing: 3px;
+    padding-left: 6px
+}
+
+.container h2 {
+    font-family: cabin,sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 25px
+}
+
+/* Add custom styles for the "Volver" button */
+button {
+    background-color: #7570B3;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: #514c86;
+}
+
+.logo {
+    width: 22rem;
+    height: auto;
+}
+
+@media only screen and (max-width: 767px) {
+    .container .error-alert {
+        height:200px
+    }
+
+    .container .error-alert h1 {
+        font-size: 200px
+    }
+
+    .logo {
+        width: 19rem;
+    }
+    .container h2 {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .container .error-alert {
+        height:162px;
+    }
+
+    .container .error-alert h1 {
+        font-size: 162px;
+        height: 150px;
+        line-height: 162px
+    }
+
+    .container h2 {
+        font-size: 16px
+    }
+
+    .logo {
+        width: 18rem;
+    }
+}
+@media only screen and (max-width: 380px) {
+    .logo {
+        width: 16rem;
+    }
+}
+@media only screen and (max-width: 290px) {
+    .logo {
+        width: 15rem;
+    }
+    .container .error-alert h3{
+        font-size: 13px;
+    }
+    .container h2 {
+        font-size: 13px
+    }
+}
+@media only screen and (max-width: 290px) {
+    .logo {
+        width: 15rem;
+        margin-bottom: 2rem;
+    }
+}

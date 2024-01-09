@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package urlRn;
+
+message UrlByUsuarioRequest{
+  int64 usuarioID=1;
+}
+
+message UrlByUsuarioResponse{
+  int32 codRespuesta=1;
+  string jsonUrl=2;
+}
+
+service UrlRn{
+  rpc getUrlByUsuario(UrlByUsuarioRequest) returns (UrlByUsuarioResponse);
+}

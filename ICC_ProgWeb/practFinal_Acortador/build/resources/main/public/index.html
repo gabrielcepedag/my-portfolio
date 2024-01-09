@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu | Shrinkr</title>
+    <link rel="shortcut icon" type="image" href="/images/logo1-icon.png">
+
+    <link rel="stylesheet" href="/css/styleMainMenu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+
+</head>
+
+<body>
+<div hidden="logguedUser" id="logguedUser" th:text="${loguedUser}"></div>
+<!--  Side Panel  -->
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li class="hovered">
+                <a href="/menu">
+                    <img class="menu-icon" src="./images/logo1-icon2.png" alt="logo">
+                    <img class="menu-logo" src="./images/logo1.png" alt="logo" style="width: 250px; height: 72px">
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Main Menu</span>
+                </a>
+            </li>
+            <li>
+                <a href="/menu/links">
+                    <span class="icon"><ion-icon name="link-outline"></ion-icon></ion-icon></span>
+                    <span class="title">My Links</span>
+                </a>
+            </li>
+            <li>
+                <a href="/menu/dashboard">
+                    <span class="icon"><ion-icon name="stats-chart"></ion-icon></span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li th:if="${loguedUser.admin}">
+                <a href="/gestion/links">
+                    <span class="icon"><ion-icon name="cog-outline"></ion-icon></span>
+                    <span class="title">Manage Links</span>
+                </a>
+            </li>
+            <li th:if="${loguedUser.admin && loguedUser.superAdmin}">
+                <a href="/gestion/users">
+                    <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></ion-icon></span>
+                    <span class="title">Manage Users</span>
+                </a>
+            </li>
+            <li>
+            <li class="profile">
+                <div class="user-profile">
+                    <img src="./images/user-icon3.jpg" alt="User Profile Picture">
+                    <div class="user-details">
+                        <div class="user-name" th:text="${loguedUser.username}">Logued Username</div>
+                        <div class="user-role" th:if="${loguedUser.admin}">
+                            <span th:if="${loguedUser.admin and not loguedUser.superAdmin}">Administrator</span>
+                            <span th:if="${loguedUser.admin and loguedUser.superAdmin}">Main Administrator</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="logout-icon" title="Logout" >
+                    <ion-icon id="logButton" name="log-out-outline"></ion-icon>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--  end of Side Panel  -->
+
+    <!--  Main Panel  -->
+    <div class="main">
+        <!-- TopBar -->
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu"></ion-icon>
+            </div>
+            <h1 class="title1">Main Menu</h1><br>
+        </div>
+        <!-- end of Topbar -->
+
+        <h1 style="margin-top: 35px; padding-left: 30px" th:text="'Welcome Back, ' + ${loguedUser.username} + '!'">Welcome Back, User!</h1><br>
+        <h4 style="font-weight: normal; padding-left: 110px">Enter your long URL: </h4><br>
+
+        <form th:unless="${preview}" id="frmURL" class="url-form" method="post" action="/menu">
+            <input type="text" id="url" name="longUrl" placeholder="Enter your URL here" required style="width: 75%">
+            <button type="submit" class="convert-btn">Preview</button>
+        </form>
+
+        <div th:if="${preview}" style="padding-bottom: 5px; padding: 10px;">
+            <form id="frmURL3" class="url-form" method="post" action="/menu">
+                <input type="text" id="url3" name="longUrl" placeholder="Enter your URL here" th:value="${longUrl}" required style="width: 75%">
+                <button type="submit" class="convert-btn">Preview</button>
+            </form>
+
+            <div style="margin-top: 20px; margin-bottom: 20px; text-align: center; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); background-color: #fff; width: 58%; height: auto; margin-left: auto; margin-right: auto">
+                <div id="loading" style="padding-top: 60px; padding-bottom: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <h3 style="padding-bottom: 20px; font-weight: normal">Loading Preview...</h3>
+                    <div class="loader"></div>
+                </div>
+                <h4 id="loading-error" style="padding-top: 100px; padding-bottom: 100px; display: none; font-weight: normal">There was an error displaying a preview for the URL provided.</h4>
+                <img id="preview-image" th:src="${previewImage}" alt="URL Preview" style="display: none; max-width: 100%; width: 98%; height: auto; margin-top: 5px">
+            </div>
+
+            <form id="frmURL2" class="url-form" method="post" action="/gestion/url" style="margin-bottom: 20px">
+                <input type="hidden" id="url2" name="longUrl" required>
+                <button type="submit" class="submit-btn">Convert</button>
+            </form>
+        </div>
+
+        <div class="details">
+            <!-- Registered User List -->
+            <div class="recentOrders">
+                <div class="cardHeader index">
+                    <h2>Recent Links</h2>
+                    <a href="/menu/links" class="btn-table">View All</a>
+                </div>
+
+                <div th:if="${not #lists.isEmpty(listaUrl)}">
+                    <table id="urlTable" class="table-users main-menu">
+                        <thead>
+                        <tr>
+                            <th>Original URL</th>
+                            <th>Shortened URL</th>
+                            <th># of Visits</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="urlRow" th:each="url, iterStat : ${listaUrl}">
+                            <td th:text="${url.urlLarga}"></td>
+                            <td th:text="${url.urlAcortada}"></td>
+                            <td th:text="${url.cantAccesos}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin User List -->
+            <div class="recentCustomers">
+                <div class="cardHeader">
+                    <h2>Link Statistics</h2>
+                    <a href="/menu/dashboard" class="btn-table">View All</a>
+                </div>
+                <canvas id="chartLinkVisits"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+<script src="/js/mainMenu.js"></script>
+<script src="/js/jquery-3.6.3.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/usuariosConectados.js"></script>
+
+
+<script>
+    const MAX_ROWS = 7; //Maximum # of rows for "Recent Links" table
+    const urlTable = document.getElementById("urlTable");
+
+    // function checkRowCount() {
+        if(urlTable != null && urlTable.rows != null){
+            // remove the first row if the maximum number of rows is exceeded
+            if (urlTable.rows.length > MAX_ROWS) {
+                while(urlTable.rows.length > MAX_ROWS){
+                    urlTable.deleteRow(1);
+                }
+            }
+        }
+    // }
+</script>
+
+<script th:inline="javascript">
+    const profileLi = document.querySelector(".profile");
+    var chartData = /*[[${listaUrlJson}]]*/ [];
+    var superAdmin = /*[[${loguedUser.superAdmin}]]*/ false;
+    var admin = /*[[${loguedUser.admin}]]*/ false;
+    var preview = /*[[${preview}]]*/ false;
+
+    if(preview){
+        const inputValue = document.getElementById("url3").value;
+        document.getElementById("url2").value = inputValue;
+
+        const previewImage = document.getElementById("preview-image");
+        const loading = document.getElementById("loading");
+        const error = document.getElementById("loading-error");
+
+        previewImage.addEventListener("load", function() {
+            loading.style.display = "none";
+            previewImage.style.display = "inline-block";
+        });
+        previewImage.addEventListener("error", function() {
+            loading.style.display = "none";
+            error.style.display = "block";
+        });
+    }
+
+    if (admin === true && superAdmin === false) {
+        profileLi.classList.add("admin");
+    }else if(admin === false && superAdmin === false){
+        profileLi.classList.add("user");
+    }
+    window.onload = createChart(chartData);
+
+    function createChart(listUrlJson){
+        const ctxProd = document.getElementById("chartLinkVisits").getContext('2d');
+
+        const listUrl = JSON.parse(listUrlJson);
+        const labels = [];
+        const data = [];
+        const backgroundColors = [];
+        const usedColors = [];
+        const validBackgroundColors = [];
+
+        for (let i = 0; i < listUrl.length; i++) {
+            if (listUrl[i].cantAccesos > 0) {
+                labels.push(listUrl[i].urlAcortada);
+                data.push(listUrl[i].cantAccesos);
+                let randomColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+                while (usedColors.includes(randomColor)) {
+                    randomColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+                }
+                backgroundColors.push(randomColor);
+                usedColors.push(randomColor);
+                validBackgroundColors.push(randomColor);
+            }
+        }
+
+        if (labels.length === 0) {
+            // display placeholder chart
+            window.myChartLinks = new Chart(ctxProd, {
+                type: 'doughnut',
+                data: {
+                    labels: ['No Data'],
+                    datasets: [{
+                        label: 'Number of Visits By Link',
+                        borderColor: 'rgb(0,0,0)',
+                        borderWidth: 1,
+                        data: [1],
+                        backgroundColor: ['#f6f6f6']
+                    }]
+                },
+                options:{
+                    responsive: true,
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    }
+                }
+            });
+        } else {
+            // display chart with url data
+            window.myChartLinks = new Chart(ctxProd, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Visits By Link',
+                        borderColor: 'rgb(255,255,255)',
+                        borderWidth: 2,
+                        data: data,
+                        backgroundColor: validBackgroundColors
+                    }]
+                },
+                options:{
+                    responsive: true,
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ordenes de Compra | Massy's Cake</title>
+    <link rel="shortcut icon" type="image" href="/img/massyCake-Logo.jpg">
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Enlaza la biblioteca de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"  crossorigin="anonymous" />
+
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+                <div class="sidebar-brand-icon sidebar-logo">
+                    <img src="/img/massyCake-Logo.jpg" alt="Logo">
+                </div>
+                <div class="sidebar-brand-text mx-sm-3">Gesti&oacute;n General</div>
+            </a>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/home">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Home</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Cocina
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCocina" aria-expanded="true" aria-controls="collapseCocina">
+                    <i class="fas fa-fw fa-utensils"></i>
+                    <span>Cocina</span>
+                </a>
+                <div id="collapseCocina" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/cocina">Cocina</a>
+                                     <a class="collapse-item" href="/pedidos?paginacion=true">Pedidos</a>
+                        <a class="collapse-item" href="/cocina/recetas">Recetas</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestion" aria-expanded="true" aria-controls="collapseGestion">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>Gesti&oacute;n</span>
+                </a>
+                <div id="collapseGestion" class="collapse" aria-labelledby="Gestion" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/inventario">Inventario</a>
+                        <a class="collapse-item" href="/productos">Productos</a>
+                        <a class="collapse-item" href="/ordenesCompra">Ordenes de Compra</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pedidos/crear">
+                    <i class="fas fa-file-upload"></i>
+                    <span>Crear Pedido</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Ventas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pos">
+                    <i class="fas fa-fw fa-cash-register"></i>
+                    <span>Punto de Venta</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegistros"
+                   aria-expanded="true" aria-controls="collapseRegistros">
+                    <i class="fas fa-fw fa-receipt"></i>
+                    <span>Registros</span>
+                </a>
+                <div id="collapseRegistros" class="collapse" aria-labelledby="Registros" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/facturas">Facturas</a>
+                        <a class="collapse-item" href="/ventas">Ventas</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Personas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/empleados">
+                    <i class="fas fa-users"></i>
+                    <span>Empleados</span></a>
+            </li>
+
+
+
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reportes
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+                   aria-expanded="true" aria-controls="collapseReportes">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseReportes" class="collapse" aria-labelledby="Reportes" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/reportes/ventas">Reporte de Ventas</a>
+                        <a class="collapse-item" href="/reportes/inventario">Reporte de Inventario</a>
+                        <a class="collapse-item" href="/reportes/clientes">Reporte de Clientes</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Page Heading -->
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <h1 class="h3 mt-2 text-gray-800">Ordenes de Compra</h1>
+                    </div>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${empleado.nombre} + ' ' + ${empleado.apellido}">Nombre Apellido</span>
+                                <img class="img-profile rounded-circle" th:src="${empleado.rol == 'ADMIN' ? '/img/profile_icon.jpg':
+                                (empleado.rol == 'REPOSTERO' ? '/img/chef-avatar-vector-illustration.jpg' : '/img/profile_icon.png')}" alt="Imagen de perfil usuario">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/perfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Mi Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Actividades
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configuraci&oacute;n
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar Sesi&oacute;n
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Ordenes de Compra Retrasadas Card -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-info text-uppercase mb-1">
+                                                Ordenes De Compra
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${ordenesCompra != null ? ordenesCompra.size() : 0}"></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-solid fa-file-invoice fa-2x text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ordenes de Compra Procesadas Card -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-success text-uppercase mb-1">
+                                                Ordenes Procesadas
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${ordenesCompraProcesadas != null ? ordenesCompraProcesadas.size() : 0}"></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-solid fa-check-circle fa-2x text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ordenes de Compra Pendientes Card -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">
+                                                Ordenes Pendientes
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${ordenesCompraGeneradas != null ? ordenesCompraGeneradas.size() : 0}"></div>
+
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-solid fa-clock fa-2x text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="col-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Ordenes de Compra Generadas</h6>
+                                </div>
+                                <div class="card-body ">
+                                    <div class="col d-flex" style="overflow-x: auto" th:if="${ordenesCompraGeneradas != null and !ordenesCompraGeneradas.isEmpty()}">
+                                        <div th:each="orden : ${ordenesCompraGeneradas}" class="col-lg-4 col-md-6 mb-4">
+                                            <div th:id="'orden-' + ${orden.OrdenCompraId}" class="card card-orden" style="background-color: #F1F5FD">
+                                                <div class="card-header d-flex justify-content-between">
+                                                    <h6 class="m-0 font-weight-bold text-primary">
+                                                        <i class="fas fa-file-invoice"></i>
+                                                        Orden de Compra #<span th:text="${orden.OrdenCompraId}"></span>
+                                                    </h6>
+                                                    <button th:if="${empleado.rol.toLowerCase() == 'admin'}" class="btn-eliminar bg-transparent" th:onclick="'javascript:confirmDeletion('+${orden.OrdenCompraId}+')'" th:attr="data-id=${orden.OrdenCompraId}" style="border: none; cursor: pointer;">
+                                                        <i class="far fa-trash-alt" style="color: #f86a6a; font-size: 20px;"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="d-flex flex-column">
+                                                        <div class="mb-2">
+                                                            <span class="badge rounded-pill px-3 py-2 d-flex flex-wrap bg-primary text-white mr-1 justify-content-between">
+                                                                <div>
+                                                                    <span class="d-block text-center">
+                                                                        <i class="far fa-calendar-alt"></i>
+                                                                        <span th:text="${orden.fechaGenerada}"></span> <!-- Fecha de creación ficticia -->
+                                                                    </span>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                        <p><i class="fas fa-box-open mr-1"></i><span th:text="${orden.getMiProducto().getNombre()}"></span></p>
+                                                        <p><i class="fas fa-truck-loading mr-1"></i><span>Por asignar</span></p> <!-- Cantidad ficticia de artículos -->
+                                                        <div class="mt-3">
+                                                            <div class="d-flex justify-content-between">
+                                                                <a href="#" class="btn btn-primary mr-2" style="background-color: #c74b4b; border: none" data-toggle="modal" data-target="#modalProcesarOrden" th:data-orden-id="${orden.OrdenCompraId}">Procesar</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:unless="${ordenesCompraGeneradas != null and !ordenesCompraGeneradas.isEmpty()}">
+                                        <p>No hay órdenes de compra sin procesar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Ordenes de Compra Procesadas</h6>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered" th:if="${ordenesCompraProcesadas != null and !ordenesCompraProcesadas.isEmpty()}" id="tableOrdenesCompra">
+                                        <thead>
+                                        <tr>
+                                            <th>Orden de Compra</th>
+                                            <th>Fecha Procesada</th>
+                                            <th>Articulo</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="orden : ${ordenesCompraProcesadas}" th:id="'orden-' + ${orden.OrdenCompraId}">
+                                            <td>
+                                                <span th:text="${orden.OrdenCompraId}"></span>
+                                            </td>
+                                            <td th:text="${orden.fechaProcesada}">
+                                            </td>
+                                            <td>
+                                                <span th:text="${orden.getMiProducto().getNombre()}"></span>
+                                            </td>
+                                            <td>
+                                                <span th:text="${orden.cantidad}"></span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div th:unless="${ordenesCompraProcesadas != null and !ordenesCompraProcesadas.isEmpty()}">
+                                        <p>No hay ordenes procesadas</p>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+
+                <div class="modal fade" id="modalProcesarOrden" tabindex="-1" role="dialog" aria-labelledby="modalProcesarOrdenLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalProcesarOrdenLabel">Procesar Orden de Compra</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="procesarOrdenForm">
+                                    <div class="form-group row">
+                                        <label for="cantidad" class="col-sm-2 col-form-label">Orden-id</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="ordenId" name="ordenId" readonly>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-sort-numeric-up"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cantidad" class="col-sm-2 col-form-label">Cantidad</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad del producto">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-sort-numeric-up"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="agregarClienteBtn" onclick="enviarOrdenCompra()">Procesar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Massy's Cake 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Est&aacute; seguro que desea salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Asegurese de guardar correctamente todo su progreso.</div> <br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="/logout">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/js/datatables-main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.confirmar-recibido-btn').click(function() {
+                var ordenCompraId = $(this).data('orden-id');
+                confirmarRecibido(ordenCompraId);
+            });
+
+            $('#modalProcesarOrden').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Botón que activó el modal
+                var ordenId = button.data('orden-id'); // Obtener el ID de la orden desde el botón
+
+                // Establecer el valor del ID de la orden en el campo oculto del formulario
+                $('#ordenId').val(ordenId);
+            });
+
+        });
+
+        function confirmarRecibido(ordenCompraId) {
+            Swal.fire({
+                title: 'Confirmar acción',
+                text: '¿Seguro que desea marcar esta orden como recibida?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Enviar el ID de la orden de compra al endpoint usando AJAX
+                    $.ajax({
+                        url: '/ordenesCompra/confirmarRecibido',
+                        type: 'POST',
+                        data: { ordenCompraId: ordenCompraId },
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Éxito',
+                                text: response,
+                                icon: 'success'
+                            });
+                            window.location.href = '/ordenesCompra';
+                            // Actualizar la página o realizar otras acciones necesarias
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: xhr.responseText,
+                                icon: 'error'
+                            });
+                            // Manejar errores si los hay
+                        }
+                    });
+                }
+            });
+        }
+
+        function confirmDeletion(ordenCompraId) {
+            Swal.fire({
+                icon: 'warning',
+                title: '¿Está seguro que desea cancelar este pedido?',
+                text: 'Esta acción no podrá ser revertida.',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#848695',
+                confirmButtonText: 'Cancelar Pedido',
+                cancelButtonText: 'Volver'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch('/ordenesCompra/eliminar/' + ordenCompraId, {
+                        method: 'POST'
+                    }).then(response => {
+                        if (response.ok) {
+                            $('#orden-' + ordenCompraId).remove();
+
+                            Swal.fire({
+                                title: '¡Cancelación exitosa!',
+                                text: 'La orden de compra ha sido cancelada correctamente.',
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire('Error', 'Ocurrió un problema al cancelar la orden.', 'error');
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire('Error', 'Ocurrió un problema al cancelar la orden.', 'error');
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function enviarOrdenCompra() {
+            var cantidad = document.getElementById('cantidad').value;
+            var ordenId = document.getElementById('ordenId').value;
+
+            var ordenCompraRequest = {
+                id: ordenId,
+                cantidad: cantidad
+            };
+
+            $.ajax({
+                url: '/ordenesCompra/procesar',
+                type: 'POST',
+                data: JSON.stringify(ordenCompraRequest),
+                contentType: 'application/json',
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Completado',
+                        text: 'Pedido creado correctamente', // Si el error es un objeto BindingResult de Spring, puedes mostrar error.responseText para obtener el mensaje de error
+                    });
+                    window.location.href = '/ordenesCompra';
+                },
+                error: function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al crear pedido',
+                        text: error.responseText, // Si el error es un objeto BindingResult de Spring, puedes mostrar error.responseText para obtener el mensaje de error
+                    });
+
+                    console.log("Errores");
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

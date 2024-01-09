@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>AJAX Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function addToCart(productId) {
+      listaEmpleados = [ {
+        usuario : "user1",
+        password : "password1"
+      },
+        {
+          usuario : "user2",
+          password: "password2"
+        },
+        {
+          usuario: "user3",
+          password: "password3"
+        }];
+
+      $.ajax({
+        url: '/addToCart',
+        type: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: JSON.stringify ({
+              id: productId,
+              cantidad : 0,
+              nota : "Hola mundo",
+              lista : listaEmpleados
+              }),
+        success: function(response) {
+          console.log(response['nombre']+ ' ' + response['cantidad']);
+        },
+        error: function(error) {
+          console.error(error['responseText']);
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+<h1>Productos</h1>
+<ul>
+  <li>Producto 1 <button onclick="addToCart(1)">Agregar al carrito</button></li>
+  <li>Producto 2 <button onclick="addToCart(2)">Agregar al carrito</button></li>
+  <li>Producto 3 <button onclick="addToCart(3)">Agregar al carrito</button></li>
+</ul>
+</body>
+</html>
