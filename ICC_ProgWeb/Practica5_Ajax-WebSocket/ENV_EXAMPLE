@@ -1,9 +1,6 @@
 DATABASE_URL=
 DATABASE_USERNAME=
 DATABASE_PASSWORD=
-
-DATABASE_URL=jdbc:postgresql://infinite-tech-9253.7tt.cockroachlabs.cloud:26257/Practica3-JDBC-ORM?sslmode=verify-full
-DATABASE_USERNAME=gabriel
-DATABASE_PASSWORD=SxbvBdUj5BFztv3GA7w8Ug
+APP_PORT=
 
 Se necesita agregar dichas variables en un archivo localizado en la raiz del proyecto llamado .env

@@ -2,6 +2,7 @@ package org.example;
 
 import controladores.*;
 import encapsulaciones.*;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.JavalinRenderer;
@@ -25,7 +26,13 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
 
         /*  Configuracion inicial de Servidor Javalin   */
-        Javalin app = Javalin.create().start(7777);
+        Dotenv dotenv = Dotenv.configure().load();
+        String port = dotenv.get("APP_PORT");
+        if (port == null){
+            port = "7000";
+        }
+
+        Javalin app = Javalin.create().start(Integer.parseInt(port));
         app.cfg.staticFiles.add(staticFileConfig -> {
             staticFileConfig.hostedPath = "/";
             staticFileConfig.directory = "/public";
@@ -85,13 +92,13 @@ public class Main {
         }
 
         //  Creando Usuarios de Prueba
-        Usuario userTest = new Usuario("eemr0001", "Eduardo Martinez", "eemr0001@ce.pucmm.edu.do", "123", false);
-        Usuario userTest2 = new Usuario("nnmr0001", "Nathalie Martinez", "nnmr0001@ce.pucmm.edu.do", "456", false);
+        Usuario userTest = new Usuario("gabriel", "Gabriel Cepeda", "gabriel@gmail.com", "gabriel", false);
+        Usuario userTest2 = new Usuario("nicolas", "Nicolas Martinez", "nicolas@gmail.com", "nicolas", false);
         mainServices.addUsuario(userTest);
         mainServices.addUsuario(userTest2);
 
         //Proceso para agregar comentarios a un producto.
-        Comentario cmtTest = new Comentario(userTest.getUsername(), "Muy Buen producto esto es un comentario que queremos que sea mnas largo oirque a eduardo le da la maldita gana de que sea asi.");
+        Comentario cmtTest = new Comentario(userTest.getUsername(), "Muy Buen producto esto es un comentario.");
         Comentario cmtTest2 = new Comentario(userTest2.getUsername(), "Muy mal producto, 0 estrellas.");
         Comentario cmtTest3 = new Comentario(userTest2.getUsername(), "Muy fragil. Prefiero las Dell.");
 
