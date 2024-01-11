@@ -140,7 +140,7 @@ var ctx = document.getElementById("mySingleBarChart");
 var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Eduardo Martinez", "Lucas Lopez", "Melany Arias", "Jose Reyes", "Arturo Rodriguez"],
+        labels: ["Gabriel Cepeda", "Lucas Lopez", "Melany Arias", "Jose Reyes", "Arturo Rodriguez"],
         datasets: [{
             label: "Consumo:",
             backgroundColor: "#36b8ca",
