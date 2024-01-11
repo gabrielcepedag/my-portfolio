@@ -93,7 +93,7 @@ public class InicioController {
                         producto -> {
                             if (producto.getCantidad() <= 0) {
                                 return "FueraStock";
-                            } else if (producto.getCantidad() <= producto.getDispMin()) {
+                            } else if (producto.getDispMin() != null && producto.getCantidad() <= producto.getDispMin()) {
                                 return "CantProductosDispMin";
                             } else {
                                 return "CantProductosInStock";

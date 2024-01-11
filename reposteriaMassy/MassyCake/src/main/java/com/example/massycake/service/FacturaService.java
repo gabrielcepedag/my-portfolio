@@ -161,7 +161,8 @@ public class FacturaService {
         String now = dtf.format(LocalDateTime.now());
 
         Float ingresosMes = facturaRepo.getIngresosByMes(now);
-        return  ingresosMes;
+
+        return ingresosMes != null ? ingresosMes : 0.0F;
     }
 
     public Float getIngresoAnoActual() {
@@ -169,7 +170,7 @@ public class FacturaService {
         String now = dtf.format(LocalDateTime.now());
 
         Float ingresosAno = facturaRepo.getIngresosByAno(now);
-        return  ingresosAno;
+        return  ingresosAno != null ? ingresosAno : 0.0F;
     }
 
     public Integer getCantVentasHoy() {

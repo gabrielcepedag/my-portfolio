@@ -1,5 +1,6 @@
 package com.example.massycake;
 
+import com.example.massycake.entities.Empleado;
 import com.example.massycake.service.EmpleadoService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -13,10 +14,10 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 @SpringBootApplication
 public class MassyCakeApplication {
 	public static void main(String[] args) {
-
-		//TODO: CREAR ENTIDAD PEDIDO Y RECETAS
-		//TODO: CUANDO SE CREE lA ENTIDAD PEDIDO SE DEBE CAMBIAR EL FACTORY PARA QUE EL DESCUENTO DEL PERSONALIZADO PASE AL PRODUCTO
 		SpringApplication.run(MassyCakeApplication.class, args);
-	}
+		Empleado admin = new Empleado("000-0000000-0", "admin", "admin", "admin", "admin", "000-000-0000", "");
+
+
+		}
 
 }

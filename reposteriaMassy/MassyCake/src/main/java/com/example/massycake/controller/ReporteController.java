@@ -237,9 +237,14 @@ public class ReporteController {
     @GetMapping("/inventario")
     public String reporteInventario(Model model) {
         Empleado empleadoLogueado = empleadoService.getEmpleadoLogueado();
-        List<Producto> productos = productoService.getAllProductos().stream().filter(producto -> !producto.getTipo().equals("Personalizado")).toList();
-        List<Producto> productosIngredientes = productoService.getAllProductos().stream().filter(producto -> producto.getTipo().equals("Ingrediente")).toList();
-        List<Producto> productosCabina = productoService.getAllProductos().stream().filter(producto -> producto.getTipo().equals("Cabina")).toList();
+//        List<Producto> productos = productoService.getAllProductos().stream().filter(producto -> !producto.getTipo().equals("Personalizado")).toList();
+//        List<Producto> productosIngredientes = productoService.getAllProductos().stream().filter(producto -> producto.getTipo().equals("Ingrediente")).toList();
+//        List<Producto> productosCabina = productoService.getAllProductos().stream().filter(producto -> producto.getTipo().equals("Cabina")).toList();
+
+        List<Producto> productosIngredientes = productoService.getAllIngredientes();
+        List<Producto> productosCabina = productoService.getAllCabina();
+        List<Producto> productos = new ArrayList<>(productosCabina);
+        productos.addAll(productosIngredientes);
         model.addAttribute("productos", productos);
         model.addAttribute("productosIngredientes", productosIngredientes);
         model.addAttribute("productosCabina", productosCabina);
