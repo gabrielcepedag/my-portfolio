@@ -1,0 +1,87 @@
+2024-02-12 02:00:59.822985-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:00:59.833524-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:01:01.382779-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:01:01.383793-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:01:01.706090-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:01:01.709593-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:01:01.711605-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:01:01.712604-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:01:01.715005-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:39:39.225359-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:39:50.059391-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 02:56:03.827542-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 03:00:17.669402-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 03:05:40.759640-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 03:16:41.517334-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 04:17:08.081726-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-12 04:21:52.853948-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-13 08:45:00.970942-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "body CHARACTER VARYING(255)": "U&'<note>\\000a<link type=""text/css"" rel=""stylesheet"" id=""dark-mode-custom-link""/... (443)"
+Value too long for column "body CHARACTER VARYING(255)": "U&'<note>\\000a<link type=""text/css"" rel=""stylesheet"" id=""dark-mode-custom-link""/... (443)"; SQL statement:
+insert into "mock" ("body","code","content_encode","content_type","created_at","delay","description","enable_jwt","expiration_id","header","method","name","path","project_id","type","id") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default) [22001-224]
+2024-02-13 08:50:45.161300-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "body CHARACTER VARYING(255)": "U&' <note>\\000a<link type=""text/css"" rel=""stylesheet"" id=""dark-mode-custom-link""... (444)"
+Value too long for column "body CHARACTER VARYING(255)": "U&' <note>\\000a<link type=""text/css"" rel=""stylesheet"" id=""dark-mode-custom-link""... (444)"; SQL statement:
+insert into "mock" ("body","code","content_encode","content_type","created_at","delay","description","enable_jwt","expiration_id","header","method","name","path","project_id","type","id") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default) [22001-224]
+2024-02-13 08:51:50.905671-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:15.554910-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:15.567749-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:16.813231-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:18.023015-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:18.057056-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:18.059189-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:18.060769-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:18.065024-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:53:18.066848-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:54:35.621740-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 08:58:54.884379-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 09:02:54.062080-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 09:05:35.492375-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-02-13 09:17:31.937157-04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]

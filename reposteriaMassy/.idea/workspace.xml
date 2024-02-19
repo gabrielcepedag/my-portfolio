@@ -5,7 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbd7f827-5c6a-47cb-bb41-2b232c4ba77a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/recursos-sb-admin/tables.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/recursos-sb-admin/tables.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/static/vendor/datatables/jquery.dataTables.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/static/vendor/datatables/jquery.dataTables.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/addRecetasPedido.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/addRecetasPedido.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/clientes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/empleados.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/empleados.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/facturas.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/facturas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/inventario.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/inventario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/ordenesCompra.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/ordenesCompra.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/productos.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/productos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/recetas.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/recetas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/regReceta.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/regReceta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/repoClientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/repoClientes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/repoInventario.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/repoInventario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/repoVentas.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/repoVentas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/verDetalleFactura.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/verDetalleFactura.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/verDetallesPedido.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/verDetallesPedido.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/verDetallesReceta.html" beforeDir="false" afterPath="$PROJECT_DIR$/MassyCake/src/main/resources/templates/verDetallesReceta.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,27 +32,31 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2PKbRqBr6yIMNzYewDQYsTEjxER" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gabriel/git/portfolio/trabajos/repositorios/reposteriaMassy&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -44,6 +67,9 @@
       <updated>1683208718142</updated>
       <workItem from="1683208719503" duration="272000" />
       <workItem from="1691633439492" duration="517000" />
+      <workItem from="1705072958885" duration="2270000" />
+      <workItem from="1706108468543" duration="1928000" />
+      <workItem from="1706192533624" duration="4333000" />
     </task>
     <servers />
   </component>
