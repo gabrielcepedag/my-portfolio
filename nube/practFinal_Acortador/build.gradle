@@ -3,6 +3,7 @@ plugins {
     id 'com.google.protobuf' version '0.8.17' //plugin para incluir la compilación de gRPC, ver: https://github.com/grpc/grpc-java#generated-code
     id 'idea' //plugins para la integración con el IDEA.
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 group 'icc.web'
@@ -99,6 +100,13 @@ idea {
     }
 }
 
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'main.Main'
+    }
+}
+
 test {
     useJUnitPlatform()
 }
+

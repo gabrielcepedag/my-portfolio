@@ -53,7 +53,7 @@ public class Main {
 
         new ApiControlador(app).aplicarRutas();
         new SoapControlador(app).aplicarRutas();
-        app.start(5000);
+        app.start(8000);
 
         /*  Denotando rutas especificas  */
 //        app.get("/", ctx -> ctx.redirect("/home"));
@@ -86,8 +86,8 @@ public class Main {
 
         /*  Inicializando usuario de administrador  */
         Usuario admin = new Usuario("admin", "admin", "admin", "admin@admin.com", true, true);
-        Usuario nicolas = new Usuario("nicolas", "nicolas", "Nicolas", "nicolas@mail.com", true, false);
-        Usuario gabriel = new Usuario("gdcg", "gabriel", "Gabriel", "gabriel@mail.com", false, false);
+        Usuario nicolas = new Usuario("user", "user", "user", "user@mail.com", false, false);
+        Usuario gabriel = new Usuario("gdcg", "gabriel", "Gabriel", "gabriel@mail.com", true, false);
         mainServices.addUsuario(admin);
         mainServices.addUsuario(nicolas);
         mainServices.addUsuario(gabriel);
@@ -152,7 +152,7 @@ public class Main {
                         InetAddress inetAddress = inetAddresses.nextElement();
                         System.out.println("IP: "+inetAddress.getHostAddress());
                         if (!inetAddress.isLoopbackAddress() && inetAddress.isSiteLocalAddress()) {
-                            return "http://" + inetAddress.getHostAddress()+ ":" +"5000/";
+                            return "http://" + inetAddress.getHostAddress()+ ":" +"8000/";
                         }
                     }
                 }

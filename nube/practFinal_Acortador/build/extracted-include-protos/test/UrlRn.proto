@@ -6,6 +6,11 @@ message UrlByUsuarioRequest{
   int64 usuarioID=1;
 }
 
+message crearUrlRequest{
+  int64 usuarioID=1;
+  string longUrl=2;
+}
+
 message UrlByUsuarioResponse{
   int32 codRespuesta=1;
   string jsonUrl=2;
@@ -13,4 +18,5 @@ message UrlByUsuarioResponse{
 
 service UrlRn{
   rpc getUrlByUsuario(UrlByUsuarioRequest) returns (UrlByUsuarioResponse);
+  rpc crearUrlByUsuario(crearUrlRequest) returns (UrlByUsuarioResponse);
 }
