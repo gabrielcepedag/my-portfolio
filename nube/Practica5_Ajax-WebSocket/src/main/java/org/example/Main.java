@@ -26,10 +26,10 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
 
         /*  Configuracion inicial de Servidor Javalin   */
-        Dotenv dotenv = Dotenv.configure().load();
+        Dotenv dotenv = Dotenv.configure().directory("./app2/").load();
         String port = dotenv.get("APP_PORT");
         if (port == null){
-            port = "7000";
+            port = "8001";
         }
 
         Javalin app = Javalin.create().start(Integer.parseInt(port));
@@ -55,10 +55,6 @@ public class Main {
         new SesionControlador(app).aplicarRutas();
         new WebSocketControlador(app).aplicarRutas();
         JavalinRenderer.register(new JavalinThymeleaf(), ".html");
-
-        /*  Inicializando usuario de administrador  */
-        Usuario admin = new Usuario("admin", "admin", "admin@admin.com", "admin", true);
-        mainServices.addUsuario(admin);
 
         /*
          *      SECCION DE ELEMENTOS DE PRUEBA
@@ -91,14 +87,18 @@ public class Main {
             mainServices.addProducto(newProd);
         }
 
+        /*  Inicializando usuario de administrador  */
+        Usuario admin = new Usuario("admin", "admin", "admin@admin.com", "admin", true);
+        mainServices.addUsuario(admin);
+
         //  Creando Usuarios de Prueba
         Usuario userTest = new Usuario("gabriel", "Gabriel Cepeda", "gabriel@gmail.com", "gabriel", false);
-        Usuario userTest2 = new Usuario("nicolas", "Nicolas Martinez", "nicolas@gmail.com", "nicolas", false);
+        Usuario userTest2 = new Usuario("user", "user", "user@gmail.com", "user", false);
         mainServices.addUsuario(userTest);
         mainServices.addUsuario(userTest2);
 
         //Proceso para agregar comentarios a un producto.
-        Comentario cmtTest = new Comentario(userTest.getUsername(), "Muy Buen producto esto es un comentario.");
+        Comentario cmtTest = new Comentario(userTest.getUsername(), "Wsto es un comentario via websocket a todos los usuarios.");
         Comentario cmtTest2 = new Comentario(userTest2.getUsername(), "Muy mal producto, 0 estrellas.");
         Comentario cmtTest3 = new Comentario(userTest2.getUsername(), "Muy fragil. Prefiero las Dell.");
 

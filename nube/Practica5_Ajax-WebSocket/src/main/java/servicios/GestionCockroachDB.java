@@ -25,7 +25,7 @@ public class GestionCockroachDB {
     }
 
     public Connection getConnection() throws IOException, SQLException {
-        Dotenv dotenv = Dotenv.configure().load();
+        Dotenv dotenv = Dotenv.configure().directory("./app2/").load(); //Change the directory of the .env
         String url = dotenv.get("DATABASE_URL");
         String username = dotenv.get("DATABASE_USERNAME");
         String password = dotenv.get("DATABASE_PASSWORD");
@@ -34,7 +34,7 @@ public class GestionCockroachDB {
         ds.setUrl(url);
         ds.setUser(username);
         ds.setPassword(password);
-        ds.setSslmode("require");
+//        ds.setSslmode("disable");
 
         return ds.getConnection();
     }
