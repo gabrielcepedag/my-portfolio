@@ -65,6 +65,8 @@ dependencies {
     implementation 'io.grpc:grpc-stub:1.39.0'
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
     implementation 'com.google.protobuf:protobuf-java:3.17.3'
+
+    implementation group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
 }
 
 

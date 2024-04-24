@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  app1:
+    image: gcepedag/mi-mockup:latest
+    build: .
+    networks:
+      - red-mockup
+    ports:
+      - '8080:8080'
+    env_file:
+      - .env
+    depends_on:
+      - database-mockup
+  database-mockup:
+    image: mysql:5.7.26
+    restart: always
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$DB_USER --password=$$DB_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_USER=$DB_USER
+      - MYSQL_DATABASE=$DB_NAME
+    volumes:
+      - ${VOLUME_PATH}:/var/lib/mysql
+    networks:
+      - red-mockup
+networks:
+  red-mockup:

@@ -26,8 +26,8 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
 
         /*  Configuracion inicial de Servidor Javalin   */
-        Dotenv dotenv = Dotenv.configure().directory("./app2/").load();
-        String port = dotenv.get("APP_PORT");
+        Dotenv dotenv = Dotenv.configure().directory("./app").load();
+        String port = dotenv.get("PRODUCTSHOP_PORT");
         if (port == null){
             port = "8001";
         }

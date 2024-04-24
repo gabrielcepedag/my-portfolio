@@ -9,6 +9,7 @@ import encapsulaciones.Acceso;
 import encapsulaciones.Url;
 import encapsulaciones.Usuario;
 import grpc.GrpcControlador;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.JavalinRenderer;
@@ -53,7 +54,14 @@ public class Main {
 
         new ApiControlador(app).aplicarRutas();
         new SoapControlador(app).aplicarRutas();
-        app.start(8000);
+
+        Dotenv dotenv = Dotenv.configure().directory("./app").load();
+        String port = dotenv.get("SHORTERURL_PORT");
+        if (port == null){
+            port = "8002";
+        }
+
+        app.start(Integer.parseInt(port));
 
         /*  Denotando rutas especificas  */
 //        app.get("/", ctx -> ctx.redirect("/home"));
@@ -86,10 +94,10 @@ public class Main {
 
         /*  Inicializando usuario de administrador  */
         Usuario admin = new Usuario("admin", "admin", "admin", "admin@admin.com", true, true);
-        Usuario nicolas = new Usuario("user", "user", "user", "user@mail.com", false, false);
+        Usuario user = new Usuario("user", "user", "user", "user@mail.com", false, false);
         Usuario gabriel = new Usuario("gdcg", "gabriel", "Gabriel", "gabriel@mail.com", true, false);
         mainServices.addUsuario(admin);
-        mainServices.addUsuario(nicolas);
+        mainServices.addUsuario(user);
         mainServices.addUsuario(gabriel);
 
 //        mainServices.setLoggedUser(eduardo);
@@ -97,8 +105,8 @@ public class Main {
         Url url = new Url("https://github.com/gabrielcepedag");
         Url url2 = new Url("https://github.com/gabrielcepedag/my-portfolio");
         Url url3 = new Url("https://gabrielcepeda.cloudfoliohub.com");
-        url.setUsuario(nicolas);
-        url2.setUsuario(nicolas);
+        url.setUsuario(user);
+        url2.setUsuario(user);
         url3.setUsuario(gabriel);
         mainServices.addUrl(url);
         mainServices.addUrl(url2);
@@ -111,8 +119,8 @@ public class Main {
         System.out.println("cantidad de url: "+ GestionDbUrl.getInstance().cantUrl());
 
         System.out.println("Usuarios registrados: ");
-        for (Usuario user: mainServices.getListaUsuarios()){
-            System.out.println(user.getNombre()+" - "+user.getUsername());
+        for (Usuario u1: mainServices.getListaUsuarios()){
+            System.out.println(u1.getNombre()+" - "+u1.getUsername());
         }
         System.out.println("URL: "+url.getUrlAcortada());
 
@@ -152,7 +160,7 @@ public class Main {
                         InetAddress inetAddress = inetAddresses.nextElement();
                         System.out.println("IP: "+inetAddress.getHostAddress());
                         if (!inetAddress.isLoopbackAddress() && inetAddress.isSiteLocalAddress()) {
-                            return "http://" + inetAddress.getHostAddress()+ ":" +"8000/";
+                            return "http://" + inetAddress.getHostAddress()+ ":" + app.port() +"/";
                         }
                     }
                 }
