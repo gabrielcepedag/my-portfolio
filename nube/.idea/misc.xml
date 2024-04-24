@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/load_balancer" />
     <file type="web" url="file://$PROJECT_DIR$/practFinal_Acortador" />
     <file type="web" url="file://$PROJECT_DIR$/Practica5_Ajax-WebSocket" />
+    <file type="web" url="file://$PROJECT_DIR$/reposteriaMassy/MassyCake" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="temurin-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
