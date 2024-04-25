@@ -1,58 +1,85 @@
-version: '3.7'
+#version: '3.7'
 services:
-  mockup-app:
-#    image: gcepedag/mockup-app:latest
+#  mockup-app:
+##    image: gcepedag/mockup-app:latest
+#    build:
+#      context: ./load_balancer
+#    networks:
+#      - private-network
+#    ports:
+#      - ${MOCKUP_PORT}:${MOCKUP_PORT}
+#    env_file:
+#      - .env
+#    depends_on:
+#      - mysql-database
+#    restart: "unless-stopped"
+#  cakeshop-app:
+#    #    image: gcepedag/cakeshop-app:latest
+#    build:
+#      context: ./massyCake
+#    networks:
+#      - private-network
+#    ports:
+#      - ${CAKESHOP_PORT}:${CAKESHOP_PORT}
+#    env_file:
+#      - .env
+#    depends_on:
+#      - mysql-database
+#    restart: "unless-stopped"
+#  mysql-database:
+##    image: mysql:5.7.26
+#    image: mysql-custom:latest
+#    build:
+#      context: ./mysql
+#    restart: always
+#    healthcheck:
+#      test: mysqladmin ping -h 127.0.0.1 -u $$DB_USER --password=$$DB_PASSWORD
+#      start_period: 5s
+#      interval: 5s
+#      timeout: 5s
+#      retries: 10
+#    env_file:
+#      - .env
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+#      - MYSQL_USER=$DB_USER
+#      - MYSQL_DATABASE=$DB_NAME
+#    volumes:
+#      - ${VOLUME_PATH}:/var/lib/mysql
+#    networks:
+#      - private-network
+#  shortener-app:
+#    #    image: gcepedag/shortener-app:latest
+#    build:
+#      context: ./
+#      dockerfile: ./practFinal_Acortador/Dockerfile
+#    networks:
+#      - private-network
+#    ports:
+#      - ${SHORTERURL_PORT}:${SHORTERURL_PORT}
+#    env_file:
+#      - .env
+#    restart: "unless-stopped"
+#  products-app:
+#    #    image: gcepedag/products-app:latest
+#    build:
+#      context: ./
+#      dockerfile: ./Practica5_Ajax-WebSocket/Dockerfile
+#    networks:
+#      - private-network
+#    ports:
+#      - ${PRODUCTSHOP_PORT}:${PRODUCTSHOP_PORT}
+#    env_file:
+#      - .env
+#    restart: "unless-stopped"
+  mqtt-app:
+    #    image: gcepedag/mqtt-app:latest
     build:
-      context: ./load_balancer
+      context: ./mqtt
     networks:
       - private-network
     ports:
-      - ${MOCKUP_PORT}:${MOCKUP_PORT}
-    env_file:
-      - .env
-    depends_on:
-      - mysql-database
-    restart: "unless-stopped"
-  mysql-database:
-    image: mysql:5.7.26
-    restart: always
-    healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u $$DB_USER --password=$$DB_PASSWORD
-      start_period: 5s
-      interval: 5s
-      timeout: 5s
-      retries: 10
-    env_file:
-      - .env
-    environment:
-      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
-      - MYSQL_USER=$DB_USER
-      - MYSQL_DATABASE=$DB_NAME
-    volumes:
-      - ${VOLUME_PATH}:/var/lib/mysql
-    networks:
-      - private-network
-  shortener-app:
-    #    image: gcepedag/shortener-app:latest
-    build:
-      context: ./
-      dockerfile: ./practFinal_Acortador/Dockerfile
-    networks:
-      - private-network
-    ports:
-      - ${SHORTERURL_PORT}:${SHORTERURL_PORT}
-    env_file:
-      - .env
-    restart: "unless-stopped"
-  products-app:
-    #    image: gcepedag/products-app:latest
-    build:
-      context: ./
-      dockerfile: ./Practica5_Ajax-WebSocket/Dockerfile
-    networks:
-      - private-network
-    ports:
-      - ${PRODUCTSHOP_PORT}:${PRODUCTSHOP_PORT}
+      - ${MQTT_PORT}:${MQTT_PORT}
     env_file:
       - .env
     restart: "unless-stopped"

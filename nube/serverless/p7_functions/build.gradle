@@ -29,7 +29,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveBaseName.set("practica7")
+    archiveBaseName.set("serverless")
     archiveClassifier.set('')
     archiveVersion.set('0.0.1')
 }

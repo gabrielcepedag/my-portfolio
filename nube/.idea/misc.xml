@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/load_balancer" />
+    <file type="web" url="file://$PROJECT_DIR$/massyCake" />
     <file type="web" url="file://$PROJECT_DIR$/practFinal_Acortador" />
     <file type="web" url="file://$PROJECT_DIR$/Practica5_Ajax-WebSocket" />
     <file type="web" url="file://$PROJECT_DIR$/reposteriaMassy/MassyCake" />

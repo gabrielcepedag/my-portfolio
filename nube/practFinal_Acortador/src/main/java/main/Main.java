@@ -100,8 +100,6 @@ public class Main {
         mainServices.addUsuario(user);
         mainServices.addUsuario(gabriel);
 
-//        mainServices.setLoggedUser(eduardo);
-
         Url url = new Url("https://github.com/gabrielcepedag");
         Url url2 = new Url("https://github.com/gabrielcepedag/my-portfolio");
         Url url3 = new Url("https://gabrielcepeda.cloudfoliohub.com");

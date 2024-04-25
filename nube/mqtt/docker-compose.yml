@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  mqtt-app:
+    image: gcepedag/mi-mqtt:latest
+    build: .
+    ports:
+      - ${APP_PORT}:8080
+    env_file:
+      - .env
+
