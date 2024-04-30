@@ -41,27 +41,33 @@ public class Main {
     }
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException, URISyntaxException, InterruptedException {
         /*  Configuracion inicial de Servidor Javalin   */
-        Javalin app = Javalin.create();
+        Javalin app = Javalin.create(config -> {
+
+        });
         app.cfg.staticFiles.add(staticFileConfig -> {
             staticFileConfig.hostedPath = "/";
             staticFileConfig.directory = "/public";
             staticFileConfig.location = Location.CLASSPATH;
         });
-        BootStrapServices.getInstancia().init();
 
-        Main.HOST = getHostForUrl(app);
-        System.out.println("La dirección del server es: " + Main.HOST);
+        BootStrapServices.getInstancia().init();
 
         new ApiControlador(app).aplicarRutas();
         new SoapControlador(app).aplicarRutas();
 
-        Dotenv dotenv = Dotenv.configure().directory("./app").load();
-        String port = dotenv.get("SHORTERURL_PORT");
+//        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().directory("./app").load();
+//        String port = dotenv.get("SHORTERURL_PORT");
+        String port = System.getenv().get("PORT");
         if (port == null){
-            port = "8002";
+            System.out.println("NO HAY VARIABLE DE ENTORNO PORT");
+            port = "8080";
         }
+        System.out.println("El puerto a usar será: "+port);
 
         app.start(Integer.parseInt(port));
+
+        Main.HOST = getHostForUrl(app);
+        System.out.println("La dirección del server es: " + Main.HOST);
 
         /*  Denotando rutas especificas  */
 //        app.get("/", ctx -> ctx.redirect("/home"));
@@ -147,25 +153,34 @@ public class Main {
     }
 
     private static String getHostForUrl(Javalin app) {
-        try {
-            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
-
-            while (((Enumeration<?>) networkInterfaces).hasMoreElements()) {
-                NetworkInterface networkInterface = networkInterfaces.nextElement();
-                if (!networkInterface.isLoopback() && networkInterface.isUp()) {
-                    Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
-                    while (inetAddresses.hasMoreElements()) {
-                        InetAddress inetAddress = inetAddresses.nextElement();
-                        System.out.println("IP: "+inetAddress.getHostAddress());
-                        if (!inetAddress.isLoopbackAddress() && inetAddress.isSiteLocalAddress()) {
-                            return "http://" + inetAddress.getHostAddress()+ ":" + app.port() +"/";
-                        }
-                    }
-                }
-            }
-        } catch (SocketException e) {
-            e.printStackTrace();
+        String host = System.getenv().get("HOST");
+        if (host != null) {
+            return host;
+        } else {
+            return "http://localhost:"+ app.port() + "/";
         }
-        return null;
     }
+
+//    private static String getHostForUrl(Javalin app) {
+//        try {
+//            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+//
+//            while (((Enumeration<?>) networkInterfaces).hasMoreElements()) {
+//                NetworkInterface networkInterface = networkInterfaces.nextElement();
+//                if (!networkInterface.isLoopback() && networkInterface.isUp()) {
+//                    Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
+//                    while (inetAddresses.hasMoreElements()) {
+//                        InetAddress inetAddress = inetAddresses.nextElement();
+//                        System.out.println("IP: "+inetAddress.getHostAddress());
+//                        if (!inetAddress.isLoopbackAddress() && inetAddress.isSiteLocalAddress()) {
+//                            return "http://" + inetAddress.getHostAddress()+ ":" + app.port() +"/";
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (SocketException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 }

@@ -165,7 +165,6 @@ public class MainServices {
     }
 
     public Url findUrl(String urlCorta) {
-
         // TODO: Implementarlo con base de datos
         String url = Main.HOST + urlCorta;
         Url longUrl = listaUrl.stream().filter(corta -> corta.getUrlAcortada().equals(url)).findFirst().orElse(null);

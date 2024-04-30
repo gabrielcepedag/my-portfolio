@@ -75,7 +75,7 @@
     if (port != null){
         host += (":" + port);
     }
-    let socket = new WebSocket(`ws://${host}/sensores`);
+    let socket = new WebSocket(`wss://${host}/sensores`);
     socket.onmessage = function (event) {
         const newData = JSON.parse(event.data);
         updateChart(newData);

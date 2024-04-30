@@ -48,18 +48,18 @@ services:
 #      - ${VOLUME_PATH}:/var/lib/mysql
 #    networks:
 #      - private-network
-#  shortener-app:
-#    #    image: gcepedag/shortener-app:latest
-#    build:
-#      context: ./
-#      dockerfile: ./practFinal_Acortador/Dockerfile
-#    networks:
-#      - private-network
-#    ports:
-#      - ${SHORTERURL_PORT}:${SHORTERURL_PORT}
-#    env_file:
-#      - .env
-#    restart: "unless-stopped"
+  shortener-app:
+    #    image: gcepedag/shortener-app:latest
+    build:
+      context: ./
+      dockerfile: ./practFinal_Acortador/Dockerfile2
+    networks:
+      - private-network
+    ports:
+      - ${SHORTERURL_PORT}:${SHORTERURL_PORT}
+    env_file:
+      - .env
+    restart: "unless-stopped"
 #  products-app:
 #    #    image: gcepedag/products-app:latest
 #    build:
