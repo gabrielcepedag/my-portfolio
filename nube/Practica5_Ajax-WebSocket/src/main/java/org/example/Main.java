@@ -26,13 +26,12 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
 
         /*  Configuracion inicial de Servidor Javalin   */
-        Dotenv dotenv = Dotenv.configure().directory("./app").load();
-        String port = dotenv.get("PRODUCTSHOP_PORT");
-        if (port == null){
-            port = "8001";
-        }
+//        Dotenv dotenv = Dotenv.configure().directory("./app").load();
+        String port = System.getenv().getOrDefault("PRODUCTSHOP_PORT", "8080"); //dotenv.get("PRODUCTSHOP_PORT");
 
         Javalin app = Javalin.create().start(Integer.parseInt(port));
+        System.out.println("VOY A LEVANTAR LA APP EN EL PUERTO: "+port);
+
         app.cfg.staticFiles.add(staticFileConfig -> {
             staticFileConfig.hostedPath = "/";
             staticFileConfig.directory = "/public";

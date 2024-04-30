@@ -46,6 +46,13 @@ dependencies {
 
 }
 
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'org.example.Main'
+    }
+}
+
+
 test {
     useJUnitPlatform()
 }
