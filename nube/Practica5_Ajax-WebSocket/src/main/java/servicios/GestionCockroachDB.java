@@ -29,9 +29,9 @@ public class GestionCockroachDB {
 //        String url = dotenv.get("DATABASE_URL");
 //        String username = dotenv.get("DATABASE_USERNAME");
 //        String password = dotenv.get("DATABASE_PASSWORD");
-        String url = System.getenv().get("DATABASE_URL");
-        String username = System.getenv().get("DATABASE_USERNAME");
-        String password = System.getenv().get("DATABASE_PASSWORD");
+        String url = System.getenv().getOrDefault("DATABASE_URL", "jdbc:postgresql://portfolio-14346.7tt.aws-us-east-1.cockroachlabs.cloud:26257/product-shop");
+        String username = System.getenv().getOrDefault("DATABASE_USERNAME", "gdcg");
+        String password = System.getenv().getOrDefault("DATABASE_PASSWORD", "nbRswCuO0Gj-x0bnd7Pr7A");
 
         PGSimpleDataSource ds = new PGSimpleDataSource();
         ds.setUrl(url);
