@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  mockup-app:
+    image: gcepedag/mi-mockup:latest
+    build: .
+    networks:
+      - red-mockup
+    ports:
+      - ${APP_PORT}:8080
+    env_file:
+      - .env_old
+    depends_on:
+      - database-mockup
+  phpmyadmin: # Cliente phpmyadmin para MySql
+    image: phpmyadmin:5.1.1
+    env_file:
+      - .env_old
+    ports:
+      - ${PHPMYADMIN_PORT}:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - red-mockup
+    depends_on:
+      - database-mockup
+  database-mockup:
+    image: mysql:5.7.26
+    restart: always
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$DB_USER --password=$$DB_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    env_file:
+      - .env_old
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_USER=$DB_USER
+      - MYSQL_DATABASE=$DB_NAME
+    volumes:
+      - ${VOLUME_PATH}:/var/lib/mysql
+    networks:
+      - red-mockup
+networks:
+  red-mockup:
