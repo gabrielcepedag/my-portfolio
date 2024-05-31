@@ -1,0 +1,6 @@
+
+#Correr MYSQL
+
+#Crear database reposteria
+# Ejecutar en mysql: source /Users/gabriel/git/portfolio/trabajos/repositorios/nube/MassyCake/cakeshop-data.sql
+# Si es en el docker: source /docker-entrypoint-initdb.d/cakeshop-data.sql

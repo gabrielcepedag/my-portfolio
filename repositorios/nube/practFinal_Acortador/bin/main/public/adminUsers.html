@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Menu | Shrinkr</title>
+  <link rel="shortcut icon" type="image" href="/images/logo1-icon.png">
+
+  <link rel="stylesheet" href="/css/styleMainMenu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+
+</head>
+
+<body>
+<div hidden="logguedUser" id="logguedUser" th:text="${logguedUser}"></div>
+<!--  Side Panel  -->
+<div class="container">
+  <div class="navigation">
+    <ul>
+      <li class="hovered">
+        <a href="/menu">
+          <img class="menu-icon" src="/images/logo1-icon2.png" alt="logo">
+          <img class="menu-logo" src="/images/logo1.png" alt="logo" style="width: 250px; height: 72px">
+        </a>
+      </li>
+      <li>
+        <a href="/menu">
+          <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+          <span class="title">Main Menu</span>
+        </a>
+      </li>
+      <li>
+        <a href="/menu/links">
+          <span class="icon"><ion-icon name="link-outline"></ion-icon></ion-icon></span>
+          <span class="title">My Links</span>
+        </a>
+      </li>
+      <li>
+        <a href="/menu/dashboard">
+          <span class="icon"><ion-icon name="stats-chart"></ion-icon></span>
+          <span class="title">Dashboard</span>
+        </a>
+      </li>
+      <li th:if="${loguedUser.admin}">
+        <a href="/gestion/links">
+          <span class="icon"><ion-icon name="cog-outline"></ion-icon></span>
+          <span class="title">Manage Links</span>
+        </a>
+      </li>
+      <li th:if="${loguedUser.admin && loguedUser.superAdmin}">
+        <a href="#">
+          <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></ion-icon></span>
+          <span class="title">Manage Users</span>
+        </a>
+      </li>
+      <li>
+      <li class="profile">
+        <div class="user-profile">
+          <img src="/images/user-icon3.jpg" alt="User Profile Picture">
+          <div class="user-details">
+            <div class="user-name" th:text="${loguedUser.username}">Logued Username</div>
+            <div class="user-role" th:if="${loguedUser.admin}">
+              <span th:if="${loguedUser.admin and not loguedUser.superAdmin}">Administrator</span>
+              <span th:if="${loguedUser.admin and loguedUser.superAdmin}">Main Administrator</span>
+            </div>
+          </div>
+        </div>
+        <div class="logout-icon" title="Logout" >
+          <ion-icon id="logButton" name="log-out-outline"></ion-icon>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--  end of Side Panel  -->
+
+  <!--  Main Panel  -->
+  <div class="main">
+    <!-- TopBar -->
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu"></ion-icon>
+      </div>
+      <h1 class="title1">User Manager</h1><br>
+    </div>
+    <!-- end of Topbar -->
+
+    <!-- Upper Cards -->
+    <div class="cardBox">
+      <div class="card">
+        <div>
+          <div class="numbers" id="cantUsuarios" th:text="${cantUsers}">[00]</div>
+          <div class="cardName">Registered Users</div>
+        </div>
+        <div class="iconBx">
+          <ion-icon name="people-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <!--          <div class="numbers" id="cantLinks" th:text="${#numbers.formatDecimal(ingresos, 1, 'DEFAULT', 2, 'DEFAULT')}">[000,000.00]</div>-->
+          <div class="numbers" id="cantUsuariosLinks" th:text="${userActiveLinks}">[00]</div>
+          <div class="cardName">Users with Created Links</div>
+        </div>
+        <div class="iconBx">
+          <ion-icon name="arrow-redo-circle-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <div class="numbers" id="cantUsuariosActivos">0</div>
+          <div class="cardName">Currently Active Users</div>
+        </div>
+        <div class="iconBx">
+          <ion-icon name="people-circle-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <div class="numbers" id="cantUsuariosAdmin" th:text="${cantAdmin}">[00]</div>
+          <div class="cardName">Administrator Users</div>
+        </div>
+        <div class="iconBx">
+          <ion-icon name="sparkles-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <!-- end of Upper Cards -->
+
+    <div class="graphBox">
+      <div class="box">
+        <div class="table-header">
+          <h1 class="caption">Registered Users</h1>
+          <a href="#" onclick="event.preventDefault()" class="add-user-button">Add new User</a>
+        </div>
+        <table class="table-users">
+          <thead>
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email Address</th>
+            <th># of Links</th>
+            <th>Account Status</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr th:each="usuario, iterStat : ${listaUsuarios}">
+              <span th:unless="${usuario.username.equalsIgnoreCase('guest')}">
+                <td th:text="${usuario.username}"></td>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.getMisUrl.size()}"></td>
+
+                <span th:if="${usuario.superAdmin}">
+                  <td>Main Administrator</td>
+                </span>
+                <span th:if="${usuario.admin and not usuario.superAdmin}">
+                  <td>Administrator</td>
+                </span>
+                <span th:unless="${usuario.admin}">
+                  <td>User</td>
+                </span>
+
+                <td th:unless="${usuario.superAdmin}">
+                  <span>
+                  <a th:href="@{'/gestion/users/update/'+ ${usuario.username}}" class="edit-user">
+                      <ion-icon name="create-outline"></ion-icon>
+                    </a>
+                <a th:id="'eliminarUser-'+${iterStat.index}" th:data-id="${usuario.id}" class="delete-user" th:href="'javascript:showModalUser('+${iterStat.index}+')'">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </a>
+                  </span>
+                </td>
+              </span>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="modal" id="myModal">
+      <div class="modal-content">
+        <div class="modal-header-wrapper">
+          <h2 class="modal-header">User Registration Form</h2>
+          <button class="close-button"><ion-icon name="close-circle-outline"></ion-icon></button>
+        </div>
+
+        <form class="form-modal" method="post" action="/register/modal">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <div class="form-group">
+            <label for="admin">Administrator User:</label>
+            <input type="checkbox" id="admin" name="admin">
+          </div>
+          <div class="modal-buttons">
+            <button type="submit" class="submit-button">Submit</button>
+            <button type="button" class="cancel-button">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="myModalUpdate" th:if="${update}">
+      <div class="modal-content">
+        <div class="modal-header-wrapper">
+          <h2 class="modal-header">User Editor</h2>
+          <button class="close-button"><ion-icon name="close-circle-outline"></ion-icon></button>
+        </div>
+
+        <form id="frmModalUpdate" class="form-modal" method="post" th:action="'/gestion/users/update/'+${selectedUser.id}">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="usernameUpdate" name="username" th:value="${selectedUser.username}" style="color: #737373" readonly>
+          </div>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="nameUpdate" name="name" th:value="${selectedUser.nombre}" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="emailUpdate" name="email" th:value="${selectedUser.email}" required>
+          </div>
+          <div class="form-group">
+            <label for="admin">Administrator User:</label>
+            <input type="checkbox" id="adminUpdate" name="admin" th:checked="${selectedUser.admin}">
+          </div>
+          <div class="modal-buttons">
+            <button type="submit" class="submit-button">Update</button>
+            <button type="button" class="cancel-button">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+<script src="/js/mainMenu.js"></script>
+<script src="/js/jquery-3.6.3.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+
+<script th:inline="javascript">
+  const profileLi = document.querySelector(".profile");
+  var superAdmin = /*[[${loguedUser.superAdmin}]]*/ false;
+  var admin = /*[[${loguedUser.admin}]]*/ false;
+  var update = /*[[${update}]]*/ false;
+  if(update){
+    window.onload = showModalUpdate;
+  }
+
+  if (admin === true && superAdmin === false) {
+    profileLi.classList.add("admin");
+  }else if(admin === false && superAdmin === false){
+    profileLi.classList.add("user");
+  }
+
+  function showModalUpdate(){
+    var modal2 = document.getElementById("myModalUpdate");
+    var link = document.querySelector(".edit-user");
+    var btnClose = document.querySelector("#myModalUpdate .close-button");
+    var btnCancel = document.querySelector("#myModalUpdate .cancel-button");
+
+    modal2.style.display = "block";
+    window.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        window.location.href = '/gestion/users';
+      }
+    });
+    btnClose.addEventListener("click", function() {
+      window.location.href = '/gestion/users';
+    });
+    btnCancel.addEventListener("click", function() {
+      window.location.href = '/gestion/users';
+    });
+  }
+</script>
+
+<script id="webSocket">
+  //abriendo el objeto para el websocket
+  var webSocket;
+  var tiempoReconectar = 5000;
+
+  $(document).ready(function(){
+    console.info("Iniciando Jquery -  Ejemplo WebServices");
+    console.info("usuario es: "+$("#logguedUser").text());
+    conectar();
+  });
+
+  function conectar() {
+
+    console.info("Iniciando la comunicación...");
+    webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/usuariosConectados");
+
+    webSocket.onmessage = function(event) {
+      var message = JSON.parse(event.data);
+      if (message.users){
+        const numUsers = message.users;
+        console.log(numUsers);
+        document.getElementById("cantUsuariosActivos").innerHTML = numUsers;
+      }
+    };
+    webSocket.onopen  = function(e){console.log("(ONOPEN) Conectado - status "+this.readyState);};
+    webSocket.onclose = function(e){console.log("(ONCLOSE) Desconectado - status "+this.readyState);};
+  }
+
+  function verificarConexion(){
+    if(!webSocket || webSocket.readyState == 3){
+      conectar();
+    }
+  }
+  setInterval(verificarConexion, tiempoReconectar); //para reconectar.
+</script>
+
+<script id="modalWindow-Register">
+  var modal = document.getElementById("myModal");
+  var btn = document.querySelector(".add-user-button");
+  var btn2 = document.querySelector(".cancel-button");
+  var btn3 = document.querySelector(".close-button");
+
+  btn.addEventListener("click", function() {
+    modal.style.display = "block";
+  });
+
+  window.addEventListener("click", function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+  btn2.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+  btn3.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+</script>
+
+<script id="modalWindow-Update">
+  var update = /*[[${update}]]*/ false;
+  if(update){
+    const form = document.getElementById('frmModalUpdate');
+    const url = form.getAttribute('action');
+    const formData = new FormData(form);
+
+    fetch(url, {
+      method: 'PUT',
+      body: formData
+    })
+            .then(response => {
+              if (response.ok) {
+                window.location.href="/gestion/users"
+              } else {
+                console.log("EROR...")
+              }
+            })
+            .catch(error => {
+              // handle error
+            });
+  }
+</script>
+
+
+</body>
+</html>

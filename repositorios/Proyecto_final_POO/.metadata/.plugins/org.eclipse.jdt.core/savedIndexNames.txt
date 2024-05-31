@@ -1,0 +1,10 @@
+INDEX VERSION 1.131+\\Mac\Home\git\TecnoC\Proyectos_POO\Proyecto_final(E1)\.metadata\.plugins\org.eclipse.jdt.core
+2020953239.index
+2164557717.index
+156190983.index
+1865797976.index
+1162630035.index
+3825991310.index
+824789268.index
+3194600628.index
+3518562389.index

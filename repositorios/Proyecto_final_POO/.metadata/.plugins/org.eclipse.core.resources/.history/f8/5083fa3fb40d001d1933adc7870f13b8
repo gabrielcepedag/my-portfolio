@@ -1,0 +1,37 @@
+package logico;
+
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Conexion {
+	
+	public static Connection getConexion() {
+		String conexionUrlString = "jdbc:sqlserver://192.168.100.118:1433;"
+				+ "database=hospital;"
+				+ "user=dbetances;"
+				+ "password=Eict@2022;"
+				+ "loginTimeout=30;"
+				+ "trustServerCertificate=true;"
+				+ "Tcp.IsEnabled = false";
+				
+		try {
+			Connection con = DriverManager.getConnection(conexionUrlString);
+			return con;
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			return null;
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			Statement sql = Conexion.getConexion().createStatement();
+			System.out.println("Conexion Correcta");
+		} catch (SQLException e) {
+			System.out.println("Error" + e.toString());
+		}
+	}
+
+}

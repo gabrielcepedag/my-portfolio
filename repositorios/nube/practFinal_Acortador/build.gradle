@@ -1,0 +1,114 @@
+plugins {
+    id 'java'
+    id 'com.google.protobuf' version '0.8.17' //plugin para incluir la compilación de gRPC, ver: https://github.com/grpc/grpc-java#generated-code
+    id 'idea' //plugins para la integración con el IDEA.
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+
+group 'icc.web'
+version '1.0-SNAPSHOT'
+
+String openapi =  "5.3.2"
+
+mainClassName = 'main.Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation('io.javalin:javalin:5.4.2')
+    implementation('io.javalin:javalin-rendering:5.4.2')
+    implementation("org.slf4j:slf4j-simple:2.0.6")
+    implementation ("org.thymeleaf:thymeleaf:3.1.1.RELEASE")
+
+    implementation group: 'com.h2database', name: 'h2', version: '2.1.214'
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
+    implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '2.2'
+    implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.2.0.CR2'
+
+    // https://mvnrepository.com/artifact/net.glxn.qrgen/javase
+    implementation group: 'net.glxn.qrgen', name: 'javase', version: '2.0'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1'
+    implementation group: 'org.json', name: 'json', version: '20230227'
+
+    //incluyendo las librerias de javax.ee en java 11.
+    //https://www.baeldung.com/java-soap-web-service
+    implementation "jakarta.servlet:jakarta.servlet-api:4.0.3"
+    implementation "jakarta.activation:jakarta.activation-api:1.2.2"
+    implementation "jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"
+    implementation "jakarta.xml.soap:jakarta.xml.soap-api:3.0.0"
+    implementation "com.sun.xml.messaging.saaj:saaj-impl:2.0.1"
+    implementation "com.sun.xml.ws:jaxws-rt:3.0.2"
+
+    //libreria para SOAP de Jetty https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-http-spi
+    implementation group: 'org.eclipse.jetty', name: 'jetty-http-spi', version: '11.0.13'
+
+    //Agregando el OpenApi, ver https://github.com/javalin/javalin-openapi/wiki
+    annotationProcessor("io.javalin.community.openapi:openapi-annotation-processor:$openapi")
+    implementation("io.javalin.community.openapi:javalin-openapi-plugin:$openapi") // for /openapi route with JSON scheme
+    implementation("io.javalin.community.openapi:javalin-swagger-plugin:$openapi") // for Swagger UI
+    implementation("io.javalin.community.openapi:javalin-redoc-plugin:$openapi") // for ReDoc UI
+    implementation("org.apache.httpcomponents:httpclient:4.5.14")
+
+    // Json Web Token (JWT)
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
+    //Librerías necesarias para para implementar gRPC y Protobuf, ver: https://github.com/grpc/grpc-java
+    implementation 'io.grpc:grpc-netty-shaded:1.39.0'
+    implementation 'io.grpc:grpc-protobuf:1.39.0'
+    implementation 'io.grpc:grpc-stub:1.39.0'
+    compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
+    implementation 'com.google.protobuf:protobuf-java:3.17.3'
+
+    implementation group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
+}
+
+
+//Tareas para la generación del código.
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.17.2"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.39.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/generated"
+}
+
+//Tareas para integrar con el
+clean {
+    delete protobuf.generatedFilesBaseDir
+}
+
+idea {
+    module {
+        // proto files and generated Java files are automatically added as
+        // source dirs.
+        // If you have additional sources, add them here:
+        sourceDirs += file("src/generated");
+    }
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'main.Main'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+

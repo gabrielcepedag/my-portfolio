@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | API.com</title>
+    <link rel="shortcut icon" type="image" href="/images/logo1-bar-icon.png">
+
+    <link rel="stylesheet" href="/css/mainMenu.css">
+    <link rel="stylesheet" href="/css/error.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+</head>
+
+<body>
+<!--<div hidden="logguedUser" id="logguedUser" th:text="${loguedUser}"></div>-->
+<!--  Side Panel  -->
+<div class="container">
+<!--    <div class="navigation">-->
+<!--        <ul>-->
+<!--            <li id="logo" class="hovered">-->
+<!--                <a href="/menu">-->
+<!--                    <img class="menu-icon" src="/images/logo1.png" alt="logo" style="width: 4.5rem; height: auto; z-index: 1">-->
+<!--                    <img class="menu-logo" src="/images/logo2.png" alt="logo" style="width: 14rem; height: auto">-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li id="menu">-->
+<!--                <a href="/menu">-->
+<!--                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>-->
+<!--                    <span class="title">Main Menu</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li id="myProjects">-->
+<!--                <a href="/project/">-->
+<!--                    <span class="icon"><ion-icon name="code-slash-outline"></ion-icon></span>-->
+<!--                    <span class="title">My Projects</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li id="adminProjects" th:if="${true}">-->
+<!--                <a href="/gestion/projects">-->
+<!--                    <span class="icon"><ion-icon name="cog-outline"></ion-icon></span>-->
+<!--                    <span class="title">Manage Projects</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li id="adminUsers" th:if="${true}">-->
+<!--                <a href="/gestion/users">-->
+<!--                    <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></ion-icon></span>-->
+<!--                    <span class="title">Manage Users</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--            <li id="profile" class="profile">-->
+<!--                <div class="user-profile">-->
+<!--                    <img src="/images/user_icon.jpg" alt="User Profile Picture">-->
+<!--                    <div class="user-details">-->
+<!--&lt;!&ndash;                        <div class="user-name" th:text="${loguedUser.username}">Logued Username</div>&ndash;&gt;-->
+<!--                        <div class="user-name">Logged Username</div>-->
+<!--                        <div class="user-role">-->
+<!--                             <span>Administrator</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="logout-icon" title="Logout" >-->
+<!--                    <ion-icon id="logButton" name="log-out-outline"></ion-icon>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+    <!--  end of Side Panel  -->
+
+    <!--  Main Panel  -->
+    <div class="main">
+        <!-- TopBar -->
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu"></ion-icon>
+            </div>
+            <h1 class="title1">Projects Workshop</h1><br>
+        </div>
+        <!-- end of Topbar -->
+
+        <div class="err_page pr-5">
+            <div class="err_page_left mt-4">
+                <img src="/images/404_phone.png" width=360px height=auto/>
+            </div>
+            <div class="err_page_right mt-4">
+                <h1 th:text="${errorCode}">404</h1>
+                <h4 th:text="${errorMessage}">Looks like the page you're looking doesn't exist or has been removed recently.</h4>
+                <p>Don't worry. Since you're valuable to us, we will take you back to safety</p>
+                <button class="err_btn" onclick="window.history.back();">Go Back</button>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script src="/js/mainMenu.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.info-project').click(function (event) {
+            event.preventDefault();
+
+            var projectId = $(this).attr('data-id');
+            editProject(projectId, projectName);
+        });
+        $('.edit-project').click(function (event) {
+            event.preventDefault();
+
+            var projectId = $(this).attr('data-id');
+            var projectName = $(this).attr('data-name');
+            editProject(projectId, projectName);
+        });
+        $('.delete-project').click(function (event) {
+            event.preventDefault();
+
+            var projectId = $(this).attr('data-id');
+            confirmDelete(projectId);
+        });
+    });
+    function confirmDelete(projectId) {
+        Swal.fire({
+            title: 'Are you sure you want to delete this project?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#FF0000FF',
+            cancelButtonColor: '#8c8c8c',
+            confirmButtonText: 'Delete'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteProject(projectId);
+            }
+        });
+    }
+
+    function deleteProject(projectId) {
+        fetch('/project/delete/' + projectId, {
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.error) {
+                    console.log('ERROR - Extra: '+response.extra);
+                    Swal.fire('Error!', response.message, 'error');
+                } else {
+                    Swal.fire('Deleted!', 'Your project has been deleted.', 'success')
+                        .then(() => {
+                                // Reload the table after successful deletion
+                                location.reload();
+                        });
+                }
+            })
+            .catch(error => {
+                console.log('ERROR EXTERNO:', error);
+                Swal.fire('Error!', 'FATAL ERROR - '+error.message, 'error');
+            });
+    }
+
+    function editProject(projectId, projectName) {
+        Swal.fire({
+            title: 'Edit your Project',
+            html:
+                `<label for="projectName">Name:</label>` +
+                `<input id="projectName" class="swal2-input" value="${projectName}">`,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            confirmButtonColor: '#2196F3',
+            cancelButtonColor: '#8c8c8c',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const editedName = document.getElementById('projectName').value;
+                // Do something with the edited name
+                Swal.fire('Saved!', 'All changes have been saved.', 'success');
+            }
+        });
+    }
+</script>
+
+<script th:inline="javascript">
+    // const profileLi = document.querySelector(".profile");
+    // var chartData = /*[[${listaUrlJson}]]*/ [];
+    // var preview = /*[[${preview}]]*/ false;
+    //
+    // if(preview){
+    //     const inputValue = document.getElementById("url3").value;
+    //     document.getElementById("url2").value = inputValue;
+    //
+    //     const previewImage = document.getElementById("preview-image");
+    //     const loading = document.getElementById("loading");
+    //     const error = document.getElementById("loading-error");
+    //
+    //     previewImage.addEventListener("load", function() {
+    //         loading.style.display = "none";
+    //         previewImage.style.display = "inline-block";
+    //     });
+    //     previewImage.addEventListener("error", function() {
+    //         loading.style.display = "none";
+    //         error.style.display = "block";
+    //     });
+    // }
+</script>
+</body>
+</html>

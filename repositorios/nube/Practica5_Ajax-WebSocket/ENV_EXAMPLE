@@ -1,0 +1,6 @@
+DATABASE_URL=
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+APP_PORT=
+
+Se necesita agregar dichas variables en un archivo localizado en la raiz del proyecto llamado .env

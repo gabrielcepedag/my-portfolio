@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICC Market | Dashboard</title>
+    <link rel="shortcut icon" type="image" href="/images/LogoPUCMM.png">
+
+    <link rel="stylesheet" href="/css/styleDashboard.css">
+    <link rel="stylesheet" href="../contrast-bootstrap-pro/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../contrast-bootstrap-pro/css/cdb.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <script src="../contrast-bootstrap-pro/js/cdb.js"></script>
+    <script src="../contrast-bootstrap-pro/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div hidden="logguedUser" id="logguedUser" th:text="${logguedUser}"></div>
+<!--  Side Panel  -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="/home?offset=0">
+                        <span class="icon"><ion-icon name="basket-outline"></ion-icon></span>
+                        <span class="title">ICC MARKET</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><ion-icon name="stats-chart"></ion-icon></ion-icon></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><ion-icon name="bag-check-outline"></ion-icon></span>
+                        <span class="title">Ventas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/gestion/dashboard#productos">
+                        <span class="icon"><ion-icon name="layers-outline"></ion-icon></span>
+                        <span class="title">Productos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/gestion?offset=0#historialVentas">
+                        <span class="icon"><ion-icon name="return-down-back-outline"></ion-icon></span>
+                        <span class="title">Volver</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+<!--  end of Side Panel  -->
+
+<!--  Main Panel  -->
+        <div class="main">
+            <!-- TopBar -->
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu"></ion-icon>
+                </div>
+<!--                <div class="search">-->
+<!--                    <label>-->
+<!--                        <input type="text" placeholder="Escriba aqui...">-->
+<!--                        <ion-icon name="search-outline"></ion-icon>-->
+<!--                    </label>-->
+<!--                </div>-->
+                <div class="user">
+                    <img src="/images/user-icon3.jpg" title="Bienvenido, admin">
+                </div>
+            </div>
+            <!-- end of Topbar -->
+
+            <!-- Upper Cards -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="ventas" th:text="${#numbers.formatDecimal(ingresos, 1, 'DEFAULT', 2, 'DEFAULT')}">[000,000.00]</div>
+                        <div class="cardName">Ingresos Totales</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="cantVentas" th:text="${cantVentas}">[00]</div>
+                        <div class="cardName">Ventas Totales</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="pricetags-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="cantProductos" th:text="${cantProductos}">[00]</div>
+                        <div class="cardName">Productos Vendidos</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="desktop-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="cantUsuarios" th:text="${cantUsuarios}">[00]</div>
+                    <div class="cardName">Usuarios Registrados</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="people-circle-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <!-- end of Upper Cards -->
+            <br><br>
+            <!-- Charts -->
+            <h1 id="productos">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Visualizaci&oacuten de Productos Vendidos</h1><br>
+            <div class="card chart-container">
+                <canvas id="chartProductos"></canvas>
+            </div><br>
+            <!--            <div class="graphBox">-->
+<!--                <div class="box">-->
+<!--                    <canvas id="chartProductos"></canvas>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script src="/js/jquery-3.6.3.js"></script>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+
+    <script id="pageDesign">
+        //Para ocultar el Side Panel
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+        toggle.onclick = function (){
+            navigation.classList.toggle('active');
+            main.classList.toggle('active');
+        }
+
+        //Para mantener la seleccion del Side Panel
+        let list = document.querySelectorAll('.navigation li');
+        function activeLink(){
+            list.forEach((item) =>
+                item.classList.remove('hovered'));
+            this.classList.add('hovered');
+        }
+        list.forEach((item) =>
+            item.addEventListener('mouseover', activeLink));
+    </script>
+
+    <script id="chart">
+        var myChartProductos;
+        function updateChart(listProd2) {
+            const chartData = window.myChartProductos.data.datasets[0].data;
+            const chartLabels = window.myChartProductos.data.labels;
+
+            for (let i = 0; i < chartLabels.length; i++) {
+                const existingLabel = chartLabels[i];
+                const existingIndex = listProd2.findIndex(p => p.nombre === existingLabel);
+                if (existingIndex >= 0) {
+                    chartData[i] = listProd2[existingIndex].cantidad;
+                    listProd2.splice(existingIndex, 1);
+                }
+            }
+
+            for (let i = 0; i < listProd2.length; i++) {
+                const newLabel = listProd2[i].nombre;
+                const newData = listProd2[i].cantidad;
+                chartLabels.push(newLabel);
+                chartData.push(newData);
+                const backgroundColor2 = generateRandomColor();
+                window.myChartProductos.data.datasets[0].backgroundColor.push(backgroundColor2);
+            }
+            window.myChartProductos.update();
+        }
+
+        function generateRandomColor() {
+            const usedColors2 = window.myChartProductos.data.datasets[0].backgroundColor;
+            let randomColor2 = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+            while (usedColors2.includes(randomColor2)) {
+                randomColor2 = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+            }
+            return randomColor2;
+        }
+
+        function createChart(listProdJson){
+            const ctxProd = document.getElementById("chartProductos").getContext('2d');
+
+            const listProd = JSON.parse(listProdJson);
+            const labels = [];
+            const data = [];
+            const backgroundColors = [];
+            const usedColors = [];
+
+            for (let i = 0; i < listProd.length; i++) {
+                labels.push(listProd[i].nombre);
+                data.push(listProd[i].cantidad);
+                let randomColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+                while (usedColors.includes(randomColor)) {
+                    randomColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+                }
+                backgroundColors.push(randomColor);
+                usedColors.push(randomColor);
+            }
+
+            window.myChartProductos = new Chart(ctxProd, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Productos Vendidos',
+                        borderColor: 'rgb(0,0,0)',
+                        borderWidth: 1,
+                        data: data,
+                        backgroundColor: backgroundColors
+                    }]
+                },
+                options:{
+                    responsive: true,
+                }
+            });
+        }
+    </script>
+
+    <script id="webSocket" th:inline="javascript">
+        var chartData = /*[[${prodsVendidos}]]*/ [];
+        window.onload = createChart(chartData);
+
+        /*  Manejador WebSocket */
+        var webSocket;
+        var tiempoReconectar = 5000;
+
+        $(document).ready(function(){
+            console.info("Iniciando Jquery -  Ejemplo WebServices");
+            console.info("usuario es: "+$("#logguedUser").text());
+            // conectarUser();
+            conectarVentas();
+        });
+
+        function recibirInformacionServidor(mensaje) {
+            var message = JSON.parse(mensaje.data);
+            console.log(message.prodsVendidos);
+            if (message.totalVenta){
+                const totalVenta = message.totalVenta;
+                document.getElementById("ventas").innerHTML = totalVenta;
+            }
+            if (message.cantVentas){
+                const cantVentas = message.cantVentas;
+                document.getElementById("cantVentas").innerHTML = cantVentas;
+            }
+            if (message.cantProds){
+                const cantProds = message.cantProds;
+                document.getElementById("cantProductos").innerHTML = cantProds;
+            }
+            if (message.cantUsuarios){
+                const cantUsers = message.cantUsuarios;
+                document.getElementById("cantUsuarios").innerHTML = cantUsers;
+            }
+            updateChart(message.prodsVendidos);
+        }
+
+        function conectarUser() {
+            console.info("Iniciando la comunicación...");
+            webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/usuariosConectados");
+            // webSocket.onmessage = function(data){recibirInformacionServidor(data);};
+            webSocket.onopen  = function(e){console.log("Conectado - status "+this.readyState);};
+            webSocket.onclose = function(e){console.log("Desconectado - status "+this.readyState);};
+        }
+
+        function conectarVentas() {
+            // if ($("#logguedUser").text() == 'admin') {
+                console.info("Iniciando la comunicación...");
+                webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/gestion/dashboard/update");
+                webSocket.onmessage = function(data){ recibirInformacionServidor(data); };
+
+                webSocket.onopen  = function(e){console.log("(ONOPEN VENTAS) Conectado - status "+this.readyState);};
+                webSocket.onclose = function(e){console.log("(ONCLOSE VENTAS) Desconectado - status "+this.readyState);};
+             // }
+        }
+        function verificarConexion(){
+            if(!webSocket || webSocket.readyState == 3){
+                conectarVentas();
+                conectarUser();
+            }
+        }
+        setInterval(verificarConexion, tiempoReconectar); //para reconectar.
+    </script>
+
+</body>
+</html>

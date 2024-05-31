@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>P5 - JMS</title>
+    <link rel="shortcut icon" type="image" href="https://www.svgrepo.com/show/184143/java.svg">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/homeStyle.css" >
+    <link rel="stylesheet" href="/css/notification.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="two">
+        <h1>Programaci&oacute;n Web Avanzada - Pr&aacute;ctica 5
+            <span>Java Message Service (JMS)</span>
+        </h1>
+    </div>
+
+    <div class="row flex-lg-nowrap">
+        <div class="col">
+            <div class="e-tabs mb-3 px-3">
+                <ul class="nav nav-tabs" id="myTabs">
+                    <li th:each="sensorIndex : ${#numbers.sequence(1, sensorCount)}" class="nav-item">
+                        <a th:href="'#sensorTab' + ${sensorIndex}" th:data-target="'#sensorTab' + ${sensorIndex}" class="nav-link"
+                           th:text="'Sensor ' + ${sensorIndex}" data-toggle="tab"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content">
+                <div th:each="sensorIndex : ${#numbers.sequence(1, sensorCount)}" class="tab-pane fade"
+                     th:id="'sensorTab' + ${sensorIndex}">
+                    <div class="row flex-lg-nowrap">
+                        <div class="col mb-3">
+                            <div class="e-panel card">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <h4 class="mr-2"><span th:text="'Dashboard para Sensor'+${sensorIndex}"></span></h4>
+                                    </div>
+
+                                    <!-- Line Chart 1: Registro de Temperatura -->
+                                    <canvas th:id="'temperatureChart' + ${sensorIndex}" width="400" height="200"></canvas>
+                                    <br><hr><br>
+                                    <!-- Line Chart 2: Registro de Humedad -->
+                                    <canvas th:id="'humidityChart' + ${sensorIndex}" width="400" height="200"></canvas>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Notification Area Div -->
+    <div id="notification-area"></div>
+</div>
+</body>
+
+<script src="/js/notification.js"></script>
+
+
+<script th:inline="javascript">
+    /*** WebSocket Configuration */
+    let host = window.location.hostname;
+    let port = window.location.port;
+    if (port != null){
+        host += (":" + port);
+    }
+    let socket = new WebSocket(`wss://${host}/sensores`);
+    socket.onmessage = function (event) {
+        const newData = JSON.parse(event.data);
+        updateChart(newData);
+    }
+    /*** ********************* ***/
+
+    $(document).ready(function() {
+        // Activar Tab de Estudiantes por default
+        $('#myTabs a:first').tab('show');
+
+        // Manejo dinamico de cambio de Tabs
+        $('#myTabs a').on('shown.bs.tab', function (e) {
+            var tabId = $(e.target).attr('href');
+            $('.tab-content .tab-pane').hide(); // Hide all tab content
+            $(tabId).show();
+        });
+    });
+
+    /*** ChartJs Configuration ***/
+    var sensorCount = /*[[${sensorCount}]]*/ 1;
+    var temperatureCharts = [];
+    var humidityCharts = [];
+    var sensorData = [];
+    for (let i = 1; i <= sensorCount; i++) {
+        sensorData[i] = { temperature: [], humidity: [], date: [] };
+    }
+
+    function generateChart(canvasId, chartType, chartData, chartOptions, chartTitle) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        return new Chart(ctx, {
+            type: chartType,
+            data: chartData,
+            options: {
+                title: {
+                    display: true,
+                    text: chartTitle
+                },
+            }
+        });
+    }
+
+    function updateChart(newData) {
+        const sensorNumber = parseInt(newData.sensorId.match(/\d+/)[0]);
+
+        // Agregando la data recibida al sensor correspondiente
+        sensorData[sensorNumber].temperature.push(newData.temperature);
+        sensorData[sensorNumber].humidity.push(newData.humidity);
+        sensorData[sensorNumber].date.push(newData.date);
+
+        // Limitando la data mostrada a las 100 ultimas entradas
+        if (sensorData[sensorNumber].temperature.length > 100) {
+            sensorData[sensorNumber].temperature.shift();
+            sensorData[sensorNumber].humidity.shift();
+        }
+
+        // Agregando entradas al grafico
+        temperatureCharts[sensorNumber].data.labels = sensorData[sensorNumber].date;
+        temperatureCharts[sensorNumber].data.datasets[0].data = sensorData[sensorNumber].temperature;
+        temperatureCharts[sensorNumber].update();
+
+        humidityCharts[sensorNumber].data.labels = sensorData[sensorNumber].date;
+        humidityCharts[sensorNumber].data.datasets[0].data = sensorData[sensorNumber].humidity;
+        humidityCharts[sensorNumber].update();
+    }
+
+    // Generando graficos dinamicamente
+    for (let i = 1; i <= sensorCount; i++) {
+        temperatureCharts[i] = generateChart(`temperatureChart${i}`, 'line', {
+            labels: ['No hay datos disponibles'],
+            datasets: [{
+                label: 'Temperatura (°C)',
+                data: [0],
+                borderWidth: 2,
+                fill: false,
+                borderColor: 'rgb(255,62,102)'
+            }]
+        }, {}, 'Registro de Temperatura');
+
+        humidityCharts[i] = generateChart(`humidityChart${i}`, 'line', {
+            labels: ['No hay datos disponibles'],
+            datasets: [{
+                label: 'Humedad (%)',
+                data: [0],
+                borderWidth: 2,
+                fill: false,
+                borderColor: 'rgb(48,130,255)'
+            }]
+        }, {}, 'Registro de Humedad');
+    }
+
+</script>
+
+
+
+
+</html>

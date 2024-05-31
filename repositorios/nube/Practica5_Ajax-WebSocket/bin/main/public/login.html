@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image" href="./images/LogoPUCMM.png">
+  <link rel="stylesheet" href="./css/styleLogin.css" />
+
+  <script src="https://kit.fontawesome.com/ffec4ec2ed.js" crossorigin="anonymous"></script>
+
+  <title>ICC Market | Login</title>
+
+</head>
+<body class="bg-dark">
+
+<section>
+  <div class="row g-0">
+    <div class="col-lg-7 d-none d-lg-block">
+      <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item min-vh-100 active" style="background: url(./images/img-1.jpg) top/cover no-repeat";></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 bg-dark d-flex flex-column align-items-end min-vh-100">
+      <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 mb-auto w-100" style="display: inline;">
+        <table>
+          <tr>
+            <td><img src="./images/LogoPUCMM.png" class="img-fluid" width="98" height="98" /></td>
+            <td><h1 class="font-weight-bold mb-4">&nbsp&nbsp&nbspICC MARKET</h1></td>
+          </tr>
+        </table>
+      </div>
+      <div class="align-self-center w-100 px-lg-5 py-lg-4 p-4">
+        <h2 class="font-weight-bold mb-4">Bienvenido de vuelta</h2>
+
+        <form class="mb-5" method="post" action="/login">
+          <div class="form-group mb-4">
+            <label for="username" class="form-label font-weight-bold">Nombre de Usuario</label>
+            <input name="username" type="username" class="form-control bg-dark-x border-0" id="username" placeholder="Ingresa tu nombre de usuario" required>
+          </div>
+          <div class="form-group mb-4">
+            <label for="password" class="form-label font-weight-bold">Contraseña</label>
+            <input name="password" type="password" class="form-control bg-dark-x border-0 mb-2" placeholder="Ingresa tu contraseña" id="password" required>
+          </div>
+          <div class="form-check form-switch mb-4">
+            <input name="recuerdame" type="checkbox" id="recuerdame" value="recuerdame" class="form-check-input">
+            <label for="recuerdame" class="form-label font-weight-bold" class="form-check-label">&nbsp&nbspRecuerdame</label>
+          </div>
+          <div class="container" style="padding: 0 0 1em 0;">
+            <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+          </div>
+          <button type="button" class="btn btn-danger w-100" onclick="window.location.href='/home?offset=0'">Cancelar</button>
+        </form>
+
+      </div>
+      <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 mt-auto w-100">
+        <p class="d-inline-block mb-0">¿Todavia no tienes una cuenta?</p> <a href="./register.html" class="text-light font-weight-bold text-decoration-none">Crea una ahora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</body>
+</html>

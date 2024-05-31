@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Nuevo Pedido | Massy's Cake</title>
+    <link rel="shortcut icon" type="image" href="/img/massyCake-Logo.jpg">
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <!-- Enlaza la biblioteca de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous"/>
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="/css/sb-admin-2.css" >
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+                <div class="sidebar-brand-icon sidebar-logo">
+                    <img src="/img/massyCake-Logo.jpg" alt="Logo">
+                </div>
+                <div class="sidebar-brand-text mx-sm-3">Gesti&oacute;n General</div>
+            </a>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/home">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Home</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Cocina
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCocina" aria-expanded="true" aria-controls="collapseCocina">
+                    <i class="fas fa-fw fa-utensils"></i>
+                    <span>Cocina</span>
+                </a>
+                <div id="collapseCocina" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/cocina">Cocina</a>
+                                     <a class="collapse-item" href="/pedidos?paginacion=true">Pedidos</a>
+                        <a class="collapse-item" href="/cocina/recetas">Recetas</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestion" aria-expanded="true" aria-controls="collapseGestion">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>Gesti&oacute;n</span>
+                </a>
+                <div id="collapseGestion" class="collapse" aria-labelledby="Gestion" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/inventario">Inventario</a>
+                        <a class="collapse-item" href="/productos">Productos</a>
+                        <a class="collapse-item" href="/ordenesCompra">Ordenes de Compra</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pedidos/crear">
+                    <i class="fas fa-file-upload"></i>
+                    <span>Crear Pedido</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Ventas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pos">
+                    <i class="fas fa-fw fa-cash-register"></i>
+                    <span>Punto de Venta</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegistros"
+                   aria-expanded="true" aria-controls="collapseRegistros">
+                    <i class="fas fa-fw fa-receipt"></i>
+                    <span>Registros</span>
+                </a>
+                <div id="collapseRegistros" class="collapse" aria-labelledby="Registros" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/facturas">Facturas</a>
+                        <a class="collapse-item" href="/ventas">Ventas</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Personas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/empleados">
+                    <i class="fas fa-users"></i>
+                    <span>Empleados</span></a>
+            </li>
+
+
+
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reportes
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+                   aria-expanded="true" aria-controls="collapseReportes">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseReportes" class="collapse" aria-labelledby="Reportes" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/reportes/ventas">Reporte de Ventas</a>
+                        <a class="collapse-item" href="/reportes/inventario">Reporte de Inventario</a>
+                        <a class="collapse-item" href="/reportes/clientes">Reporte de Clientes</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Page Heading -->
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <h1 class="h3 mt-2 text-gray-800">Registrar Nuevo Pedido</h1>
+                    </div>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${empleado.nombre} + ' ' + ${empleado.apellido}">Nombre Apellido</span>
+                                <img class="img-profile rounded-circle" th:src="${empleado.rol == 'ADMIN' ? '/img/profile_icon.jpg':
+                                (empleado.rol == 'REPOSTERO' ? '/img/chef-avatar-vector-illustration.jpg' : '/img/profile_icon.png')}" alt="Imagen de perfil usuario">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/perfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Mi Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar Sesi&oacute;n
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <br>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#cabina">Pedido para Cabina</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#personalizado">Pedido Personalizado</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <!--------------- FORM PARA CREAR PEDIDO DE CABINA --------------------->
+                        <div id="cabina" class="tab-pane fade show active">
+                            <div class="form-group row" style="padding-top: 10px">
+                                <label for="nombrePedidoCabina" class="col-sm-2 col-form-label">Nombre del pedido</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="nombrePedidoCabina" name="nombrePedidoCabina">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-clipboard"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="fechaOrdenCabina" class="col-sm-2 col-form-label">Fecha de Orden</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="text" id="fechaOrdenCabina" name="fechaOrdenCabina" class="form-control text-gray-600" readonly>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label for="fechaEntregaCabina" class="col-sm-2 col-form-label">Fecha de Entrega</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="text" id="fechaEntregaCabina" name="fechaEntregaCabina" class="form-control">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-calendar-check"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="descripcionPedidoCabina" class="col-sm-2 col-form-label">Descripción</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <textarea id="descripcionPedidoCabina" name="descripcionCabina" class="form-control" maxlength="100"></textarea>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="form-group row">
+                                <label for="porcionResultanteCab" class="col-sm-2 col-form-label">Porci&oacute;n Resultante</label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input id="porcionResultanteCab" name="porcionResultante" aria-labelledby="porcion" type="number" min="0" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <select id="uniPorcionCab" name="uniPorcionResultante" aria-label="Unidad de Porcion" class="form-control">
+                                            <div th:each="unidad : ${unidadesPeso}" >
+                                                <option th:value="${unidad}" th:text="${unidad}"></option>
+                                            </div>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-weight"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <hr>
+                            <button type="submit" class="btn btn-primary" onclick="enviarPedidosCabina()">Crear pedido</button>
+
+                        </div>
+                        <!--------------- FORM PARA CREAR PEDIDO DE CABINA --------------------->
+
+                        <!--------------- FORM PARA CREAR PEDIDO PERSONALIZADO --------------------->
+
+                        <div id="personalizado" class="tab-pane fade">
+                            <div style="padding: 10px">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="nombrePedido">Nombre del pedido</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="nombrePedido" name="nombrePedido">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-clipboard"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="fechaOrdenEncargo" class="col-sm-2 col-form-label">Fecha de Orden</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" id="fechaOrdenEncargo" name="fechaOrden" class="form-control text-gray-600" readonly>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label for="fechaEntregaEncargo" class="col-sm-2 col-form-label">Fecha de Entrega</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" id="fechaEntregaEncargo" name="fechaEntrega" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-calendar-check"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="clienteInput">Cliente</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="cliente" id="clienteInput" data-toggle="modal" data-target="#agregarClienteModal">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user" th:text="${clienteSelected == null ? '' : clienteSelected.getId()}"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label" for="tipoEntregaPedido">Método de entrega</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <select class="form-control" id="tipoEntregaPedido" name="metodoEntrega">
+                                                <option value="Recogida en el local">Recogida en el local</option>
+                                                <option value="Delivery">Delivery</option>
+                                            </select>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-truck"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="descripcionPedido" class="col-sm-2 col-form-label">Descripción</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <textarea id="descripcionPedido" name="descripcion" class="form-control" maxlength="100"></textarea>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label class="col-form-label">Cotizacion</label>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <input name="cotizacion" id="cotizacionPedido" type="number" min="1" step="0.1" class="form-control" >
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <label class="col-form-label">Inicial</label>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <input class="form-control" name="inicial" id="inicialPedido" type="number" min="1" step="0.1">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <label class="col-form-label" for="descuentoPedido">Descuento</label>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" name="descuento" id="descuentoPedido" min="0" max="100" step="0.1">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <input type="hidden" id="detallesPedidosInput" name="detallesPedidos"/>
+                                <input type="hidden" id="tipoPedido" value="Pedido personalizado"/>
+
+                                <hr>
+                                <div id="detallesContainer"></div>
+
+                                <button id="crearPedido" class="btn btn-primary">Crear pedido</button>
+                                <button id="btnDetallePedido" type="button" class="btn btn-success" data-toggle="modal" data-target="#detallePedidoModal">Agregar detalle de pedido</button>
+                            </div>
+                        </div>
+
+                        <!-----MODAL PARA CREAR DETALLEs--------->
+
+                        <div class="modal fade" id="detallePedidoModal" tabindex="-1" role="dialog" aria-labelledby="detallePedidoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="detallePedidoModalLabel">Agregar detalle de pedido</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Tipo de masa</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="tipoMasa">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-bread-slice"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Forma</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="forma">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-shapes"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Relleno</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="relleno">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-drumstick-bite"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Peso</label>
+                                                <div class="col-sm-7">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="peso">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-weight"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="input-group">
+                                                        <select class="form-control" name="unidad">
+                                                            <div th:each="unidad : ${unidadesPeso}">
+                                                                <option th:text="${unidad}"></option>
+                                                            </div>
+<!--                                                            <option value="Kg">Kg</option>-->
+                                                        </select>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-balance-scale"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Notas</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <textarea class="form-control" name="notas" maxlength="100"></textarea>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Crear detalle</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Agregar Cliente Modal -->
+                        <div class="modal fade" id="agregarClienteModal" tabindex="-1" role="dialog" aria-labelledby="agregarClienteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="agregarClienteModalLabel">Agregar Cliente</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="overflow-y: scroll; max-height: 400px;">
+                                        <!-- Tabla de clientes -->
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Registro de Clientes</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <!-- Formulario para agregar un nuevo cliente -->
+                                                <div id="agregarClienteForm" style="display: none; border-radius: 20px; border: 1px solid #7570B3; padding: 15px">
+                                                    <div class="form-group row">
+                                                        <label for="cedulaCliente" class="col-sm-2 col-form-label">Cédula</label>
+                                                        <div class="col-sm-10">
+                                                            <div class="input-group">
+                                                                <input type="text" id="cedulaCliente" name="cedula" class="form-control" placeholder="Ingrese la cédula del cliente">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="nombreCliente" class="col-sm-2 col-form-label">Nombre</label>
+                                                        <div class="col-sm-10">
+                                                            <div class="input-group">
+                                                                <input type="text" id="nombreCliente" name="nombre" class="form-control" placeholder="Ingrese el nombre del cliente">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="direccionCliente" class="col-sm-2 col-form-label">Dirección</label>
+                                                        <div class="col-sm-10">
+                                                            <div class="input-group">
+                                                                <input type="text" id="direccionCliente" name="direccion" class="form-control" placeholder="Ingrese la dirección del cliente">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="telefonoCliente" class="col-sm-2 col-form-label">Teléfono</label>
+                                                        <div class="col-sm-10">
+                                                            <div class="input-group">
+                                                                <input type="text" id="telefonoCliente" name="telefono" class="form-control" placeholder="Ingrese el teléfono del cliente">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <button type="button" class="btn btn-secondary mr-2" id="cancelarClienteBtn">Cancelar</button>
+                                                        <button type="button" id="btnCrearCliente" class="btn btn-primary">Agregar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Cédula</th>
+                                                            <th>Nombre</th>
+                                                            <th>Teléfono</th>
+                                                            <th>Dirección</th>
+                                                            <th>Seleccionar</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr th:each="cliente : ${clientes}">
+                                                            <td th:text="${cliente.getCedula()}"></td>
+                                                            <td th:text="${cliente.getNombre()}"></td>
+                                                            <td th:text="${cliente.getTelefono()}"></td>
+                                                            <td th:text="${cliente.getDireccion()}"></td>
+                                                            <td><button class="btn btn-primary btn-seleccionar">Seleccionar</button></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary" id="agregarClienteBtn">Agregar Cliente</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--------------- FORM PARA CREAR PEDIDO POR ENCARGO --------------------->
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Massy's Cake 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Est&aacute; seguro que desea salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Asegurese de guardar correctamente todo su progreso.</div> <br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="/logout">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- DatePicker Scripts and Initializers -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+
+    <!-- DateTimePicker Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
+    <script>
+        function enviarPedidosCabina() {
+            var nombre = document.getElementById('nombrePedidoCabina').value;
+            var fechaOrden = document.getElementById('fechaOrdenCabina').value;
+            var fechaEntrega = document.getElementById('fechaEntregaCabina').value;
+            var descripcion = document.getElementById('descripcionPedidoCabina').value;
+
+            var porcionResultante = document.getElementById('porcionResultanteCab').value;
+            var uniPorcionResultante = document.getElementById('uniPorcionCab').value;
+
+            var detallePedidoList = [];
+
+            class DetallePedido {
+                constructor(tipoMasa, forma, relleno, peso, unidad, nota) {
+                    this.tipoMasa = tipoMasa;
+                    this.forma = forma;
+                    this.relleno = relleno;
+                    this.peso = peso;
+                    this.unidad = unidad;
+                    this.nota = nota;
+                }
+            }
+            // Crear una instancia de DetallePedido con los valores capturados
+            var detallePedido = new DetallePedido(
+                "N/A",
+                "N/A",
+                "N/A",
+                porcionResultante,
+                uniPorcionResultante,
+                " ",
+            );
+            detallePedidoList.push(detallePedido);
+
+
+            var pedido = {
+                nombre: nombre,
+                fechaOrden: fechaOrden,
+                fechaEntrega: fechaEntrega,
+                descripcion: descripcion,
+                detallePedido: detallePedidoList
+            };
+
+            var pedidoJson = JSON.stringify(pedido);
+            //Realizar la petición AJAX
+            $.ajax({
+                url: '/pedidos/crear-cabina', // Ajustar la URL según tu configuración
+                type: 'POST',
+                contentType: 'application/json',
+                data: pedidoJson,
+                // headers: {
+                //     'porcion-data': porcionJson
+                // },
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Completado',
+                        text: 'Pedido creado correctamente',
+                        showCancelButton: false,
+                    }).then(function(result) {
+                        if (result.isConfirmed) {
+                            window.location.href = '/pedidos/crear';
+                        }
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al crear pedido',
+                        text: error.responseText,
+                    });
+                    console.log("Errores");
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+
+    <script>
+        //Asuntos del cliente
+
+        btn = document.getElementById("btnCrearCliente");
+        btn.addEventListener("click", function (){
+            enviarCliente();
+        });
+
+        function enviarCliente() {
+            var cedula = document.getElementById('cedulaCliente').value;
+            var nombre = document.getElementById('nombreCliente').value;
+            var direccion = document.getElementById('direccionCliente').value;
+            var telefono = document.getElementById('telefonoCliente').value;
+
+            var cliente = {
+                cedula: cedula,
+                nombre: nombre,
+                direccion: direccion,
+                telefono: telefono
+            };
+
+            var clienteJson = JSON.stringify(cliente);
+            // Realizar la petición AJAX
+            $.ajax({
+                url: '/pedidos/crearCliente',
+                type: 'POST',
+                contentType: 'application/json',
+                data: clienteJson,
+                success: function(response) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cliente creado',
+                        text: 'El cliente ha sido creado exitosamente',
+                    });
+
+                    var agregarClienteForm = document.getElementById("agregarClienteForm");
+                    $(agregarClienteForm).slideUp(300, function() { // Animación de ocultamiento con deslizamiento hacia arriba
+                        agregarClienteForm.style.display = "none";
+                    });
+
+                    // Actualizar la tabla con los nuevos datos del cliente creado
+                    var tablaUsuarios = $("#dataTable"); // Seleccionar la tabla por su id
+                    var newRow = $("<tr>"); // Crear una nueva fila para el cliente creado
+                    newRow.append($("<td>").text(cliente.cedula));
+                    newRow.append($("<td>").text(cliente.nombre));
+                    newRow.append($("<td>").text(cliente.telefono));
+                    newRow.append($("<td>").text(cliente.direccion));
+                    newRow.append($("<td>").html('<button class="btn btn-primary btn-seleccionar">Seleccionar</button>'));
+
+                    tablaUsuarios.append(newRow);
+
+                    var nuevoBoton = newRow.find('.btn-seleccionar').eq(0); // Seleccionar el botón de la nueva fila
+                    nuevoBoton.on('click', function () {
+                        var clienteId = $(this).closest('tr').find('td:nth-child(1)').text();
+                        var clienteNombre = $(this).closest('tr').find('td:nth-child(2)').text();
+
+                        // Actualizar el valor del campo de cliente en el formulario
+                        clienteInput.value = clienteId + ' | ' + clienteNombre;
+
+                        // Cerrar el modal (opcional)
+                        $('#agregarClienteModal').modal('hide');
+                    });
+
+                    nuevoBoton.click();
+
+
+                    cliente = null;
+                },
+                error: function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al crear cliente',
+                        text: error.responseText, // Si el error es un objeto BindingResult de Spring, puedes mostrar error.responseText para obtener el mensaje de error
+                    });
+                    console.log("Errores");
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // Obtener todos los botones de selección
+        const seleccionarButtons = document.querySelectorAll('.btn-seleccionar');
+        // Obtener el campo de cliente en el formulario
+        const clienteInput = document.getElementById('clienteInput');
+
+        // Agregar un controlador de eventos de clic a cada botón de selección
+        seleccionarButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Obtener el cliente seleccionado (fila)
+                const clienteId = button.closest('tr').querySelector('td:nth-child(1)').textContent;
+                const clienteNombre = button.closest('tr').querySelector('td:nth-child(2)').textContent;
+
+                // Actualizar el valor del campo de cliente en el formulario
+                clienteInput.value = clienteId + ' | ' + clienteNombre;
+
+                // Cerrar el modal (opcional)
+                $('#agregarClienteModal').modal('hide');
+            });
+        });
+    </script>
+
+
+    <script>
+        document.getElementById("agregarClienteBtn").addEventListener("click", function() {
+            var agregarClienteForm = document.getElementById("agregarClienteForm");
+            $(agregarClienteForm).slideDown(300); // Animación de despliegue con deslizamiento hacia abajo
+        });
+
+        document.getElementById("crearPedido").addEventListener("click", function() {
+            enviarPedidos();
+        });
+
+        document.getElementById("cancelarClienteBtn").addEventListener("click", function() {
+            var agregarClienteForm = document.getElementById("agregarClienteForm");
+            $(agregarClienteForm).slideUp(300, function() { // Animación de ocultamiento con deslizamiento hacia arriba
+                agregarClienteForm.style.display = "none";
+            });
+        });
+    </script>
+
+    <script>
+
+        var detallesPedidos = [];
+
+        class Pedido {
+            constructor(nombre, tipoPedido, fechaEntrega, fechaOrden, descuento, descripcion, tipoEntrega, inicial, cotizacion, cliente, detallePedido) {
+                this.nombre = nombre;
+                this.tipoPedido = tipoPedido;
+                this.fechaEntrega = fechaEntrega;
+                this.fechaOrden = fechaOrden;
+                this.descuento = descuento;
+                this.descripcion = descripcion;
+                this.tipoEntrega = tipoEntrega;
+                this.inicial = inicial;
+                this.costoTotal = cotizacion;
+                this.cliente = cliente;
+                this.detallePedido = detallePedido;
+            }
+        }
+
+        class DetallePedido {
+            constructor(id, tipoMasa, forma, relleno, peso, unidad, nota) {
+                this.id = id;
+                this.tipoMasa = tipoMasa;
+                this.forma = forma;
+                this.relleno = relleno;
+                this.peso = peso;
+                this.unidad = unidad;
+                this.nota = nota;
+            }
+        }
+
+        $(document).ready(function() {
+            // Variables globales
+            var detallePedidoId = 1;
+            var modoEditar = false;
+
+            document.getElementById("btnDetallePedido").addEventListener("click", function() {
+                modoEditar = false;
+                $('#detallePedidoModal .btn-primary').text('Crear Detalle');
+            });
+
+            // Evento clic para el botón "Crear detalle"
+            $('#detallePedidoModal').on('click', '.modal-footer .btn-primary', function() {
+
+                if(modoEditar === false) {
+
+                    // Obtener los valores del formulario del modal
+                    var tipoMasa = $('[name="tipoMasa"]').val();
+                    var forma = $('[name="forma"]').val();
+                    var relleno = $('[name="relleno"]').val();
+                    var peso = $('[name="peso"]').val();
+                    var unidad = $('[name="unidad"]').val();
+                    var nota = $('[name="notas"]').val();
+
+                    // Crear una instancia de DetallePedido con los valores capturados
+                    var detallePedido = new DetallePedido(
+                        detallePedidoId,
+                        tipoMasa,
+                        forma,
+                        relleno,
+                        peso,
+                        unidad,
+                        nota,
+                    );
+
+                    if(validarDetalle(detallePedido) === false) {
+                        return;
+                    }
+
+                    // Agregar el detallePedido a la lista de detallesPedidos
+                    detallesPedidos.push(detallePedido);
+                    // Después de modificar detallesPedidos
+                    var detallesPedidosJSON = JSON.stringify(detallesPedidos);
+                    document.getElementById("detallesPedidosInput").value = detallesPedidosJSON;
+                    // Generar el HTML del detalle de pedido
+                    var detallePedidoItem = '<div id="detalle-' + detallePedidoId + '" style="background-color: #fff; padding: 10px; border-radius: 20px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">';
+                    detallePedidoItem += '<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">';
+                    detallePedidoItem += '<h3 style="color: #7570B3; padding: 10px; margin: 0;">Detalle ' + detallePedidoId + '</h3>';
+                    detallePedidoItem += '<div style="display: flex;">';
+
+                    detallePedidoItem += '<div class="btn-ver" data-id="' + detallePedidoId + '" style="background-color: transparent; border: none; cursor: pointer; margin-right: 10px;" >';
+                    detallePedidoItem += '<i class="far fa-edit" style="color: #7570B3; font-size: 18px;"></i>';
+                    detallePedidoItem += '</div>';
+
+                    detallePedidoItem += '<button class="btn-eliminar" data-id="' + detallePedidoId + '" style="background-color: transparent; border: none; cursor: pointer;">';
+                    detallePedidoItem += '<i class="far fa-trash-alt" style="color: #7570B3; font-size: 18px;"></i>';
+                    detallePedidoItem += '</button>';
+
+                    detallePedidoItem += '</div>';
+                    detallePedidoItem += '</div>';
+                    detallePedidoItem += '<p><strong>Tipo de masa:</strong> ' + tipoMasa + '</p>';
+                    detallePedidoItem += '<p><strong>Forma:</strong> ' + forma + '</p>';
+                    detallePedidoItem += '<p><strong>Relleno:</strong> ' + relleno + '</p>';
+                    detallePedidoItem += '<p><strong>Peso:</strong> ' + peso + ' ' + unidad + '</p>';
+                    detallePedidoItem += '<p><strong>Notas:</strong> ' + nota + '</p>';
+                    detallePedidoItem += '</div>';
+
+
+                    // Agregar el elemento de lista al contenedor de detalles
+                    $('#detallesContainer').append(detallePedidoItem);
+
+                    // Incrementar el contador de ID del detalle de pedido
+                    detallePedidoId++;
+
+                    // Limpiar los campos del formulario del modal
+                    $('[name="tipoMasa"]').val('');
+                    $('[name="forma"]').val('');
+                    $('[name="relleno"]').val('');
+                    $('[name="peso"]').val('');
+                    $('[name="unidad"]').val('Lbs');
+                    $('[name="notas"]').val('');
+
+                    // Cerrar el modal
+                    $('#detallePedidoModal').modal('hide');
+                }
+            });
+
+            $(document).on('click', '.btn-eliminar', function() {
+                var detalleId = $(this).data('id');
+
+                // Eliminar el detalle de pedido del elemento HTML
+                $('#detalle-' + detalleId).remove();
+                // Eliminar el detalle de pedido de la lista detallesPedidos
+                detallesPedidos = detallesPedidos.filter(function(detalle) {
+                    return detalle.id !== detalleId;
+                });
+
+                // Después de modificar detallesPedidos
+                var detallesPedidosJSON = JSON.stringify(detallesPedidos);
+                document.getElementById("detallesPedidosInput").value = detallesPedidosJSON;
+            });
+
+            $(document).on('click', '.btn-ver', function() {
+                modoEditar = true;
+                var detalleId = $(this).data('id');
+
+                // Eliminar el detalle de pedido del elemento HTML
+                var detallePedido = detallesPedidos.find(function(detalle) {
+                    return detalle.id === detalleId;
+                });
+
+                if (detallePedido) {
+                    // Cargar los valores en los campos del formulario del modal
+                    $('#detallePedidoModal input[name="tipoMasa"]').val(detallePedido.tipoMasa);
+                    $('#detallePedidoModal input[name="forma"]').val(detallePedido.forma);
+                    $('#detallePedidoModal input[name="relleno"]').val(detallePedido.relleno);
+                    $('#detallePedidoModal input[name="peso"]').val(detallePedido.peso);
+                    $('#detallePedidoModal select[name="unidad"]').val(detallePedido.unidad);
+                    $('#detallePedidoModal textarea[name="notas"]').val(detallePedido.nota);
+
+                    // Cambiar el texto del botón a "Guardar cambios"
+                    $('#detallePedidoModal .btn-primary').text('Guardar cambios');
+
+                    // Cambiar la función asociada al clic del botón para guardar los cambios del detalle
+                    $('#detallePedidoModal .btn-primary').off('click').on('click', function() {
+
+                        if(modoEditar === true) {
+                            // Obtener los nuevos valores del formulario del modal
+                            var nuevoTipoMasa = $('#detallePedidoModal input[name="tipoMasa"]').val();
+                            var nuevaForma = $('#detallePedidoModal input[name="forma"]').val();
+                            var nuevoRelleno = $('#detallePedidoModal input[name="relleno"]').val();
+                            var nuevoPeso = $('#detallePedidoModal input[name="peso"]').val();
+                            var nuevaUnidad = $('#detallePedidoModal select[name="unidad"]').val();
+                            var nuevasNotas = $('#detallePedidoModal textarea[name="notas"]').val();
+
+                            // Buscar el detalle de pedido correspondiente en la lista
+                            var detalleActualizado = detallesPedidos.find(function(detalle) {
+                                return detalle.id === detallePedido.id;
+                            });
+
+                            // Verificar si se encontró el detalle de pedido actualizado
+                            if (detalleActualizado) {
+                                // Actualizar los valores del detalle de pedido
+                                detalleActualizado.tipoMasa = nuevoTipoMasa;
+                                detalleActualizado.forma = nuevaForma;
+                                detalleActualizado.relleno = nuevoRelleno;
+                                detalleActualizado.peso = nuevoPeso;
+                                detalleActualizado.unidad = nuevaUnidad;
+                                detalleActualizado.nota = nuevasNotas;
+
+                                // Después de modificar detallesPedidos
+                                var detallesPedidosJSON = JSON.stringify(detallesPedidos);
+                                document.getElementById("detallesPedidosInput").value = detallesPedidosJSON;
+                                // Actualizar la vista del detalle de pedido
+                                actualizarVistaDetallePedido(detalleActualizado.id, detalleActualizado);
+                                // Cerrar el modal
+                                $('#detallePedidoModal').modal('hide');
+                                //Limpiando campos
+                                $('[name="tipoMasa"]').val('');
+                                $('[name="forma"]').val('');
+                                $('[name="relleno"]').val('');
+                                $('[name="peso"]').val('');
+                                $('[name="unidad"]').val('Lbs');
+                                $('[name="notas"]').val('');
+                            }
+                        }
+                        // Cerrar el modal
+                        $('#detallePedidoModal').modal('hide');
+                    });
+                    // Abrir el modal
+                    $('#detallePedidoModal').modal('show');
+                }
+            });
+        });
+
+        function enviarPedidos() {
+            nombre = document.getElementById('nombrePedido').value;
+            tipoPedido = document.getElementById('tipoPedido').value;
+            fechaEntrega = document.getElementById('fechaEntregaEncargo').value;
+            fechaOrden = document.getElementById('fechaOrdenCabina').value;
+            descuento = document.getElementById('descuentoPedido').value;
+            descripcion = document.getElementById('descripcionPedido').value;
+            tipoEntrega = document.getElementById('tipoEntregaPedido').value;
+            inicial = document.getElementById('inicialPedido').value;
+            costoTotal = document.getElementById('cotizacionPedido').value;
+            cliente = document.getElementById('clienteInput').value;
+            pedido = new Pedido(nombre, tipoPedido, fechaEntrega, fechaOrden, descuento, descripcion, tipoEntrega, inicial, costoTotal, cliente, detallesPedidos);
+
+            var pedidoJson = JSON.stringify(pedido);
+
+            pedidoJson = eliminarCampoId(pedidoJson)
+            // Realizar la petición AJAX
+            $.ajax({
+                url: '/pedidos/crear',
+                type: 'POST',
+                contentType: 'application/json',
+                data: pedidoJson,
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Completado',
+                        text: 'Pedido creado correctamente',
+                        showCancelButton: false,
+                    }).then(function(result) {
+                        if (result.isConfirmed) {
+                            window.location.href = '/pedidos/crear'; // Redirect
+                        }
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al crear pedido',
+                        text: error.responseText, // Si el error es un objeto BindingResult de Spring, puedes mostrar error.responseText para obtener el mensaje de error
+                    });
+                    console.log("Errores");
+                    console.log(error);
+                }
+            });
+        }
+
+        function eliminarCampoId(jsonData) {
+            // Parsea el JSON
+            let data = JSON.parse(jsonData);
+
+            // Verifica si el campo "inicial" existe y es un arreglo
+            if (data.detallePedido && Array.isArray(data.detallePedido)) {
+                // Itera sobre cada objeto dentro del arreglo "inicial"
+                data.detallePedido.forEach((obj) => {
+                    // Verifica si el campo "id" existe y lo elimina
+                    if (obj.id) {
+                        delete obj.id;
+                    }
+                });
+            }
+
+            // Retorna el JSON modificado
+            return JSON.stringify(data);
+        }
+
+        function actualizarVistaDetallePedido(detalleId, detalleActualizado) {
+            var detalle = document.getElementById('detalle-' + detalleId)
+            var detallePedidoItem = '<div id="detalle-' + detalleId + '" style="background-color: #fff; padding: 10px; border-radius: 20px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">';
+            detallePedidoItem += '<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">';
+            detallePedidoItem += '<h3 style="color: #7570B3; padding: 10px; margin: 0;">Detalle ' + detalleId + '</h3>';
+            detallePedidoItem += '<div style="display: flex;">';
+
+            detallePedidoItem += '<div class="btn-ver" data-id="' + detalleId + '" style="background-color: transparent; border: none; cursor: pointer; margin-right: 10px;" >';
+            detallePedidoItem += '<i class="far fa-edit" style="color: #7570B3; font-size: 18px;"></i>';
+            detallePedidoItem += '</div>';
+
+            detallePedidoItem += '<button class="btn-eliminar" data-id="' + detalleId + '" style="background-color: transparent; border: none; cursor: pointer;">';
+            detallePedidoItem += '<i class="far fa-trash-alt" style="color: #7570B3; font-size: 18px;"></i>';
+            detallePedidoItem += '</button>';
+
+            detallePedidoItem += '</div>';
+            detallePedidoItem += '</div>';
+            detallePedidoItem += '<p><strong>Tipo de masa:</strong> ' + detalleActualizado.tipoMasa + '</p>';
+            detallePedidoItem += '<p><strong>Forma:</strong> ' + detalleActualizado.forma + '</p>';
+            detallePedidoItem += '<p><strong>Relleno:</strong> ' + detalleActualizado.relleno + '</p>';
+            detallePedidoItem += '<p><strong>Peso:</strong> ' + detalleActualizado.peso + ' ' + detalleActualizado.unidad + '</p>';
+            detallePedidoItem += '<p><strong>Notas:</strong> ' + detalleActualizado.nota + '</p>';
+            detallePedidoItem += '</div>';
+
+            detalle.outerHTML = detallePedidoItem;
+        }
+    </script>
+
+    <script>
+        $(function() {
+            $('#fechaEntregaCabina').daterangepicker({
+                singleDatePicker: true,
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'YYYY-MM-DDTHH:mm'
+                }
+            });
+
+            $('#fechaOrdenCabina').daterangepicker({
+                singleDatePicker: true,
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'YYYY-MM-DDTHH:mm'
+                }
+            });
+
+            $('#fechaEntregaEncargo').daterangepicker({
+                singleDatePicker: true,
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'YYYY-MM-DDTHH:mm'
+                }
+            });
+
+            $('#fechaOrdenEncargo').daterangepicker({
+                singleDatePicker: true,
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'YYYY-MM-DDTHH:mm'
+                }
+            });
+        });
+    </script>
+
+    <script th:inline="javascript">
+
+        function validarDetalle(detallePedido) {
+            if (detallePedido.forma.length <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Informacion insuficiente',
+                    text: 'Debes agregar la forma deseada',
+                });
+                return false;
+            }
+            if (detallePedido.tipoMasa.length <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Informacion insuficiente',
+                    text: 'Debes agregar el tipo de masa (vainilla, chocolate, etc..)',
+                });
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

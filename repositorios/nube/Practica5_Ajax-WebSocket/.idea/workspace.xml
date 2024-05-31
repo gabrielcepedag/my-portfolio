@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="554dad81-3459-409c-b6b1-b3e6e2c1a6e4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/controladores/UsuarioControlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/controladores/UsuarioControlador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/encapsulaciones/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/encapsulaciones/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/controladores/UsuarioControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/controladores/UsuarioControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/encapsulaciones/Url.java" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/encapsulaciones/Url.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/encapsulaciones/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/encapsulaciones/Usuario.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/controladores/UrlControlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/controladores/UrlControlador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/controladores/UsuarioControlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/controladores/UsuarioControlador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/encapsulaciones/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/encapsulaciones/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/servicios/GestionDbUsuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/build/classes/java/main/servicios/GestionDbUsuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/build/resources/main/public/adminUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/build/resources/main/public/adminUsers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/controladores/UrlControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/controladores/UrlControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/controladores/UsuarioControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/controladores/UsuarioControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/encapsulaciones/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/encapsulaciones/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/servicios/GestionDbUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/src/main/java/servicios/GestionDbUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practFinal_Acortador/src/main/resources/public/adminUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/../practFinal_Acortador/src/main/resources/public/adminUsers.html" afterDir="false" />
+>>>>>>> origin/eduardo
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="carritoCompra_2" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="carritoCompra_2" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2NNl4vzNs3HbdTK2K9Vq7i2JTy0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "eduardo",
+    "last_opened_file_path": "C:/Users/eduar/OneDrive/Documents/Documentos PUCMM/Ciclo 1820/ICC-352/PracticasGit/ICC_ProgWeb/Practica5_Ajax-WebSocket",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Practica5_Ajax-WebSocket [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Practica5_Ajax-WebSocket [run]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="554dad81-3459-409c-b6b1-b3e6e2c1a6e4" name="Changes" comment="" />
+      <created>1679512232681</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679512232681</updated>
+      <workItem from="1679512233823" duration="6785000" />
+      <workItem from="1679520570008" duration="58000" />
+      <workItem from="1679527230838" duration="1954000" />
+      <workItem from="1679579536972" duration="12478000" />
+      <workItem from="1679615470204" duration="11162000" />
+      <workItem from="1679663788700" duration="46555000" />
+      <workItem from="1680103624764" duration="5962000" />
+      <workItem from="1680189819302" duration="203000" />
+      <workItem from="1680190110978" duration="4576000" />
+      <workItem from="1680204242774" duration="715000" />
+      <workItem from="1680211019251" duration="840000" />
+      <workItem from="1680276817453" duration="4442000" />
+      <workItem from="1680287295925" duration="176000" />
+      <workItem from="1680448010997" duration="1893000" />
+      <workItem from="1680529954919" duration="1219000" />
+      <workItem from="1680650746279" duration="139000" />
+      <workItem from="1680650918738" duration="625000" />
+      <workItem from="1680703128637" duration="16000" />
+      <workItem from="1680705621331" duration="1530000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/eduardo" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="com.fasterxml.jackson.databind.JsonMappingException" package="com.fasterxml.jackson.databind" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/practica3_ORM_JDBC$practica3_ORM_JDBC__run_.ic" NAME="practica3-ORM-JDBC [run] Coverage Results" MODIFIED="1677346423728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

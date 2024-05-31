@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agregar Recetas | Massy's Cake</title>
+    <link rel="shortcut icon" type="image" href="/img/massyCake-Logo.jpg">
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+
+    <!-- Enlaza la biblioteca de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous"/>
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="/css/sb-admin-2.css" >
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/css/notification.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+                <div class="sidebar-brand-icon sidebar-logo">
+                    <img src="/img/massyCake-Logo.jpg" alt="Logo">
+                </div>
+                <div class="sidebar-brand-text mx-sm-3">Gesti&oacute;n General</div>
+            </a>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/home">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Home</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Cocina
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCocina" aria-expanded="true" aria-controls="collapseCocina">
+                    <i class="fas fa-fw fa-utensils"></i>
+                    <span>Cocina</span>
+                </a>
+                <div id="collapseCocina" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/cocina">Cocina</a>
+                                     <a class="collapse-item" href="/pedidos?paginacion=true">Pedidos</a>
+                        <a class="collapse-item" href="/cocina/recetas">Recetas</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestion" aria-expanded="true" aria-controls="collapseGestion">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>Gesti&oacute;n</span>
+                </a>
+                <div id="collapseGestion" class="collapse" aria-labelledby="Gestion" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/inventario">Inventario</a>
+                        <a class="collapse-item" href="/productos">Productos</a>
+                        <a class="collapse-item" href="/ordenesCompra">Ordenes de Compra</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pedidos/crear">
+                    <i class="fas fa-file-upload"></i>
+                    <span>Crear Pedido</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Ventas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pos">
+                    <i class="fas fa-fw fa-cash-register"></i>
+                    <span>Punto de Venta</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegistros"
+                   aria-expanded="true" aria-controls="collapseRegistros">
+                    <i class="fas fa-fw fa-receipt"></i>
+                    <span>Registros</span>
+                </a>
+                <div id="collapseRegistros" class="collapse" aria-labelledby="Registros" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/facturas">Facturas</a>
+                        <a class="collapse-item" href="/ventas">Ventas</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Personas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/empleados">
+                    <i class="fas fa-users"></i>
+                    <span>Empleados</span></a>
+            </li>
+
+
+
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reportes
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+                   aria-expanded="true" aria-controls="collapseReportes">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseReportes" class="collapse" aria-labelledby="Reportes" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/reportes/ventas">Reporte de Ventas</a>
+                        <a class="collapse-item" href="/reportes/inventario">Reporte de Inventario</a>
+                        <a class="collapse-item" href="/reportes/clientes">Reporte de Clientes</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Page Heading -->
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <h1 class="h3 mt-2 text-gray-800">Agregar Recetas a Pedido</h1>
+                    </div>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${empleado.nombre} + ' ' + ${empleado.apellido}">Nombre Apellido</span>
+                                <img class="img-profile rounded-circle" th:src="${empleado.rol == 'ADMIN' ? '/img/profile_icon.jpg':
+                                (empleado.rol == 'REPOSTERO' ? '/img/chef-avatar-vector-illustration.jpg' : '/img/profile_icon.png')}" alt="Imagen de perfil usuario">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/perfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Mi Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar Sesi&oacute;n
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div>
+                        <!--------------- FORM PARA VER PEDIDO PERSONALIZADO --------------------->
+                        <div id="personalizado">
+                            <form style="padding: 10px" th:action="${'/pedidos/editar/'+pedido.pedidoId}" method="POST" onsubmit="return deshabilitarBoton()">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="nombrePedido">Nombre del pedido</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="nombrePedido" th:value="${pedido.nombre}" disabled>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-clipboard"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="fechaOrdenEncargo" class="col-sm-2 col-form-label">Fecha de Orden</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" id="fechaOrdenEncargo" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label for="fechaEntregaEncargo" class="col-sm-2 col-form-label">Fecha de Entrega</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" id="fechaEntregaEncargo" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-calendar-check"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="cliente">Cliente</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="cliente" th:value="${pedido.cliente.nombre}" disabled>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label" for="metodoEntrega">Método de entrega</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="metodoEntrega" th:text="${pedido.metodoEntrega}" disabled>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-truck"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <textarea id="descripcion" class="form-control" maxlength="100" th:text="${pedido.descripcion}" disabled></textarea>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row" th:if="${pedido.tipoPedido.toLowerCase() != 'cabina'}">
+                                    <label class="col-sm-2 col-form-label" for="inicialPedido">Inicial</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="inicialPedido" th:value="${pedido.inicial}" disabled>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label">Descuento</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="descuentoPedido" th:value="${pedido.descuento}" disabled>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="detallesPedidosInput" name="detallesPedidos"/>
+                                <hr>
+
+                                <div id="detallesContainer">
+
+                                </div>
+
+                                <!--------------- DIV PARA AGREGAR RECETAS ---------------->
+                                <br>
+                                <h1 class="h4 text-black-00" th:if="${detallesPedido.size()>0}">Recetas</h1>
+                                <hr>
+                                <!-- Tabla Recetas Disponibles (Crear) -->
+                                <div class="card shadow mb-4" th:if="${detallesPedido.size()>0}">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Agregar Recetas</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+
+                                            <table class="table table-bordered" id="tableRecetasDispCrear" width="100%" cellspacing="0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Porci&oacute;n Resultante</th>
+                                                    <th>Tiempo Preparaci&oacute;n</th>
+                                                    <th>Cant. Ingredientes</th>
+                                                    <th>Agregar</th>
+                                                </tr>
+                                                </thead>
+                                                <tfoot>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Porci&oacute;n Resultante</th>
+                                                    <th>Tiempo Preparaci&oacute;n</th>
+                                                    <th>Cant. Ingredientes</th>
+                                                    <th>Agregar</th>
+                                                </tr>
+                                                </tfoot>
+
+                                                <tbody>
+<!--                                                <tr th:each="receta : ${recetas}" th:data-id="${receta.id}" th:if="${receta.ingredientes.size() > 0}">-->
+                                                <tr th:each="receta : ${recetas}" th:data-id="${receta.id}">
+                                                    <td th:text="${receta.nombre}"></td>
+                                                    <td th:text="${receta.porcionResultante} + ' ' + ${receta.uniPorcionResultante}"></td>
+                                                    <td th:text="${receta.minutosPreparacion} + ' Mins.'"></td>
+                                                    <td th:text="${receta.ingredientes.size()}"></td>
+                                                    <td>
+                                                        <a href="" class="btn btn-success btn-circle" data-toggle="modal" data-target="#modalSelectDetalle" th:attr="data-id=${receta.id}, data-nombre=${receta.nombre}">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- Tabla Ingredientes Disponibles (Crear) -->
+                                </div>
+                                <!-- end of DIV PARA AGREGAR INGREDIENTES -->
+                                <input type="hidden" id="recetasPedidoInputCrear" name="recetasJSON" th:value="${recetasPedidoJSON}" />
+
+                                <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar Cambios</button>
+                                <button type="button" class="btn btn-secondary" onclick="window.history.back()">Cancelar</button>
+                            </form>
+                        </div>
+                        <!--------------- FORM PARA VER DETALLES PEDIDO POR ENCARGO --------------------->
+
+                        <!------------ MODAL PARA SELECCIONAR DETALLE DE RECETA ---------------->
+                        <div class="modal fade" id="modalSelectDetalle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h4 class="modal-title w-100 font-weight-bold text-gray-800">Agregar Receta</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form>
+                                        <div>
+                                            <input type="hidden" id="recetaId" name="idReceta">
+                                        </div>
+                                        <div class="modal-body mx-3">
+                                            <div class="md-form mb-4-5">
+                                                <label for="nombreReceta">Receta:</label>
+                                                <div class="input-group">
+                                                    <input id="nombreReceta" name="nombre" type="text" class="form-control" readonly>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-font"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="md-form mb-3">
+                                                <div class="input-group">
+                                                    <label for="numDetalle" style="margin-top: 0.4rem">Agregar a detalle: &nbsp;&nbsp;&nbsp;</label>
+                                                    <select id="numDetalle" name="numDetalle" class="form-control">
+                                                        <option th:each="detalle, i : ${detallesPedido}" th:text="${i.index + 1}"></option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-balance-scale"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-primary">Agregar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!------------ MODAL PARA SELECCIONAR DETALLE DE RECETA ---------------->
+
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Massy's Cake 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Est&aacute; seguro que desea salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Asegurese de guardar correctamente todo su progreso.</div> <br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="/logout">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Notification Area Div -->
+    <div id="notification-area"></div>
+
+    <!-- DatePicker Scripts and Initializers -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Page level plugins -->
+    <script src="/jquery.dataTables.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/datatables-main.js"></script>
+    <script src="/js/notification.js">  </script>
+
+    <!-- DateTimePicker Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
+
+    <script th:inline="javascript">
+        $(function() {
+            var defaultDate = new Date();
+            var fechaEntrega = /*[[${#temporals.format(pedido.fechaEntrega, 'yyyy-MM-dd HH:mm')}]]*/ '';
+            var fechaOrdenEncargo = /*[[${#temporals.format(pedido.fechaOrden, 'yyyy-MM-dd HH:mm')}]]*/ '';
+
+            $("#fechaOrdenCabina").val(convertToCustomFormat(defaultDate)).prop("readonly", true);
+
+            $("#fechaEntregaEncargo").datetimepicker({
+                dateFormat: "yy-mm-dd",
+                timeFormat: "HH:mm",
+                minDate: 0,
+                step: 5,
+                onSelect: function(dateText, inst) {
+                    var selectedDate = new Date(dateText);
+                    var formattedDate = convertToCustomFormat(selectedDate);
+                    $("#fechaEntregaEncargo").val(formattedDate);
+                }
+            }).val(fechaEntrega).prop("disabled", true);
+
+            $("#fechaOrdenEncargo").datetimepicker({
+                dateFormat: "yy-mm-dd",
+                timeFormat: "HH:mm",
+                minDate: 0,
+                step: 5,
+                onSelect: function(dateText, inst) {
+                    var selectedDate = new Date(dateText);
+                    var formattedDate = convertToCustomFormat(selectedDate);
+                    $("#fechaOrdenEncargo").val(formattedDate);
+                }
+            }).val(fechaOrdenEncargo).prop("disabled", true);
+        })
+
+        function convertToCustomFormat(date) {
+            var formattedDate =
+                date.getFullYear() +
+                "-" +
+                ("0" + (date.getMonth() + 1)).slice(-2) +
+                "-" +
+                ("0" + date.getDate()).slice(-2) +
+                "T" +
+                ("0" + date.getHours()).slice(-2) +
+                ":" +
+                ("0" + date.getMinutes()).slice(-2);
+            return formattedDate;
+        }
+    </script>
+
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            var detallesPedido = /*[[${detallesPedido}]]*/ [];
+            var recetasPedido = [];
+
+
+            if (detallesPedido != null && detallesPedido.length > 0) {
+                var detallePedidoId = 1;
+
+                detallesPedido.forEach(function(detalle) {
+                    var detalleId = detalle.detalle_pedidoId;
+                    var tipoMasa = detalle.masa;
+                    var forma = detalle.forma;
+                    var relleno = detalle.relleno;
+                    var peso = detalle.peso;
+                    var unidad = detalle.unidad;
+                    var notas = detalle.nota ? detalle.nota : " ";
+                    var numDetalle = 1;
+
+                    var detalleContainerId = 'detalle-' + detallePedidoId;
+                    var detallePedidoItem = '<div id="' + detalleContainerId + '" data-detalleId="' + detalleId + '" style="background-color: #fff; padding: 10px; border-radius: 20px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">';
+                    detallePedidoItem += '<h3 class="text-primary m-0" style="padding: 10px">Detalle ' + detallePedidoId + '</h3>';
+                    detallePedidoItem += '<p><strong>Tipo de masa:</strong> ' + tipoMasa + '</p>';
+                    detallePedidoItem += '<p><strong>Forma:</strong> ' + forma + '</p>';
+                    detallePedidoItem += '<p><strong>Relleno:</strong> ' + relleno + '</p>';
+                    detallePedidoItem += '<p><strong>Peso:</strong> ' + peso + ' ' + unidad + '</p>';
+                    detallePedidoItem += '<p><strong>Notas:</strong> ' + notas + '</p>';
+
+                    if (detalle.recetas.length > 0) {
+                        detallePedidoItem += '<h4 class="text-primary m-0" style="padding: 10px">Recetas</h4>';
+                        detallePedidoItem += '<div class="table-responsive d-flex justify-content-center">';
+                        detallePedidoItem += '<table class="table table-bordered" id="tableRecetasUsadasCrear' + detallePedidoId + '" style="width: 95%;" cellspacing="0">';
+                        detallePedidoItem += '<thead>';
+                        detallePedidoItem += '<tr>';
+                        detallePedidoItem += '<th>Nombre</th>';
+                        detallePedidoItem += '<th>Porci&oacute;n Resultante</th>';
+                        detallePedidoItem += '<th>Tiempo Preparaci&oacute;n</th>';
+                        detallePedidoItem += '<th>Cant. Ingredientes</th>';
+                        detallePedidoItem += '<th>Acciones</th>';
+                        detallePedidoItem += '</tr>';
+                        detallePedidoItem += '</thead>';
+                        detallePedidoItem += '<tbody>';
+                        detalle.recetas.forEach(function(receta) {
+                            var idReceta = receta.id;
+                            recetasPedido.push({
+                                idReceta: idReceta,
+                                idDetalle: detalleId,
+                            });
+                            var recetaPedidoJSON = JSON.stringify(recetasPedido);
+                            var recetasPedidoInput = 'recetasPedidoInputCrear';
+                            document.getElementById(recetasPedidoInput).value = recetaPedidoJSON;
+
+                            var nombre = receta.nombre;
+                            var porcion = receta.porcionResultante + ' ' + receta.uniPorcionResultante;
+                            var tiempo = receta.minutosPreparacion + ' Mins.';
+                            var ingredientes = receta.ingredientes.length;
+
+                            // Agregar fila con receta a tabla RecetasUsadasCrear
+                            detallePedidoItem += '<tr data-id="' + idReceta + '">';
+                            detallePedidoItem +=    '<td>' + nombre + '</td>';
+                            detallePedidoItem +=    '<td>' + porcion + '</td>';
+                            detallePedidoItem +=    '<td>' + tiempo +'</td>';
+                            detallePedidoItem +=    '<td>' + ingredientes + '</td>';
+                            detallePedidoItem +=    '<td style="width: 5%; text-align: center;">';
+                            //detallePedidoItem +=      '<a href="" class="btn btn-info btn-circle" data-toggle="modal" data-target="#modalEditIngredient">' +
+                            //detallePedidoItem +=          '<i class="fas fa-pen"></i>' +
+                            //detallePedidoItem +=      '</a>' +
+                            detallePedidoItem +=        '<a href="" class="btn btn-danger btn-circle">';
+                            detallePedidoItem +=            '<i class="fas fa-trash"></i>';
+                            detallePedidoItem +=        '</a>';
+                            detallePedidoItem +=    '</td>';
+                            detallePedidoItem += '</tr>';
+                        });
+                        detallePedidoItem += '</tbody>';
+                        detallePedidoItem += '</table>';
+                        detallePedidoItem += '</div>';
+
+                        detallePedidoItem += '</div>';
+
+                        $('#detallesContainer').append(detallePedidoItem);
+                        detallePedidoId++;
+                    }else{
+                        detallePedidoItem += '<h4 class="text-primary m-0" style="padding: 10px">Recetas</h4>';
+                        detallePedidoItem += '<div class="table-responsive d-flex justify-content-center">';
+                        detallePedidoItem += '<table class="table table-bordered" id="tableRecetasUsadasCrear' + detallePedidoId + '" style="width: 95%;" cellspacing="0">';
+                        detallePedidoItem += '<thead>';
+                        detallePedidoItem += '<tr>';
+                        detallePedidoItem += '<th>Nombre</th>';
+                        detallePedidoItem += '<th>Porci&oacute;n Resultante</th>';
+                        detallePedidoItem += '<th>Tiempo Preparaci&oacute;n</th>';
+                        detallePedidoItem += '<th>Cant. Ingredientes</th>';
+                        detallePedidoItem += '<th>Acciones</th>';
+                        detallePedidoItem += '</tr>';
+                        detallePedidoItem += '</thead>';
+                        detallePedidoItem += '<tbody>';
+                        detallePedidoItem += '</tbody>';
+                        detallePedidoItem += '</table>';
+                        detallePedidoItem += '</div>';
+
+                        detallePedidoItem += '</div>';
+
+                        $('#detallesContainer').append(detallePedidoItem);
+                        addEmptyRow(detallePedidoId);
+                        detallePedidoId++;
+                    }
+                });
+            }else{
+                var noDetalles = '<div style="background-color: #fff; padding: 10px; border-radius: 20px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center;">';
+                noDetalles +=    '<p class="mt-2"><strong>No hay detalles para este pedido</strong></p>';
+                noDetalles +=    '</div>';
+                $('#detallesContainer').append(noDetalles);
+            }
+
+            // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
+
+            if ($('#tableRecetasUsadasCrear tbody tr').length === 0) {
+                addEmptyRow();
+            }
+            $('#tableRecetasDispCrear tbody').on('click', 'a', function(event) {
+                event.preventDefault();
+
+                var nombre = $(this).data('nombre');
+                var id = $(this).data('id');
+
+                $('#nombreReceta').val(nombre);
+                $('#recetaId').val(id);
+            });
+
+            $('#modalSelectDetalle').on('click', '.modal-footer .btn-primary', function() {
+                var idReceta = $('[name="idReceta"]').val();
+                var numDetalle = $('[name="numDetalle"]').val();
+
+                var detalleContainerId = 'detalle-' + numDetalle;
+                var idDetalle = $('#' + detalleContainerId).data('detalleid');
+
+                var exists = recetasPedido.some(function(item) {
+                    return (item.idReceta.toString() === idReceta.toString() &&
+                            item.idDetalle.toString() === idDetalle.toString());
+                });
+
+                if(!exists){
+                    var selectedRow = $('#tableRecetasDispCrear').find('tbody tr[data-id="' + idReceta + '"]');
+                    var nombre = selectedRow.find('td:nth-child(1)').text();
+                    var porcion = selectedRow.find('td:nth-child(2)').text();
+                    var tiempo = selectedRow.find('td:nth-child(3)').text();
+                    var ingredientes = selectedRow.find('td:nth-child(4)').text();
+
+                    var unidadDetalle = $('#' + detalleContainerId).find('p:contains("Peso:")').text().split(' ')[2].trim();
+                    var unidadReceta = selectedRow.find('td:nth-child(2)').text().split(' ')[1].trim();
+
+                    if (unidadDetalle !== "Unds" && unidadReceta !== "Unds" || (unidadDetalle == "Unds" && unidadReceta == "Unds")) { //Gabriel modifico esto... no esta probado con unidadMedida != UNDS
+                        recetasPedido.push({
+                            idReceta: idReceta,
+                            idDetalle: idDetalle,
+                        });
+                        var recetaPedidoJSON = JSON.stringify(recetasPedido);
+                        var recetasPedidoInput = 'recetasPedidoInputCrear';
+                        document.getElementById(recetasPedidoInput).value = recetaPedidoJSON;
+
+                        // Agregar fila con receta a tabla RecetasUsadasCrear
+                        var recetaRow = '<tr data-id="' + idReceta + '">' +
+                            '<td>' + nombre + '</td>' +
+                            '<td>' + porcion + '</td>' +
+                            '<td>' + tiempo +'</td>' +
+                            '<td>' + ingredientes + '</td>' +
+                            '<td style="width: 5%; text-align: center;">' +
+                            // '<a href="" class="btn btn-info btn-circle" data-toggle="modal" data-target="#modalEditIngredient">' +
+                            //     '<i class="fas fa-pen"></i>' +
+                            // '</a>' +
+                                '<a href="" class="btn btn-danger btn-circle">' +
+                                    '<i class="fas fa-trash"></i>' +
+                                '</a>' +
+                            '</td>' +
+                            '</tr>';
+
+                        var tableRecetasUsadas = '#tableRecetasUsadasCrear'+numDetalle;
+                        var tableRecetasUsadasBody = $(tableRecetasUsadas + ' tbody');
+                        tableRecetasUsadasBody.append(recetaRow);
+                        notify('success', 'La receta ha sido asignada al detalle correctamente.');
+
+                        if (tableRecetasUsadasBody.find('.empty-row').length > 0) {
+                            tableRecetasUsadasBody.find('.empty-row').remove();
+                        }
+
+                        $('#modalSelectDetalle').modal('hide');
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error de Detalle',
+                            text: 'La porción del detalle seleccionado no es compatible con esta receta',
+                        });
+                    }
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de Detalle',
+                        text: 'El detalle seleccionado ya contiene esta receta',
+                    });
+                }
+            });
+
+            // Botón eliminar Ingrediente
+            $(document).on('click', 'a.btn-danger.btn-circle', function(event) {
+                event.preventDefault();
+                var recetaId = $(this).closest('tr').data('id');
+                var numDetalle = $(this).closest('div[id^="detalle-"]').attr('id').split('-')[1];
+                var tablaRecetasUsadas = '#tableRecetasUsadasCrear'+numDetalle;
+                var recetasPedidoInput = 'recetasPedidoInputCrear';
+
+                // Asignando los valores del ingrediente a eliminar
+                var deletedRow = $(tablaRecetasUsadas).find('tbody tr[data-id="' + recetaId + '"]');
+                var nombre = deletedRow.find('td:nth-child(1)').text();
+                var porcion = deletedRow.find('td:nth-child(2)').text();
+                var tiempo = deletedRow.find('td:nth-child(3)').text();
+                var ingredientes = deletedRow.find('td:nth-child(4)').text();
+
+                //Eliminando ingrediente de tabla ingredientesUtilizados y agregandolo a ingredientesDisponibles
+                $(tablaRecetasUsadas).find('tr[data-id="' + recetaId + '"]').remove();
+                notify('warning', 'La receta ha sido removida del pedido.');
+
+                // Verificando size de tabla ingredientesUtilizados
+                if ($(tablaRecetasUsadas + ' tbody tr').length === 0) {
+                    addEmptyRow(numDetalle);
+                }
+
+                // Eliminando ingrediente de lista ingredientesReceta
+                recetasPedido = recetasPedido.filter(function(receta) {
+                    return receta.idReceta !== recetaId && receta.idReceta !== recetaId.toString();
+                });
+
+                // Modificando el JSON a enviar
+                var recetaPedidoJSON = JSON.stringify(recetasPedido);
+                document.getElementById(recetasPedidoInput).value = recetaPedidoJSON;
+            });
+        });
+
+        function addEmptyRow(numPedido) {
+            // Determinar la table basados en vistaEditar
+            var tableRecetasUsadas = '#tableRecetasUsadasCrear'+numPedido;
+            var emptyRow = '<tr class="empty-row">' +
+                '<td colspan="6" style="text-align: center;">No se han agregado recetas a este pedido.</td>' +
+                '</tr>';
+            $(tableRecetasUsadas + ' tbody').append(emptyRow);
+        }
+        function removeMatchingRows(numDetalle) {
+            // Determinar la table basados en vistaEditar
+            var recetasUsadasTable = '#tableRecetasUsadasCrear'+numDetalle;
+            var recetasDispTable = '#tableRecetasDispCrear';
+
+            $(recetasUsadasTable + ' tbody tr').each(function() {
+                var recetaId = $(this).data('id');
+                var dataTable = $(recetasDispTable).DataTable();
+
+                dataTable.row('tr[data-id="' + recetaId + '"]').remove().draw(false);
+            });
+        }
+    </script>
+
+    <script th:inline="javascript">
+
+        function validarDetalle(detallePedido) {
+            if (detallePedido.forma.length <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Informacion insuficiente',
+                    text: 'Debes agregar la forma deseada',
+                });
+                return false;
+            }
+            if (detallePedido.tipoMasa.length <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Informacion insuficiente',
+                    text: 'Debes agregar el tipo de masa (vainilla, chocolate, etc..)',
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <script>
+        function deshabilitarBoton(){
+            var btn = document.getElementById("btnGuardar")
+            btn.disabled = true;
+
+            setTimeout(function() {
+                btn.disabled = false;
+            }, 15000);
+            return true;
+        }
+    </script>
+</body>
+
+</html>

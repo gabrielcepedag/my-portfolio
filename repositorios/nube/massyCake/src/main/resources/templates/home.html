@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Home | Massy's Cake</title>
+    <link rel="shortcut icon" type="image" href="/img/massyCake-Logo.jpg">
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+
+    <!-- Enlaza la biblioteca de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"  crossorigin="anonymous" />
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/css/notification.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+                <div class="sidebar-brand-icon sidebar-logo">
+                    <img src="/img/massyCake-Logo.jpg" alt="Logo">
+                </div>
+                <div class="sidebar-brand-text mx-sm-3">Gesti&oacute;n General</div>
+            </a>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/home">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Home</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Cocina
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCocina" aria-expanded="true" aria-controls="collapseCocina">
+                    <i class="fas fa-fw fa-utensils"></i>
+                    <span>Cocina</span>
+                </a>
+                <div id="collapseCocina" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/cocina">Cocina</a>
+                                     <a class="collapse-item" href="/pedidos?paginacion=true">Pedidos</a>
+                        <a class="collapse-item" href="/cocina/recetas">Recetas</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestion" aria-expanded="true" aria-controls="collapseGestion">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>Gesti&oacute;n</span>
+                </a>
+                <div id="collapseGestion" class="collapse" aria-labelledby="Gestion" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/inventario">Inventario</a>
+                        <a class="collapse-item" href="/productos">Productos</a>
+                        <a class="collapse-item" href="/ordenesCompra">Ordenes de Compra</a>
+                    </div>
+                </div>
+            </li>
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/cocina">-->
+<!--                    <i class="fas fa-fw fa-utensils"></i>-->
+<!--                    <span>Cocina</span></a>-->
+<!--            </li>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/cocina/recetas">-->
+<!--                    <i class="fas fa-fw fa-scroll"></i>-->
+<!--                    <span>Recetas</span></a>-->
+<!--            </li>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/inventario">-->
+<!--                    <i class="fas fa-fw fa-box-open"></i>-->
+<!--                    <span>Inventario</span></a>-->
+<!--            </li>-->
+<!--            &lt;!&ndash; Divider &ndash;&gt;-->
+<!--            <hr class="sidebar-divider">-->
+
+
+<!--            &lt;!&ndash; Heading &ndash;&gt;-->
+<!--            <div class="sidebar-heading">-->
+<!--                Pedidos-->
+<!--            </div>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/pedidos">-->
+<!--                    <i class="fas fa-file-invoice"></i>-->
+<!--                    <span>Pedidos</span></a>-->
+<!--            </li>-->
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pedidos/crear">
+                    <i class="fas fa-file-upload"></i>
+                    <span>Crear Pedido</span></a>
+            </li>
+
+<!--            &lt;!&ndash; Divider &ndash;&gt;-->
+<!--            <hr class="sidebar-divider">-->
+<!--            &lt;!&ndash; Heading &ndash;&gt;-->
+<!--            <div class="sidebar-heading">-->
+<!--                Productos-->
+<!--            </div>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/productos">-->
+<!--                    <i class="fas fa-fw fa-shopping-cart"></i>-->
+<!--                    <span>Productos</span></a>-->
+<!--            </li>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/inventario/ingrediente/crear">-->
+<!--                    <i class="fas fa-fw fa-truck-loading"></i>-->
+<!--                    <span>Registrar Ingrediente</span></a>-->
+<!--            </li>-->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Ventas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pos">
+                    <i class="fas fa-fw fa-cash-register"></i>
+                    <span>Punto de Venta</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegistros"
+                   aria-expanded="true" aria-controls="collapseRegistros">
+                    <i class="fas fa-fw fa-receipt"></i>
+                    <span>Registros</span>
+                </a>
+                <div id="collapseRegistros" class="collapse" aria-labelledby="Registros" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/facturas">Facturas</a>
+                        <a class="collapse-item" href="/ventas">Ventas</a>
+                    </div>
+                </div>
+            </li>
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/ventas">-->
+<!--                    <i class="fas fa-fw fa-chart-line"></i>-->
+<!--                    <span>Ventas</span></a>-->
+<!--            </li>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/facturas">-->
+<!--                    <i class="fas fa-fw fa-receipt"></i>-->
+<!--                    <span>Facturas</span></a>-->
+<!--            </li>-->
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Personas
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/empleados">
+                    <i class="fas fa-users"></i>
+                    <span>Empleados</span></a>
+            </li>
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/empleados/crear">-->
+<!--                    <i class="fas fa-user-plus"></i>-->
+<!--                    <span>Registrar Empleado</span></a>-->
+<!--            </li>-->
+
+
+
+<!--            &lt;!&ndash; Divider &ndash;&gt;-->
+<!--            <hr class="sidebar-divider d-none d-md-block">-->
+<!--            <div class="sidebar-heading">-->
+<!--                Inventario-->
+<!--            </div>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/ordenesCompra">-->
+<!--                    <i class="fas fa-file-invoice"></i>-->
+<!--                    <span>Ordenes de Compra</span>-->
+<!--                </a>-->
+<!--            </li>-->
+            <!-- Divider -->
+
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reportes
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+                   aria-expanded="true" aria-controls="collapseReportes">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseReportes" class="collapse" aria-labelledby="Reportes" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/reportes/ventas">Reporte de Ventas</a>
+                        <a class="collapse-item" href="/reportes/inventario">Reporte de Inventario</a>
+                        <a class="collapse-item" href="/reportes/clientes">Reporte de Clientes</a>
+                    </div>
+                </div>
+            </li>
+
+<!--            &lt;!&ndash; Divider &ndash;&gt;-->
+<!--            <hr class="sidebar-divider">-->
+
+<!--            &lt;!&ndash; Heading &ndash;&gt;-->
+<!--            <div class="sidebar-heading">-->
+<!--                Reportes-->
+<!--            </div>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/reportes/ventas">-->
+<!--                    <i class="fas fa-chart-line"></i>-->
+<!--                    <span>Reporte de ventas</span></a>-->
+<!--            </li>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/reportes/inventario">-->
+<!--                    <i class="fas fa-boxes"></i>-->
+<!--                    <span>Reporte de Inventario</span></a>-->
+<!--            </li>-->
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/reportes/clientes">-->
+<!--                    <i class="fas fa-chart-bar"></i>-->
+<!--                    <span>Reporte de Clientes</span></a>-->
+<!--            </li>-->
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Page Heading -->
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <h1 class="h3 mt-2 text-gray-800">Gesti&oacute;n Principal</h1>
+                    </div>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+<!--                        &lt;!&ndash; Nav Item - Alerts Testing &ndash;&gt;-->
+<!--                        <li class="nav-item dropdown no-arrow mx-1">-->
+<!--                            <a class="nav-link dropdown-toggle" href="#" id="alertsTestingDropdown" role="button"-->
+<!--                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                <i class="fas fa-info-circle fa-fw"></i>-->
+<!--                            </a>-->
+<!--                            &lt;!&ndash; Dropdown - Alerts &ndash;&gt;-->
+<!--                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in"-->
+<!--                                 aria-labelledby="alertsTestingDropdown">-->
+<!--                                <h6 class="dropdown-header">-->
+<!--                                    Prueba de Notificaciones-->
+<!--                                </h6>-->
+<!--                                <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" onclick="notify('success', 'Muy bien, has recibido una notificación.')">-->
+<!--                                    <div class="mr-3">-->
+<!--                                        <div class="icon-circle bg-success">-->
+<!--                                            <i class="fas fa-check text-white"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        Notificaci&oacute;n de operaci&oacute;n exitosa-->
+<!--                                    </div>-->
+<!--                                </a>-->
+<!--                                <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" onclick="notify('warning', 'Esta es una notificación de advertencia.')">-->
+<!--                                    <div class="mr-3">-->
+<!--                                        <div class="icon-circle bg-warning">-->
+<!--                                            <i class="fas fa-exclamation-triangle text-white"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        Notificaci&oacute;n de advertencia-->
+<!--                                    </div>-->
+<!--                                </a>-->
+<!--                                <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" onclick="notify('danger', 'Esta es una notificación de error.')">-->
+<!--                                    <div class="mr-3">-->
+<!--                                        <div class="icon-circle bg-danger">-->
+<!--                                            <i class="fas fa-exclamation-triangle text-white"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        Notificaci&oacute;n de Error-->
+<!--                                    </div>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </li>-->
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${empleado.nombre} + ' ' + ${empleado.apellido}">Nombre Apellido</span>
+                                <img class="img-profile rounded-circle" th:src="${empleado.rol == 'ADMIN' ? '/img/profile_icon.jpg': 
+                                (empleado.rol == 'REPOSTERO' ? '/img/chef-avatar-vector-illustration.jpg' : '/img/profile_icon.png')}" alt="Imagen de perfil usuario">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/perfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Mi Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar Sesi&oacute;n
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid" id="main-container">
+                    <div>
+                        <div class="row">
+                            <!-- Total Pedidos Card -->
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-lg font-weight-bold text-info text-uppercase mb-1">
+                                                    Pedidos Realizados <span class="text-gray-600 text-xs">| Hoy</span></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalPedidos != null ? totalPedidos : '0'}"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-solid fa-file-invoice fa-2x text-gray-400"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pedidos en Curso Card -->
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">
+                                                    Pedidos Pendientes <span class="text-gray-600 text-xs">| Hoy</span></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${cantPendientes != null ? cantPendientes : '0'}"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-solid fa-clock fa-2x text-gray-400"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sin Receta Asignada Card -->
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-lg font-weight-bold text-info text-uppercase mb-1">
+                                                    Libras Pendientes <span class="text-gray-600 text-xs">| Hoy</span></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${cantLibrasHoy != null ? cantLibrasHoy : '0'}"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-solid fa-weight fa-2x text-gray-400"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Row -->
+                        <div class="row">
+
+                            <!-- Earnings (Daily) Card -->
+                            <div class="col-xl-4-5 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-lg font-weight-bold text-success text-uppercase mb-1">
+                                                    Ingresos <span class="text-gray-600 text-xs">| hoy</span></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${ingresosHoy != null ? #numbers.formatDecimal(ingresosHoy, 1, 'DEFAULT', 2, 'DEFAULT') : '0'}"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-dollar-sign fa-2x text-gray-400"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Earnings (Annually) Card -->
+                            <div class="col-xl-4-5 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-lg font-weight-bold text-success text-uppercase mb-1">
+                                                    Ingresos <span class="text-gray-600 text-xs">| Mes</span></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${ingresosMes != null ? #numbers.formatDecimal(ingresosMes, 1, 'DEFAULT', 2, 'DEFAULT') : '0'}"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-dollar-sign fa-2x text-gray-400"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Earnings (Monthly) Card -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
+                                                    Ventas <span class="text-gray-600 text-xs">| Hoy</span></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${cantVentasHoy != null ? cantVentasHoy : '0'}"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-shopping-basket fa-2x text-gray-400"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Content Row -->
+
+                        <!-- Content Row -->
+                        <div class="row">
+
+                            <!-- Pie Chart -->
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Disponibilidad de Productos</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink3"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                 aria-labelledby="dropdownMenuLink3">
+                                                <a class="dropdown-item" href="/reportes/inventario">Reportes de Inventario</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="myPieChart" th:data-stock="${cantProductosInStock}" th:data-agotados="${cantProductosFueraStock}" th:data-dispMin="${cantProductosDispMin}"></canvas>
+                                        </div>
+                                        <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> En Stock
+                                        </span>
+                                            <span class="mr-2">
+                                            <i class="fas fa-circle text-warning"></i> Disp. M&iacute;nima
+                                        </span>
+                                            <span class="mr-2">
+                                            <i class="fas fa-circle text-danger"></i> Fuera de Stock
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Line Chart -->
+                            <div class="col-xl-8 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Ingresos por Ventas</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                 aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="/reportes/ventas">Reportes de Ventas</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-area">
+                                            <canvas id="ingresosPorVentasChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content Row -->
+
+                        <div class="row">
+
+                            <!-- Area Chart -->
+                            <div class="col-xl-12 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Ingresos por Pedidos</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink4"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                 aria-labelledby="dropdownMenuLink3">
+                                                <a class="dropdown-item" href="/ventas">Ver M&aacute;s</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-area">
+                                            <canvas id="barChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Massy's Cake 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Est&aacute; seguro que desea salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Asegurese de guardar correctamente todo su progreso.</div> <br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="/logout">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Area Div -->
+    <div id="notification-area"></div>
+
+    <script src="/js/notification.js">  </script>
+
+    <script>
+        window.onload = function() {
+            notify('success', 'Muy bien, has recibido una notificación.');
+        };
+    </script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
+    <script src="/js/chartjs-main.js"></script>
+
+
+    <script>
+        window.onload = function() {
+            $('#loadingSpinnerPendiente').css('display', 'none');
+
+            $('#cardContentPendiente').css('display', 'block');
+        }
+    </script>
+
+    <script th:inline="javascript">
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // *     example: number_format(1234.56, 2, ',', ' ');
+            // *     return: '1 234,56'
+            number = (number + '').replace(',', '').replace(' ', '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function(n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        }
+
+        var ctx = document.getElementById("ingresosPorVentasChart");
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                datasets: [{
+                    label: "Ingresos",
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2,
+                    data: [0,0,0,0,0,0,700,192897,0,0,0,0],
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'date'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return '$' + number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 14,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    intersect: false,
+                    mode: 'index',
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+                        }
+                    }
+                }
+            }
+        });
+        var ctxBar= document.getElementById("barChart");
+        if (ctxBar != null){
+            var myBarChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                    datasets: [{
+                        label: "Ventas Totales",
+                        backgroundColor: "#6762a1",
+                        hoverBackgroundColor: "#3d3a67",
+                        borderColor: "#6762a1",
+                        data: [0,0,0,0,0,0,700,192897,0,0,0,0],
+                        maxBarThickness: 35,
+                        barPercentage: .95,
+                        categoryPercentage: .80,
+                    }, {
+                        label: "Pedidos por encargo",
+                        backgroundColor: "#1cc689",
+                        hoverBackgroundColor: "#187553",
+                        borderColor: "#1cc689",
+                        data: [0,0,0,0,0,0,700,5200,0,0,0,0],
+                        maxBarThickness: 35,
+                        barPercentage: .95,
+                        categoryPercentage: .80,
+                    }, {
+                        label: "Pedidos Cabina",
+                        backgroundColor: "#e06d2f",
+                        hoverBackgroundColor: "#9d4414",
+                        borderColor: "#e06d2f",
+                        data: [0,0,0,0,0,0,0,187697,0,0,0,0],
+                        maxBarThickness: 35,
+                        barPercentage: .95,
+                        categoryPercentage: .80,
+                    }],
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            left: 10,
+                            right: 25,
+                            top: 25,
+                            bottom: 0
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            time: {
+                                unit: 'month'
+                            },
+                            gridLines: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                maxTicksLimit: 6
+                            },
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                min: 0,
+                                maxTicksLimit: 7,
+                                padding: 10,
+                                // Include a dollar sign in the ticks
+                                callback: function(value, index, values) {
+                                    return '$' + number_format(value);
+                                }
+                            },
+                            gridLines: {
+                                color: "rgb(234, 236, 244)",
+                                zeroLineColor: "rgb(234, 236, 244)",
+                                drawBorder: false,
+                                borderDash: [2],
+                                zeroLineBorderDash: [2]
+                            }
+                        }],
+                    },
+                    legend: {
+                        display: true,
+                        labels: {
+                            fontColor: '#1a1919'
+                        }
+                    },
+                    tooltips: {
+                        titleMarginBottom: 10,
+                        titleFontColor: '#2f3033',
+                        titleFontSize: 14,
+                        backgroundColor: "rgb(255,255,255)",
+                        bodyFontColor: "#232325",
+                        borderColor: '#b1b3c2',
+                        borderWidth: 1,
+                        xPadding: 15,
+                        yPadding: 15,
+                        displayColors: false,
+                        caretPadding: 10,
+                        callbacks: {
+                            label: function(tooltipItem, chart) {
+                                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+                            }
+                        }
+                    },
+                }
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>

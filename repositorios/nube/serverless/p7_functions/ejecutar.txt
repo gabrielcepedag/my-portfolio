@@ -1,0 +1,3 @@
+Crear base de datos en DynamoDB AWS con 'TABLA_RESERVA'
+
+TODO: Compilar con GraalVM para eficacia al levantar el proyecto

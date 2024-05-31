@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Converter | Shrinkr</title>
+  <link rel="shortcut icon" type="image" href="/images/logo1-icon.png">
+
+  <link rel="stylesheet" href="/css/styleHome.css">
+  <link rel="stylesheet" href="/css/animate.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+
+</head>
+<body>
+<!---------     Navbar Start    ----------->
+    <div class="navbar-area converter">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/home">
+              <img class="logo" src="/images/logo1.png">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="0" aria-current="page" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="1" href="/home#features">Features</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="2" href="/home#about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="2" href="/login">Login</a>
+                </li>
+                <li class="nav-item register-btn">
+                  <a href="/login/register" class="navbar-btn">Sign Up</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  <!---------     Navbar End    ----------->
+
+  <div class="page-content">
+    <h1 class="page-title">Welcome to <span>Shrinkr URL Shortener</span>!</h1>
+    <p class="page-subtitle">Start converting for free right now with any URL you want.</p>
+
+<!--    <form id="frmURL" class="url-form" method="post" action="/gestion/url">-->
+<!--      <input type="text" id="url" name="longUrl" placeholder="Enter your URL here" required>-->
+<!--      <button type="submit" class="convert-btn">Convert</button>-->
+<!--    </form>-->
+
+    <form th:unless="${preview}" id="frmURL" class="url-form" method="post" action="/home/converter">
+      <input type="text" id="url" name="longUrl" placeholder="Enter your URL here" required>
+      <button type="submit" class="convert-btn">Preview</button>
+    </form>
+
+    <div th:if="${preview}" style="padding-bottom: 5px; padding: 10px;">
+      <form id="frmURL3" class="url-form" method="post" action="/home/converter">
+        <input type="text" id="url3" name="longUrl" placeholder="Enter your URL here" th:value="${longUrl}" required>
+        <button type="submit" class="convert-btn">Preview</button>
+      </form>
+
+      <div id="loading-wrapper" style="margin-top: 30px; margin-bottom: 20px; text-align: center; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); background-color: #fff; width: 90%; height: auto; margin-left: auto; margin-right: auto; display: flex; justify-content: center; align-items: center;">
+        <h4 id="loading" style="padding: 3%; margin: 25%">Loading Preview...</h4>
+        <img id="preview-image" th:src="${previewImage}" alt="URL Preview" style="display: none; max-width: 100%; width: 98%; height: auto; margin-top: 5px">
+        <h5 id="loading-error" style="font-weight: normal; margin: 20%; display: none">There was an error displaying a preview for the URL provided.</h5>
+      </div>
+
+      <form id="frmURL2" class="url-form" method="post" action="/home/converter/url">
+        <input type="hidden" id="url2" name="longUrl" required>
+        <button type="submit" class="submit-btn">Convert</button>
+      </form>
+    </div>
+
+
+    <hr class="separator">
+
+    <h1 class="page-title" style="padding-top: 20px">Your Created Links</h1>
+    <div class="table-responsive">
+      <div th:if="${not #lists.isEmpty(listaUrl)}">
+
+        <table class="table table-bordered table-hover">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th>#</th>
+              <th>Original URL</th>
+              <th>Shortened URL</th>
+              <th>Visits</th>
+              <th style="width: 5%">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="url, iterStat : ${listaUrl}">
+              <td th:text="${iterStat.index + 1}"></td>
+              <td th:text="${url.urlLarga}"></td>
+              <td th:text="${url.urlAcortada}"></td>
+              <td th:text="${url.cantAccesos}"></td>
+              <td>
+                <span style="display:flex; justify-content: space-between; width: 60px">
+                  <a th:href="@{'/home/converter/stats/'+ ${url.id}}">
+                    <i class="fa-solid fa-chart-simple" style="color: #0d6dfb; height: 22px; width: 22px; cursor: pointer"></i>
+                  </a>
+                  <a th:id="'eliminarUrl-'+${iterStat.index}" th:data-id="${url.id}" class="delete-user" th:href="'javascript:showModalLinksHome('+${iterStat.index}+')'">
+                    <i class="fa-regular fa-trash-can" style="color: #e31b1b; height: 20px; width: 20px; cursor: pointer"></i>
+                  </a>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!---------     Footer Start    ----------->
+  <footer class="footer-area converter" style="margin-top: -50px" id="about">
+    <div class="footer-shape shape-1"></div>
+    <div class="footer-shape shape-2"></div>
+    <div class="footer-shape shape-3"></div>
+    <div class="footer-shape shape-4"></div>
+    <div class="footer-shape shape-5"></div>
+    <div class="footer-widget pt-30 pb-80">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-about mt-50">
+              <a href="" class="footer-logo">
+                <img src="/images/logo1.png" alt="">
+              </a>
+              <p class="text">"More than just shorter links". Build your brand's recognition by creating unique and attractive links using Shrinkr. The best url shortener suitable for all your needs.</p>
+              <ul class="social">
+                <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/?lang=en" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/gabrielcepedag/my-portfolio/tree/main" target="_blank"><i class="fab fa-github"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-6">
+            <div class="footer-link d-flex flex-wrap">
+              <div class="footer-link-wrapper mt-45">
+                <div class="footer-title">
+                  <h4 class="title">Quick Links</h4>
+                </div>
+                <ul class="link">
+                  <li><a href="/home">Home</a></li>
+                  <li><a href="/home#features">Features</a></li>
+                  <li><a href="/home#about">About</a></li>
+                  <li><a href="/login/register">Get Started</a></li>
+                </ul>
+              </div>
+              <div class="footer-link-wrapper mt-45">
+                <div class="footer-title">
+                  <h4 class="title">Support</h4>
+                </div>
+                <ul class="link">
+                  <li><a href="https://drive.google.com/file/d/1O78N_cN9F42fRBvTWQ0sgjdcyw8tQElT/view?usp=sharing" target="_blank">FAQ</a></li>
+                  <li><a href="https://www.contractscounsel.com/t/us/website-privacy-policy" target="_blank">Privacy Policy</a></li>
+                  <li><a href="https://drive.google.com/file/d/1AxN1d7oqSwVT7qutvHU4yuqvQPaoZBcP/view?usp=sharing" target="_blank">Terms of Use</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-contact mt-45">
+              <div class="footer-title">
+                <h4 class="title">Contact</h4>
+              </div>
+              <ul class="contact-list">
+                <li>
+                  <div class="contact-info">
+                    <div class="info-content media-body">
+                      <p class="text"><i class="fa-regular fa-id-card"></i> Gabriel Cepeda</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-info">
+                    <div class="info-content media-body">
+                      <p class="text"><i class="fas fa-map-marker-alt"></i> Pontificia Universidad Catolica Madre y Maestra, Santiago de los Caballeros, Dominican Republic</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="lo-lg-12">
+            <div class="copyright">
+              <div class="copyright-text text-center">
+                <p class="text">Copyright &nbsp &#169 2023 &nbsp <a href="/home">Shrinkr</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+  <script src="/js/mainMenu.js"></script>
+  <script src="/js/wow.min.js"></script>
+  <script src="/js/home.js"></script>
+  <script src="./js/usuariosConectados.js"></script>
+
+<script th:inline="javascript">
+  var preview = /*[[${preview}]]*/ false;
+  const pageContent = document.querySelector('.page-content');
+  const tableLinks = document.querySelector('.table-responsive');
+
+
+  if(preview){
+    pageContent.style.marginTop = '175px';
+    pageContent.style.marginBottom = '250px';
+    tableLinks.style.paddingBottom = '220px';
+
+    const inputValue = document.getElementById("url3").value;
+    document.getElementById("url2").value = inputValue;
+
+
+    const previewImage = document.getElementById("preview-image");
+    const loading = document.getElementById("loading");
+    const loadingDiv = document.getElementById("loading-wrapper");
+     const error = document.getElementById("loading-error");
+
+    previewImage.addEventListener("load", function() {
+      loading.style.display = "none";
+      loadingDiv.style.width = "50%";
+      previewImage.style.display = "inline-block";
+    });
+    previewImage.addEventListener("error", function() {
+       loading.style.display = "none";
+      previewImage.style.display = "none";
+      error.style.display = "block";
+    });
+
+
+
+  }else{
+    pageContent.style.marginTop = '0';
+    pageContent.style.marginBottom = '0';
+  }
+</script>
+
+</body>
+</html>
